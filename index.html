@@ -10,7 +10,6 @@
 <link rel="apple-touch-icon" href="/pre-call-info/assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
 <link rel="preconnect" href="https://fast.wistia.com" crossorigin />
 <script src="https://fast.wistia.com/player.js" async></script>
 <script src="https://fast.wistia.com/embed/8ak013qk1x.js" async type="module"></script>
@@ -219,6 +218,20 @@ button.btn { cursor: pointer; }
 
 .cal-menu[hidden] { display: none; }
 
+/* Calendar button under the video */
+.video-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s4);
+}
+
+.video-cta .cal-menu {
+  left: 50%;
+  right: auto;
+  width: 280px;
+  transform: translateX(-50%);
+}
+
 .cal-links { display: flex; flex-direction: column; }
 .cal-links[hidden] { display: none; }
 
@@ -375,7 +388,6 @@ button.btn { cursor: pointer; }
   border-radius: var(--r-panel);
 }
 
-.video-frame vturb-smartplayer,
 .video-frame wistia-player { display: block; width: 100%; margin: 0 auto; }
 
 /* Blurred poster until the Wistia player loads */
@@ -386,22 +398,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   padding-top: 56.25%;
 }
 
-.video-list { list-style: none; display: flex; flex-direction: column; }
-
-.video-item + .video-item {
-  margin-top: var(--s5);
-  padding-top: var(--s5);
-  border-top: 1px solid var(--hairline);
-}
-
-.video-item h3 {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
-  margin-bottom: var(--s3);
-}
-
-.video-item h3 .num { color: var(--sky); margin-right: var(--s2); }
 
 /* ── Checklist ── */
 .card {
@@ -411,7 +407,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   padding: var(--s1) var(--s4);
 }
 
-.numbers-card { padding: var(--s4); }
+.numbers-card { padding: var(--s4); max-width: var(--page); margin: 0 auto; }
 
 .numbers {
   list-style: none;
@@ -535,6 +531,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   .video-panel { padding: var(--s2); border-radius: var(--r-card); }
   .numbers-card { padding: var(--s3); }
   .btn { width: 100%; }
+  .video-cta .cal-menu { left: 0; right: 0; width: auto; transform: none; }
   .card { padding: var(--s1) var(--s3); }
   .panel { padding: var(--s4); }
   .panel .btn { width: 100%; }
@@ -589,32 +586,32 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
             </span>
           </a>
         </li>
-        <li class="cal" id="calendar">
-          <button type="button" id="cal-toggle" class="step-card" aria-expanded="false" aria-controls="cal-menu">
+        <li>
+          <a href="#numbers" class="step-card">
             <span class="step-num">2</span>
+            <span class="step-body">
+              <span class="step-title">Have five numbers ready</span>
+              <span class="step-sub">So we can skip the basics and move fast on the call.</span>
+            </span>
+          </a>
+        </li>
+        <li class="cal" id="calendar">
+          <button type="button" class="step-card cal-toggle" aria-expanded="false" aria-controls="cal-menu-hero">
+            <span class="step-num">3</span>
             <span class="step-body">
               <span class="step-title">Add the call to your calendar</span>
               <span class="step-sub">One tap: Google, Apple or Outlook.</span>
             </span>
             <svg class="step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
           </button>
-          <div class="cal-menu" id="cal-menu" hidden>
+          <div class="cal-menu" id="cal-menu-hero" hidden>
             <div class="cal-links">
-              <a id="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
-              <a id="cal-ics" href="#" download="adamax-viral-audit.ics">Apple or Outlook (.ics)</a>
-              <a id="cal-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+              <a class="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+              <a class="cal-ics" href="#" download="adamax-viral-audit.ics">Apple or Outlook (.ics)</a>
+              <a class="cal-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
             </div>
             <p class="cal-fallback" hidden>Open the calendar invite in your email and tap <strong>Add to calendar</strong>. It has your exact date, time and Zoom link.</p>
           </div>
-        </li>
-        <li>
-          <a href="#numbers" class="step-card">
-            <span class="step-num">3</span>
-            <span class="step-body">
-              <span class="step-title">Have five numbers ready</span>
-              <span class="step-sub">So we can skip the basics and move fast on the call.</span>
-            </span>
-          </a>
         </li>
       </ol>
 
@@ -644,14 +641,29 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
           <wistia-player media-id="8ak013qk1x" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
+
+      <div class="cal video-cta">
+        <button type="button" class="btn btn--primary cal-toggle" aria-expanded="false" aria-controls="cal-menu-video">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
+          Add to calendar
+        </button>
+        <div class="cal-menu" id="cal-menu-video" hidden>
+            <div class="cal-links">
+              <a class="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+              <a class="cal-ics" href="#" download="adamax-viral-audit.ics">Apple or Outlook (.ics)</a>
+              <a class="cal-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+            </div>
+            <p class="cal-fallback" hidden>Open the calendar invite in your email and tap <strong>Add to calendar</strong>. It has your exact date, time and Zoom link.</p>
+          </div>
+      </div>
     </div>
   </section>
 
-  <!-- Step 3 (step 2 is the calendar card in the hero) -->
+  <!-- Step 2 -->
   <section class="section" id="numbers" aria-labelledby="numbers-title">
-    <div class="container">
+    <div class="container container--wide">
       <div class="section-head section-head--center">
-        <h2 class="display display-step" id="numbers-title">Step 3: <em>Have these</em> numbers ready</h2>
+        <h2 class="display display-step" id="numbers-title">Step 2: <em>Have these</em> numbers ready</h2>
         <p class="muted">The more of this you have ready, the faster we move and the more specific your strategy will be.</p>
       </div>
 
@@ -664,39 +676,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
           <li>Your revenue goal for the next 90 days</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- Optional deep dives -->
-  <section class="section" id="deep-dives" aria-labelledby="deep-dives-title">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <h2 class="display display-step" id="deep-dives-title">Optional: <em>Go deeper</em> before the call</h2>
-        <p class="muted">Five short videos that answer the questions clients ask most before their viral audit. Watch the ones that matter to you.</p>
-      </div>
-
-      <ol class="video-list">
-        <li class="video-item">
-          <h3><span class="num">01</span>How does our process work?</h3>
-          <div class="video-frame"><vturb-smartplayer id="vid-69f3518f67b3f7b15624d9ae"></vturb-smartplayer></div>
-        </li>
-        <li class="video-item">
-          <h3><span class="num">02</span>Why choose Adamax over every other option?</h3>
-          <div class="video-frame"><vturb-smartplayer id="vid-69f351598dfd6d0e7b1f3b5b"></vturb-smartplayer></div>
-        </li>
-        <li class="video-item">
-          <h3><span class="num">03</span>Why is AI now mandatory for content?</h3>
-          <div class="video-frame"><vturb-smartplayer id="vid-69f350d67dfa1bb6cfc64153"></vturb-smartplayer></div>
-        </li>
-        <li class="video-item">
-          <h3><span class="num">04</span>Will this work in any industry?</h3>
-          <div class="video-frame"><vturb-smartplayer id="vid-69f350b5c2504d7d6caad94b"></vturb-smartplayer></div>
-        </li>
-        <li class="video-item">
-          <h3><span class="num">05</span>What's our success rate?</h3>
-          <div class="video-frame"><vturb-smartplayer id="vid-69f35129e1d248316d31e346"></vturb-smartplayer></div>
-        </li>
-      </ol>
     </div>
   </section>
 
@@ -746,8 +725,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   var CALL_TITLE      = 'Viral audit call · Adamax Studios';
   var CALL_DETAILS    = 'Your free viral audit call with Adamax Studios. Join with the Zoom link in your confirmation email.';
 
-  var VTURB_ACCOUNT = '1200be6e-6fcb-4724-87ac-03a7f7bc2d31';
-
   /* ── Footer year ── */
   document.querySelectorAll('.js-year').forEach(function (el) {
     el.textContent = new Date().getFullYear();
@@ -762,15 +739,13 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   var params   = new URLSearchParams(location.search);
   var rawStart = params.get('start') || params.get('start_time');
   var startAt  = null;
+  var links    = null;
   if (rawStart) {
     startAt = /^\d+$/.test(rawStart)
       ? new Date(rawStart.length > 10 ? +rawStart : rawStart * 1000)
       : new Date(rawStart);
     if (isNaN(startAt)) startAt = null;
   }
-
-  var calToggle = document.getElementById('cal-toggle');
-  var calMenu   = document.getElementById('cal-menu');
 
   if (startAt) {
     var minutes = parseInt(params.get('duration'), 10) || CALL_MINUTES;
@@ -781,14 +756,15 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
     var q       = encodeURIComponent;
     var icsText = function (t) { return t.replace(/[\\,;]/g, '\\$&').replace(/\n/g, '\\n'); };
 
-    document.getElementById('cal-google').href =
+    links = {};
+    links.google =
       'https://calendar.google.com/calendar/render?action=TEMPLATE' +
       '&text=' + q(CALL_TITLE) +
       '&dates=' + stamp(startAt) + '/' + stamp(endAt) +
       '&details=' + q(details) +
       (join ? '&location=' + q(join) : '');
 
-    document.getElementById('cal-outlook').href =
+    links.outlook =
       'https://outlook.live.com/calendar/0/action/compose?rru=addevent' +
       '&subject=' + q(CALL_TITLE) +
       '&startdt=' + q(startAt.toISOString()) +
@@ -809,54 +785,48 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
       'BEGIN:VALARM', 'TRIGGER:-PT15M', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText(CALL_TITLE), 'END:VALARM',
       'END:VEVENT', 'END:VCALENDAR'
     ].filter(Boolean).join('\r\n');
-    document.getElementById('cal-ics').href = 'data:text/calendar;charset=utf-8,' + q(ics);
-  } else {
-    calMenu.querySelector('.cal-links').hidden = true;
-    calMenu.querySelector('.cal-fallback').hidden = false;
+    links.ics = 'data:text/calendar;charset=utf-8,' + q(ics);
   }
 
-  function setMenu(open) {
-    calMenu.hidden = !open;
-    calToggle.setAttribute('aria-expanded', String(open));
+  /* Every .cal block (hero card and under the video) shares the same links */
+  var cals = Array.prototype.slice.call(document.querySelectorAll('.cal')).map(function (cal) {
+    var menu = cal.querySelector('.cal-menu');
+    if (links) {
+      menu.querySelector('.cal-google').href  = links.google;
+      menu.querySelector('.cal-outlook').href = links.outlook;
+      menu.querySelector('.cal-ics').href     = links.ics;
+    } else {
+      menu.querySelector('.cal-links').hidden = true;
+      menu.querySelector('.cal-fallback').hidden = false;
+    }
+    return { el: cal, toggle: cal.querySelector('.cal-toggle'), menu: menu };
+  });
+
+  function setMenu(c, open) {
+    c.menu.hidden = !open;
+    c.toggle.setAttribute('aria-expanded', String(open));
   }
-  calToggle.addEventListener('click', function () { setMenu(calMenu.hidden); });
-  calMenu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  function closeAll(except) {
+    cals.forEach(function (c) { if (c !== except) setMenu(c, false); });
+  }
+  cals.forEach(function (c) {
+    c.toggle.addEventListener('click', function () {
+      var open = c.menu.hidden;
+      closeAll(c);
+      setMenu(c, open);
+    });
+    c.menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(c, false); });
+  });
   document.addEventListener('click', function (e) {
-    if (!calMenu.hidden && !e.target.closest('.cal')) setMenu(false);
+    if (!e.target.closest('.cal')) closeAll();
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !calMenu.hidden) { setMenu(false); calToggle.focus(); }
+    if (e.key !== 'Escape') return;
+    cals.forEach(function (c) {
+      if (!c.menu.hidden) { setMenu(c, false); c.toggle.focus(); }
+    });
   });
 
-  /* ── vturb players (Step 3) ──
-     The main Step 1 video is Wistia and loads with the page. These five
-     optional videos load as they approach the viewport so they don't
-     compete with it. */
-  function loadPlayer(el) {
-    if (el.dataset.loaded) return;
-    el.dataset.loaded = '1';
-    var s = document.createElement('script');
-    s.src = 'https://scripts.converteai.net/' + VTURB_ACCOUNT +
-            '/players/' + el.id.replace(/^vid-/, '') + '/v4/player.js';
-    s.async = true;
-    document.head.appendChild(s);
-  }
-
-  var lazy = Array.prototype.slice.call(document.querySelectorAll('vturb-smartplayer'));
-
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          loadPlayer(entry.target);
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '600px 0px' });
-    lazy.forEach(function (el) { io.observe(el); });
-  } else {
-    lazy.forEach(loadPlayer);
-  }
 })();
 </script>
 
