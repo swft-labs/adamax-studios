@@ -309,6 +309,32 @@
 
     .hero-cta { width: 100%; }
 
+    /* Light tracing the hero CTA's edge. An SVG outline sits over the button and a
+       short Glow-coloured dash travels around it at constant speed (pathLength=100
+       makes the dash a fixed share of the perimeter at any button width). */
+    .cta-trace { position: relative; display: block; }
+
+    .cta-trace .trace {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .cta-trace rect {
+      fill: none;
+      stroke-dasharray: 18 82;
+      stroke-linecap: round;
+      animation: trace 3.6s linear infinite;
+    }
+
+    .cta-trace .trace-glow { stroke: var(--glow); stroke-width: 6; opacity: 0.55; filter: blur(3px); }
+    .cta-trace .trace-line { stroke: #CFF6FF; stroke-width: 1.5; }
+
+    @keyframes trace { to { stroke-dashoffset: -100; } }
+
     .trust {
       margin-top: var(--s3);
       font-weight: 600;
@@ -614,6 +640,7 @@
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; animation: none; }
       .btn-primary::after { animation: none; display: none; }
+      .cta-trace .trace { display: none; }
       .carousel { overflow-x: auto; }
       .carousel-track { animation: none; }
     }
@@ -657,10 +684,16 @@
           </div>
 
           <div class="hero-cta reveal d4">
-            <a href="#qualify" class="btn btn-primary btn-block" data-scroll-to="qualify">
-              See if you qualify
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-            </a>
+            <span class="cta-trace">
+              <a href="#qualify" class="btn btn-primary btn-block" data-scroll-to="qualify">
+                See if you qualify
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+              </a>
+              <svg class="trace" aria-hidden="true" focusable="false">
+                <rect class="trace-glow" x="0" y="0" width="100%" height="100%" rx="8" ry="8" pathLength="100" />
+                <rect class="trace-line" x="0" y="0" width="100%" height="100%" rx="8" ry="8" pathLength="100" />
+              </svg>
+            </span>
             <p class="trust">Free 45-min viral audit call with our team</p>
           </div>
         </div>
