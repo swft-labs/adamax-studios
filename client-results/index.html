@@ -17,13 +17,28 @@
 <link rel="icon" type="image/png" href="/client-results/assets/favicon.png" />
 <link rel="apple-touch-icon" href="/client-results/assets/apple-touch-icon.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://images.leadconnectorhq.com" crossorigin />
-<link rel="preconnect" href="https://assets.cdn.filesafe.space" />
-<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Self-hosted brand fonts (latin subset, ~34 KB total): no render-blocking
+     third-party CSS. Both are used above the fold, so preload them. -->
+<link rel="preload" href="/client-results/assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/client-results/assets/fonts/krona-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preconnect" href="https://images.leadconnectorhq.com" />
 
 <style>
+@font-face {
+  font-family: 'Krona One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/client-results/assets/fonts/krona-one-latin.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/client-results/assets/fonts/manrope-latin-var.woff2) format('woff2');
+}
+
 /* ──────────────────────────────────────────────────────────────
    Adamax Studios · brand kit v1.0
    Built on black. ~70% black, 20% white type, 10% blue.
@@ -632,7 +647,9 @@ html, body { margin: 0; background: #000; }
   <header class="adx-nav">
     <div class="adx-container">
       <a href="./" aria-label="Adamax Studios home">
-        <img class="adx-lockup" src="/client-results/assets/adamax-lockup-on-dark.webp" width="720" height="240" alt="Adamax Studios" fetchpriority="high" />
+        <img class="adx-lockup" src="/client-results/assets/adamax-lockup-on-dark-420.webp"
+             srcset="/client-results/assets/adamax-lockup-on-dark-420.webp 420w, /client-results/assets/adamax-lockup-on-dark-640.webp 640w"
+             sizes="(max-width: 640px) 180px, 210px" width="720" height="240" alt="Adamax Studios" fetchpriority="high" />
       </a>
       <a class="adx-btn adx-btn--secondary" data-cta hidden>Book a call</a>
     </div>
@@ -676,8 +693,8 @@ html, body { margin: 0; background: #000; }
               <p>Julie's growth had stalled at 6,000 followers, and paid ads and collaborations weren't converting. With Adamax she moved to content that builds trust and inbound demand tied to her mission. She is now at 22,000+ followers and 36 million+ organic views, with discovery calls from exactly the audience she wanted.</p>
             </div>
             <div class="adx-media">
-              <video src="/client-results/assets/video/696fb1780e12ab354fd7d11e.mp4#t=0.1"
-                     controls muted loop playsinline preload="metadata" aria-label="Julie's case study video"></video>
+              <video src="/client-results/assets/video/696fb1780e12ab354fd7d11e.mp4" data-poster="/client-results/assets/poster/696fb1780e12ab354fd7d11e.webp"
+                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Julie's case study video"></video>
             </div>
           </article>
 
@@ -692,8 +709,8 @@ html, body { margin: 0; background: #000; }
               <p>Rohit was stuck at 200 to 300 views a video. He published two videos with Adamax, and the first passed 2 million organic views, bringing saves, shares and inbound conversations within days. Adamax took on production, which turned his expertise into a content engine that scales.</p>
             </div>
             <div class="adx-media">
-              <video src="/client-results/assets/video/696fb0e941fb815fe4ce2816.mp4#t=0.1"
-                     controls muted loop playsinline preload="metadata" aria-label="Rohit's case study video"></video>
+              <video src="/client-results/assets/video/696fb0e941fb815fe4ce2816.mp4" data-poster="/client-results/assets/poster/696fb0e941fb815fe4ce2816.webp"
+                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Rohit's case study video"></video>
             </div>
           </article>
 
@@ -708,8 +725,8 @@ html, body { margin: 0; background: #000; }
               <p>Mahreen grew from 500 followers to 350K+ with Adamax and now averages more than 12 million organic views every month. She runs a fast-growing coaching business and podcast, with brand partnerships including TikTok, Amazon, Lipton, Sony and Apture.</p>
             </div>
             <div class="adx-media">
-              <video src="/client-results/assets/video/696faf1e193b567ee57ccd79.mp4#t=0.1"
-                     controls muted loop playsinline preload="metadata" aria-label="Mahreen's case study video"></video>
+              <video src="/client-results/assets/video/696faf1e193b567ee57ccd79.mp4" data-poster="/client-results/assets/poster/696faf1e193b567ee57ccd79.webp"
+                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Mahreen's case study video"></video>
             </div>
           </article>
         </div>
@@ -756,8 +773,11 @@ html, body { margin: 0; background: #000; }
       <div class="adx-container">
         <!-- Metallic lockup is a hero treatment: only where it renders ≥320px drawn width, on pure black -->
         <picture>
-          <source media="(min-width: 480px)" srcset="/client-results/assets/adamax-metallic-lockup-on-dark.webp" />
-          <img class="adx-end-lockup" src="/client-results/assets/adamax-lockup-on-dark.webp" width="1200" height="400" alt="Adamax Studios" loading="lazy" />
+          <source media="(min-width: 480px)" sizes="560px"
+                  srcset="/client-results/assets/adamax-metallic-lockup-on-dark-640.webp 640w, /client-results/assets/adamax-metallic-lockup-on-dark.webp 1200w" />
+          <img class="adx-end-lockup" src="/client-results/assets/adamax-lockup-on-dark-640.webp"
+               srcset="/client-results/assets/adamax-lockup-on-dark-420.webp 420w, /client-results/assets/adamax-lockup-on-dark-640.webp 640w, /client-results/assets/adamax-lockup-on-dark.webp 720w"
+               sizes="calc(100vw - 32px)" width="1200" height="400" alt="Adamax Studios" loading="lazy" decoding="async" />
         </picture>
         <p class="adx-lead">1,200+ clients. 9B+ organic views. No ads.</p>
         <a class="adx-btn adx-btn--primary" data-cta hidden>
@@ -787,7 +807,7 @@ html, body { margin: 0; background: #000; }
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
     </button>
     <div class="adx-lb-stage" id="adxLbStage">
-      <img class="adx-lb-img" id="adxLbImg" alt="" />
+      <img class="adx-lb-img" id="adxLbImg" alt="" decoding="async" />
     </div>
     <button type="button" class="adx-lb-btn adx-lb-next" id="adxLbNext" aria-label="Next result">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
@@ -811,11 +831,17 @@ html, body { margin: 0; background: #000; }
   // ID (the part before .png) into the right list.
   var MEDIA = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
 
-  // Square 1080×1080 before/after cards for the carousel.
+  // Square 1080×1080 before/after cards for the carousel. alt describes
+  // what each card shows (used in the carousel and the lightbox).
   var CAROUSEL = [
-    '69df93e380b446d0fbafb024', '69df93e32b7a6ecd79c9509f', '69df93e3db7c222f7150d194',
-    '69df93e327c94c7e4e59e77c', '69df93e306cfeed5500fbe2f', '69df93e3acdf45d673debf39',
-    '69df93e32b7a6ecd79c9509e', '69df93e3190683601a5d6d6f'
+    { id: '69df93e380b446d0fbafb024', alt: 'Before and after: @nayradelduca grew from 11K to 296K followers, +340M views' },
+    { id: '69df93e32b7a6ecd79c9509f', alt: 'Before and after: @doctorhasia grew from 54K to 296K followers, +280M views' },
+    { id: '69df93e3db7c222f7150d194', alt: 'Before and after: @carolmagalhaes1 grew from 234K to 463K followers, +510M views' },
+    { id: '69df93e327c94c7e4e59e77c', alt: 'Before and after: @karakwithmahreen grew from 0 to 142K TikTok followers, +240M views' },
+    { id: '69df93e306cfeed5500fbe2f', alt: 'Before and after: @nathalia.braga grew from 0 to 1.4M followers, +850M views' },
+    { id: '69df93e3acdf45d673debf39', alt: 'Before and after: @ryuzagoncalves grew from 30K to 664K followers, +560M views' },
+    { id: '69df93e32b7a6ecd79c9509e', alt: 'Before and after: @evandrosilvarodrig grew from 780 to 223K followers, +310M views' },
+    { id: '69df93e3190683601a5d6d6f', alt: 'Before and after: Card headed "From 780 to 223K followers, +310M views", showing @evandrosilvarodrig\'s profile above @nathalia.braga\'s' }
   ];
 
   // Proof screenshots. w/h are the source dimensions, used to reserve
@@ -824,31 +850,65 @@ html, body { margin: 0; background: #000; }
   var REELS = { w: 1080, h: 1920 };   // view-count screenshots
   var PROOF = [].concat(
     [
-      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
-      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
-      '696faa9b4a64648261c6e42f', '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430',
-      '696faa9b4a6464ce7ac6e42d', '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8568237b4b',
-      '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56', '696faa9bd4fb9005fe818dce',
-      '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd', '696faa9bd4fb909ec6818dc6',
-      '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd'
-    ].map(function (id) { return { id: id, w: CHATS.w, h: CHATS.h }; }),
+      ['696faa9b0e12ab6e16d65f32', 'Client group chat: "We got almost 200k views for the video we posted yesterday on TikTok"'],
+      ['696faa9b0e12abae96d65f31', 'Chat with Rohit sharing YouTube Shorts stats: 1,160,148 views, +322,608 in the last 48 hours'],
+      ['696faa9b15885e14a5f6fec1', 'Chat with Natassia and her TikTok profile: a clip at "1.2 million, and on Monday we were at 900K"'],
+      ['696faa9b193b56731c7be105', 'Chat with Mahreen: Instagram grid with a 607K-view reel circled, "omg this is doing great"'],
+      ['696faa9b4a64643e83c6e431', 'Group chat celebrating Karak with Mahreen reaching 100K followers on TikTok'],
+      ['696faa9b4a646454f9c6e433', 'Group chat with Dr. Hasia: "I think I\'ll be on 100k by the end of the week"'],
+      ['696faa9b4a64648261c6e42f', 'Chat sharing Instagram reel insights: 1,638,359 views on a single reel'],
+      ['696faa9b4a6464b67dc6e42e', 'Group chat: "Erim\'s clip hit a million", with the Punjabi Pride clip at 1M views'],
+      ['696faa9b4a6464c326c6e430', 'Team update in a client group chat: 294K views on the second clip'],
+      ['696faa9b4a6464ce7ac6e42d', 'Chat with Mahreen\'s team: YouTube grid with a 1.3M-view video circled, "Millions on YouTube as well"'],
+      ['696faa9b7b1aed22ad237b5e', 'Group chat congratulating Biljana Markova, with her Instagram profile and recent reels'],
+      ['696faa9b7b1aed8568237b4b', 'Client update: close to 60K on Facebook and 116K combined followers across all accounts'],
+      ['696faa9b7b1aed8e82237b5d', 'Message from Weverton: from zero to nearly 1 million YouTube views, with qualified leads from the channel'],
+      ['696faa9b7b1aeda491237b56', 'Chat with Mahreen: a reel at 24.7M views that "just grew 5M views during the last 10 days"'],
+      ['696faa9bd4fb9005fe818dce', 'Monthly performance report for Karak with Mahreen: 19,369,582 views in one month'],
+      ['696faa9bd4fb905e9d818dcf', 'Chat with Mahreen: "Omg the video is at 300K on TikTok"'],
+      ['696faa9bd4fb906b16818dcd', 'Nurture2Sleep group chat celebrating Julie\'s clip reaching 1.3M views on TikTok'],
+      ['696faa9bd4fb909ec6818dc6', 'Three-month summary: 79,979,708 views, +125,000 Instagram and +62,000 TikTok followers, 3,470,428 average views per video'],
+      ['696faa9beb392b4659fed3e1', 'Client team update: "Our recent clip hit 2.3 million views on Instagram"'],
+      ['696faa9beb392b8803fed3dd', 'Chat with Dr. Niya after her first clip passed 1M views: "Never expected it to go this viral"']
+    ].map(function (r) { return { id: r[0], alt: r[1], w: CHATS.w, h: CHATS.h }; }),
     [
-      '67b2d7b811feb954bdd4044c', '67b2d7b870fcfe76ac265ef8', '67b2d7b8afe6aed4f6aa8858',
-      '67b2d7b911feb93fc0d40450', '67b2d7b911feb94ac5d4044d', '67b2d7b911feb9d5dad4044f',
-      '67b2d7b911feb9f51cd4044e', '67b2d7b92aa0e900b6efb03d', '67b2d7b92aa0e93f19efb041',
-      '67b2d7b92aa0e943e6efb03c', '67b2d7b92aa0e94648efb042', '67b2d7b92aa0e952c3efb040',
-      '67b2d7b92aa0e96ac8efb03b', '67b2d7b92aa0e98d79efb03a', '67b2d7b92aa0e9950defb03f',
-      '67b2d7b92aa0e9e2e9efb03e', '67b2d7b92de3ab01559d3519', '67b2d7b92de3ab138f9d3517',
-      '67b2d7b92de3ab37689d3516', '67b2d7b92de3ab40909d3514', '67b2d7b92de3ab50bd9d3518',
-      '67b2d7b92de3abc1269d3515', '67b2d7b92de3abe3bd9d351a', '67b2d7b970fcfe2dac265efc',
-      '67b2d7b970fcfe6457265efa', '67b2d7b970fcfe89a1265efb', '67b2d7b970fcfea762265ef9',
-      '67b2d7b9afe6ae0279aa8859', '67b2d7b9afe6ae5ac9aa885b', '67b2d7b9afe6ae62a8aa885a'
-    ].map(function (id) { return { id: id, w: REELS.w, h: REELS.h }; })
+      ['67b2d7b811feb954bdd4044c', 'Reel by @vanessalles with 5.1 million views'],
+      ['67b2d7b870fcfe76ac265ef8', 'Reel by @therapywith_aditivc with 9.9 million views'],
+      ['67b2d7b8afe6aed4f6aa8858', 'Reel by Jéssica Barros with 7.5 million views'],
+      ['67b2d7b911feb93fc0d40450', 'Reel by @doctorhasia with 14.7 million views'],
+      ['67b2d7b911feb94ac5d4044d', 'Reel by @therapywith_aditivc with 12.1 million views'],
+      ['67b2d7b911feb9d5dad4044f', 'Reel by @nayradelduca with 9.4 million views'],
+      ['67b2d7b911feb9f51cd4044e', 'Reel by @ryuzagoncalves with 12.8 million views'],
+      ['67b2d7b92aa0e900b6efb03d', 'Reel by @vanessalles with 7.9 million views'],
+      ['67b2d7b92aa0e93f19efb041', 'Reel by @karakwithmahreen with 7.8 million views'],
+      ['67b2d7b92aa0e943e6efb03c', 'Reel by Karak with Mahreen with 6.3 million views'],
+      ['67b2d7b92aa0e94648efb042', 'Reel by @doctorhasia with 18.5 million views'],
+      ['67b2d7b92aa0e952c3efb040', 'Reel by @evandrosilvarodrig with 15.8 million views'],
+      ['67b2d7b92aa0e96ac8efb03b', 'Reel by @noonanafousi with 6.3 million views'],
+      ['67b2d7b92aa0e98d79efb03a', 'Reel by @nayradelduca with 9.3 million views'],
+      ['67b2d7b92aa0e9950defb03f', 'Reel by @ryuzagoncalves with 12.3 million views'],
+      ['67b2d7b92aa0e9e2e9efb03e', 'Reel by @doctorhasia with 10.2 million views'],
+      ['67b2d7b92de3ab01559d3519', 'Reel by Karak with Mahreen with 14.1 million views'],
+      ['67b2d7b92de3ab138f9d3517', 'Reel by @thehaalchaalproject with 77.5 million views'],
+      ['67b2d7b92de3ab37689d3516', 'Reel by @noonanafousi with 8 million views'],
+      ['67b2d7b92de3ab40909d3514', 'Reel by @evandrosilvarodrig with 19.6 million views'],
+      ['67b2d7b92de3ab50bd9d3518', 'Reel by @karakwithmahreen with 24.7 million views'],
+      ['67b2d7b92de3abc1269d3515', 'Reel by @ryuzagoncalves with 16.5 million views'],
+      ['67b2d7b92de3abe3bd9d351a', 'Reel by Natassia with 4.2 million views'],
+      ['67b2d7b970fcfe2dac265efc', 'Reel by Jéssica Barros with 11.6 million views'],
+      ['67b2d7b970fcfe6457265efa', 'Reel by @marcosfreitas with 10.1 million views'],
+      ['67b2d7b970fcfe89a1265efb', 'Reel by @evandrosilvarodrig with 9 million views'],
+      ['67b2d7b970fcfea762265ef9', 'Reel by @therapywith_aditivc with 9 million views'],
+      ['67b2d7b9afe6ae0279aa8859', 'Reel by Natassia with 2.7 million views'],
+      ['67b2d7b9afe6ae5ac9aa885b', 'Reel by @doctorhasia with 9.8 million views'],
+      ['67b2d7b9afe6ae62a8aa885a', 'Reel by @nataliabeauty with 21.8 million views']
+    ].map(function (r) { return { id: r[0], alt: r[1], w: REELS.w, h: REELS.h }; })
   );
 
   // Screenshots with the old "Spreed" branding covered up. These are served
-  // from assets/proof/ (<id>-480.webp for the grid, <id>.webp for the
-  // lightbox) instead of the GHL CDN, and never fall back to the originals.
+  // from assets/proof/ (<id>-360.webp / <id>-720.webp for the grid,
+  // <id>.webp at 1080w for the lightbox) instead of the GHL CDN, and never
+  // fall back to the originals.
   var COVERED = [
     '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
     '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
@@ -884,11 +944,11 @@ html, body { margin: 0; background: #000; }
 
   function original(id) { return MEDIA + id + '.png'; }
   function sized(id, width) {
-    if (isCovered[id]) return '/client-results/assets/proof/' + id + (width <= 480 ? '-480' : '') + '.webp';
+    if (isCovered[id]) return '/client-results/assets/proof/' + id + (width <= 360 ? '-360' : width <= 720 ? '-720' : '') + '.webp';
     return 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_' + width + '/u_' + original(id);
   }
   function srcsetFor(id, widths) {
-    if (isCovered[id]) return sized(id, 480) + ' 480w, ' + sized(id, 1080) + ' 1080w';
+    if (isCovered[id]) return sized(id, 360) + ' 360w, ' + sized(id, 720) + ' 720w';
     return widths.map(function (w) { return sized(id, w) + ' ' + w + 'w'; }).join(', ');
   }
   // If the resize CDN ever fails, fall back to the original file
@@ -921,7 +981,7 @@ html, body { margin: 0; background: #000; }
     lb.img.removeAttribute('src');
     withFallback(lb.img, id);
     lb.img.src = sized(id, 1080);
-    lb.img.alt = lb.label + ' ' + (lb.index + 1) + ' of ' + n;
+    lb.img.alt = lb.items[lb.index].alt || (lb.label + ' ' + (lb.index + 1) + ' of ' + n);
     lb.count.textContent = String(lb.index + 1).padStart(2, '0') + ' / ' + n;
     lb.img.style.animation = 'none';
     void lb.img.offsetWidth;
@@ -976,8 +1036,9 @@ html, body { margin: 0; background: #000; }
   (function () {
     var carousel = document.getElementById('adxCarousel');
     var track = document.getElementById('adxTrack');
-    var items = CAROUSEL.map(function (id) { return { id: id }; });
+    var items = CAROUSEL;
     var frag = document.createDocumentFragment();
+    var pending = [];   // images get their src only when the carousel nears the viewport
 
     // Two copies back to back so the marquee loops seamlessly at -50%.
     // The second copy is decorative: hidden from screen readers and tab order.
@@ -990,18 +1051,18 @@ html, body { margin: 0; background: #000; }
 
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.setAttribute('aria-label', 'Enlarge client result ' + (n + 1));
+      btn.setAttribute('aria-label', 'Enlarge: ' + item.alt);
       if (dup) btn.tabIndex = -1;
       btn.addEventListener('click', function () { lbOpen(items, n, 'Client result'); });
 
       var img = withFallback(document.createElement('img'), item.id);
-      img.src = sized(item.id, 640);
-      img.srcset = srcsetFor(item.id, [440, 640]);
       img.sizes = '(max-width: 640px) 220px, 320px';
       img.width = 320;
       img.height = 320;
-      img.alt = dup ? '' : 'Client result ' + (n + 1);
+      // The duplicate copy is aria-hidden, so its empty alt is intentional.
+      img.alt = dup ? '' : item.alt;
       img.decoding = 'async';
+      pending.push([img, item.id]);
       img.draggable = false;
 
       btn.appendChild(img);
@@ -1010,11 +1071,26 @@ html, body { margin: 0; background: #000; }
     });
     track.appendChild(frag);
 
-    // Don't animate the marquee while it's off-screen.
+    // Lazy-load: tiles have fixed sizes, so nothing shifts when images arrive.
+    // (Native loading="lazy" is unreliable inside a clipped, transformed marquee.)
+    function loadImages() {
+      pending.forEach(function (p) {
+        p[0].srcset = srcsetFor(p[1], [440, 640]);
+        p[0].src = sized(p[1], 640);
+      });
+      pending = [];
+    }
+
     if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries, io) {
+        if (entries[0].isIntersecting) { loadImages(); io.disconnect(); }
+      }, { rootMargin: '600px 0px' }).observe(carousel);
+      // Don't animate the marquee while it's off-screen.
       new IntersectionObserver(function (entries) {
         carousel.classList.toggle('is-offscreen', !entries[0].isIntersecting);
       }).observe(carousel);
+    } else {
+      loadImages();
     }
   })();
 
@@ -1032,16 +1108,16 @@ html, body { margin: 0; background: #000; }
 
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.setAttribute('aria-label', 'Enlarge proof screenshot ' + (i + 1));
+      btn.setAttribute('aria-label', 'Enlarge: ' + item.alt);
       btn.addEventListener('click', function () { lbOpen(PROOF, i, 'Proof screenshot'); });
 
       var img = withFallback(document.createElement('img'), item.id);
-      img.src = sized(item.id, 480);
+      img.src = sized(item.id, 640);
       img.srcset = srcsetFor(item.id, [320, 480, 640]);
-      img.sizes = '(max-width: 640px) 48vw, (max-width: 900px) 31vw, 230px';
+      img.sizes = '(max-width: 640px) 45vw, (max-width: 900px) 31vw, 230px';
       img.width = item.w;
       img.height = item.h;
-      img.alt = 'Client result screenshot ' + (i + 1);
+      img.alt = item.alt;
       img.loading = 'lazy';
       img.decoding = 'async';
 
@@ -1069,7 +1145,11 @@ html, body { margin: 0; background: #000; }
   /* ── Case-study videos ────────────────────────────────────── */
   (function () {
     var videos = Array.prototype.slice.call(document.querySelectorAll('.adx-media video'));
-    var autoplay = !reduceMotion && !saveData && 'IntersectionObserver' in window;
+    // Muted preview autoplay only on wider screens. On phones (mostly paid
+    // traffic on cellular data) the videos show their poster frame and load
+    // nothing until tapped.
+    var autoplay = !reduceMotion && !saveData && 'IntersectionObserver' in window &&
+                   window.matchMedia('(min-width: 900px)').matches;
 
     function pauseOthers(except) {
       videos.forEach(function (v) { if (v !== except) { v.pause(); v.muted = true; } });
@@ -1086,6 +1166,8 @@ html, body { margin: 0; background: #000; }
           (autoplay ? 'Play with sound' : 'Play video') +
         '</span>';
       v.parentElement.appendChild(btn);
+      // Native controls would show through under the overlay; restore them on play.
+      v.controls = false;
 
       btn.addEventListener('click', function () {
         pauseOthers(v);
@@ -1094,6 +1176,7 @@ html, body { margin: 0; background: #000; }
         v.currentTime = 0;
         v.play().catch(function () {});
         btn.remove();
+        v.controls = true;
         v.focus({ preventScroll: true });
       });
 
@@ -1102,11 +1185,24 @@ html, body { margin: 0; background: #000; }
         if (!v.muted) { v.dataset.engaged = '1'; pauseOthers(v); }
       });
       v.addEventListener('volumechange', function () {
-        if (!v.muted) { v.dataset.engaged = '1'; if (btn.isConnected) btn.remove(); pauseOthers(v); }
+        if (!v.muted) { v.dataset.engaged = '1'; if (btn.isConnected) { btn.remove(); v.controls = true; } pauseOthers(v); }
       });
     });
 
-    if (!('IntersectionObserver' in window)) return;
+    // Posters are below the fold: attach them as the videos approach.
+    if ('IntersectionObserver' in window) {
+      var posterIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.poster = entry.target.getAttribute('data-poster');
+          posterIO.unobserve(entry.target);
+        });
+      }, { rootMargin: '800px 0px' });
+      videos.forEach(function (v) { posterIO.observe(v); });
+    } else {
+      videos.forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
+      return;
+    }
 
     // Muted preview while in view; always pause when scrolled away.
     var io = new IntersectionObserver(function (entries) {
