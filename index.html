@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adamax Studios — Viral Audit</title>
+  <meta name="description" content="1 million+ real views or your money back. Watch the 4-minute training and book a free 45-minute viral audit call with the Adamax Studios team." />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Adamax Studios" />
+  <meta property="og:title" content="1 million+ real views, or your money back" />
+  <meta property="og:description" content="Trusted by 1,200+ doctors, with 9B+ views generated. Book a free 45-minute viral audit call." />
+  <meta property="og:url" content="https://viral.adamaxstudios.com/" />
+  <meta property="og:image" content="https://viral.adamaxstudios.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://viral.adamaxstudios.com/" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin />
+  <link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
+  <link rel="preconnect" href="https://my.roasform.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       Adamax Studios brand tokens (Brand Kit v1.0)
+       ============================================================ */
+    :root {
+      /* Brand colours */
+      --azure:    #006BE5;  /* the only button blue */
+      --sky:      #009BFC;  /* rules, accents, links on dark */
+      --cobalt:   #024AA1;
+      --navy:     #02244E;
+      --midnight: #00142C;
+      --glow:     #03CCFF;  /* thin lit edges only, never a fill */
+      --silver:   #D8EAF3;
+
+      /* Dark theme */
+      --ground:    #000000;
+      --surface:   #030D1A;
+      --raised:    #0A172E;
+      --hairline:  #172F52;
+      --ink:       #FFFFFF;
+      --ink-muted: #9AA8BD;
+
+      /* Type */
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+      /* Spacing scale: 4 / 8 / 16 / 24 / 40 / 64 */
+      --s1: 4px;  --s2: 8px;  --s3: 16px;
+      --s4: 24px; --s5: 40px; --s6: 64px;
+
+      /* Corners: slightly softened, never round */
+      --r-tag: 4px; --r-card: 8px; --r-panel: 16px;
+
+      --page: 1040px;
+      --gutter: 24px;
+      --carousel-h: 300px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: var(--text);
+      font-size: 15px;
+      line-height: 24px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: calc(var(--page) + var(--gutter) * 2);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ── Angled accent: facets in the right margin, like the brand kit cover ── */
+    .facets {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: calc((100vw - var(--page)) / 2 - var(--s5));
+      height: 900px;
+      pointer-events: none;
+      display: none;
+    }
+
+    .facets i {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* 60° cuts: each slab is a parallelogram leaning at the mark's angle */
+    .facets i:nth-child(1) { background: var(--midnight); clip-path: polygon(10% 0, 100% 0, 100% 100%, 100% 100%); }
+    .facets i:nth-child(2) { background: var(--navy);     clip-path: polygon(45% 0, 100% 0, 100% 75%); }
+    .facets i:nth-child(3) { background: linear-gradient(160deg, var(--cobalt), var(--azure)); clip-path: polygon(75% 0, 100% 0, 100% 42%); }
+    .facets i:nth-child(4) { background: linear-gradient(200deg, var(--sky), var(--azure)); clip-path: polygon(100% 62%, 100% 100%, 82% 100%); }
+
+    @media (min-width: 1300px) { .facets { display: block; } }
+
+    /* ── Typography ── */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      font-family: var(--text);
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: var(--s3);
+    }
+
+    .eyebrow::before {
+      content: '';
+      flex: 0 0 40px;
+      height: 1px;
+      background: var(--sky);
+    }
+
+    h1, h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: clamp(22px, 4.2vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+
+    h1 .accent { color: var(--sky); }
+    .nowrap { white-space: nowrap; }
+
+    h2 {
+      font-size: clamp(18px, 2.4vw, 24px);
+      line-height: 1.2;
+    }
+
+    .lead {
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--ink-muted);
+      max-width: 60ch;
+    }
+
+    .caption {
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .section-head { margin-bottom: var(--s5); }
+    .section-head h2 + .lead { margin-top: var(--s2); }
+
+    /* ── Nav ── */
+    .site-nav {
+      background: var(--ground);
+      border-bottom: 1px solid var(--hairline);
+      position: relative;
+      z-index: 2;
+    }
+
+    .site-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s3);
+      padding-top: var(--s3);
+      padding-bottom: var(--s3);
+    }
+
+    /* Lockup on dark. The PNG carries ~10% black clear space on each side, so the
+       drawn logo is 80% of the file width: 184px file = 147px logo, above the
+       140px brand minimum. The negative margin lines the artwork up with the text. */
+    .lockup {
+      --lockup-w: 184px;
+      width: var(--lockup-w);
+      max-width: none;
+      height: auto;
+      margin-left: calc(var(--lockup-w) * -0.102);
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s2);
+      padding: 16px 24px;
+      border-radius: var(--r-card);
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .btn svg { flex: 0 0 auto; transition: transform 0.16s ease; }
+    .btn:hover svg { transform: translateX(3px); }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--sky);
+      outline-offset: 3px;
+    }
+
+    .btn-primary {
+      background: var(--azure);
+      color: #fff;
+      border: 1px solid var(--azure);
+    }
+
+    .btn-primary:hover { background: #0A78F0; border-color: #0A78F0; }
+
+    /* Light sweep across the button, cut at the mark's 60° angle */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-30deg);
+      animation: sweep 4s ease-in-out 1.2s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sweep {
+      0%   { left: -60%; }
+      35%  { left: 130%; }
+      100% { left: 130%; }
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--sky);
+      border: 1px solid var(--azure);
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    .btn-secondary:hover { background: var(--midnight); color: var(--ink); }
+
+    .btn-block { width: 100%; }
+
+    /* ── Hero: one centred, stacked column (proof → headline → video → CTA) ── */
+    .hero {
+      padding: var(--s5) 0 var(--s6);
+      text-align: center;
+    }
+
+    .hero-stack {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Proof tag: 4px corners (the brand avoids pills) */
+    .proof-tag {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 4px 10px;
+      padding: 6px 12px;
+      margin-bottom: var(--s4);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-tag);
+      background: var(--surface);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .proof-tag .stars { color: var(--sky); letter-spacing: 2px; }
+    .proof-tag strong { color: var(--ink); font-weight: 700; }
+    .proof-tag .sep { width: 1px; height: 12px; background: var(--hairline); }
+
+    .hero h1 { margin-bottom: var(--s3); }
+
+    .hero .lead { margin: 0 auto var(--s4); }
+
+    .hero-video { width: 100%; margin-bottom: var(--s4); }
+
+    .hero-cta { width: 100%; }
+
+    .trust {
+      margin-top: var(--s3);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* Laptop: tighten so headline, video and CTA fit in a ~900px-tall viewport */
+    @media (min-width: 768px) {
+      .hero { padding: var(--s4) 0 var(--s6); }
+      .hero-stack { max-width: 800px; }
+      .proof-tag { margin-bottom: var(--s3); }
+      .hero h1 { font-size: 34px; margin-bottom: 12px; }
+      .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); }
+      .hero-video { margin-bottom: var(--s3); }
+      .hero .btn { padding: 14px 24px; }
+      .trust { margin-top: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .proof-tag { font-size: 10px; letter-spacing: 0.1em; }
+      .proof-tag .sep { display: none; }
+      .trust { font-size: 10px; letter-spacing: 0.12em; }
+    }
+
+    /* Video frame: hairline with one lit top edge */
+    .frame {
+      position: relative;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .frame vturb-smartplayer { display: block; width: 100%; }
+
+    /* ── Sections ── */
+    .section {
+      padding: var(--s6) 0;
+      border-top: 1px solid var(--hairline);
+    }
+
+    /* ── Results carousel ── */
+    .carousel {
+      overflow: hidden;
+      min-height: calc(var(--carousel-h) + 2px);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 48s linear infinite;
+      will-change: transform;
+    }
+
+    .carousel:hover .carousel-track,
+    .carousel.is-offscreen .carousel-track { animation-play-state: paused; }
+
+    .carousel-item {
+      height: var(--carousel-h);
+      width: auto;
+      flex: 0 0 auto;
+      /* margin (not gap) keeps the duplicated set exactly 50% wide, so the loop is seamless */
+      margin-right: var(--s3);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
+      background: var(--surface);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── Qualify form ── */
+    .form-section { scroll-margin-top: var(--s3); }
+
+    .form-panel {
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    /* ── Testimonials ── */
+    .stories { display: grid; gap: var(--s5); }
+
+    .story {
+      display: grid;
+      gap: var(--s4);
+      padding: var(--s4);
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      align-items: center;
+    }
+
+    @media (min-width: 760px) {
+      .story { grid-template-columns: 1fr 1fr; gap: var(--s5); padding: var(--s5); }
+    }
+
+    .story h3 {
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--ink);
+      margin-bottom: var(--s3);
+    }
+
+    .story h3 em { font-style: normal; color: var(--sky); }
+
+    .story p { color: var(--ink-muted); }
+
+    .story-media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      background: var(--ground);
+    }
+
+    .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* "Play with sound" tag, shown until the visitor unmutes */
+    .unmute {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .unmute span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: 6px 10px;
+      border-radius: var(--r-tag);
+      border: 1px solid var(--hairline);
+      background: rgba(0, 0, 0, 0.8);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .unmute:hover span { border-color: var(--sky); }
+    .unmute:focus-visible { outline: 2px solid var(--sky); outline-offset: -4px; }
+
+    .stories-cta { margin-top: var(--s5); }
+
+    /* ── Proof grid ── */
+    .proof-grid { columns: 2; column-gap: 12px; }
+
+    @media (min-width: 760px) { .proof-grid { columns: 3; } }
+
+    .proof-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .proof-item img { width: 100%; height: auto; }
+
+    /* ── End card: lockup centred on black, one angled accent ── */
+    .end-card {
+      position: relative;
+      overflow: hidden;
+      padding: var(--s6) 0 calc(var(--s6) + var(--s5));
+      border-top: 1px solid var(--hairline);
+      text-align: center;
+    }
+
+    .end-card .container { display: flex; flex-direction: column; align-items: center; }
+
+    /* Metallic lockup: hero treatment on pure black. Its drawn logo is 80% of the
+       file width, so 420px keeps the artwork above the 320px brand minimum.
+       Narrower screens get the flat lockup instead (see <picture>). */
+    .end-card picture { display: block; width: min(100%, 420px); margin-bottom: var(--s5); }
+    .end-card .metallic { width: 100%; height: auto; }
+
+    @media (max-width: 469px) {
+      .end-card picture { width: min(100%, 320px); }
+    }
+
+    .end-card h2 { margin-bottom: var(--s4); }
+    .end-card .caption { margin-top: var(--s3); }
+
+    .end-card::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 220px;
+      height: 190px;
+      background: linear-gradient(200deg, var(--sky), var(--azure) 55%, var(--cobalt));
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 560px) {
+      .end-card::after { width: 110px; height: 95px; }
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--hairline);
+      padding: var(--s5) 0;
+    }
+
+    .site-footer .container {
+      display: grid;
+      gap: var(--s3);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s3);
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s4); }
+
+    .footer-links a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover { color: var(--sky); }
+
+    .legal {
+      font-size: 12px;
+      line-height: 18px;
+      color: #5D6B80;
+      max-width: 75ch;
+    }
+
+    /* ── Entrance: a short fade, no bounce ── */
+    .reveal {
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+
+    .reveal.d1 { animation-delay: 0.05s; }
+    .reveal.d2 { animation-delay: 0.15s; }
+    .reveal.d3 { animation-delay: 0.25s; }
+    .reveal.d4 { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── Responsive ── */
+    @media (min-width: 760px) {
+      :root { --gutter: 40px; --carousel-h: 240px; }
+      .lockup { --lockup-w: 196px; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 20px; }
+      .lead { font-size: 16px; line-height: 26px; }
+      .site-nav .btn-secondary { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; animation: none; }
+      .btn-primary::after { animation: none; display: none; }
+      .carousel { overflow-x: auto; }
+      .carousel-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="site-nav">
+    <div class="container">
+      <a href="./" aria-label="Adamax Studios home">
+        <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" />
+      </a>
+      <a href="#qualify" class="btn btn-secondary" data-scroll-to="qualify">See if you qualify</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="facets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <div class="container">
+        <div class="hero-stack">
+          <p class="proof-tag reveal d1">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <strong>4.9/5</strong>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Trusted by 1,200+ doctors &amp; 9B+ views generated</span>
+          </p>
+
+          <h1 class="reveal d2"><span class="accent">1 million+</span> <span class="nowrap">real views.</span><br>Or your money back.</h1>
+
+          <p class="lead reveal d3">Watch the 4-minute video training below.</p>
+
+          <!-- VSL (vturb / ConverteAI smartplayer) -->
+          <div class="hero-video reveal d3">
+            <div class="frame">
+              <vturb-smartplayer id="vid-69f349e0c4812a9b1a751036" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/1200be6e-6fcb-4724-87ac-03a7f7bc2d31/players/69f349e0c4812a9b1a751036/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+            </div>
+          </div>
+
+          <div class="hero-cta reveal d4">
+            <a href="#qualify" class="btn btn-primary btn-block" data-scroll-to="qualify">
+              See if you qualify
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            </a>
+            <p class="trust">Free 45-min viral audit call with our team</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results carousel (images injected after window load so they don't compete with the VSL) -->
+    <section class="section" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Results</p>
+          <h2 id="results-title">Doctor results</h2>
+          <p class="lead">A few of the 1,200+ doctors we've worked with.</p>
+        </div>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qualify form (GoHighLevel inline form) -->
+    <section class="section form-section" id="qualify" aria-labelledby="qualify-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Apply</p>
+          <h2 id="qualify-title">See if you qualify</h2>
+          <p class="lead">Answer a few quick questions to book your free 45-minute viral audit call.</p>
+        </div>
+        <!-- ROASForm (form ID 924236-f7060d-0db987) -->
+        <div class="form-panel">
+          <div id="roasform-924236-f7060d-0db987" style="width: 100%; height: 600px"></div>
+          <script>
+          (function(w,d,o){w.ROASForm=w.ROASForm||{q:[]};w.ROASForm.q.push(o);if(!w.ROASForm._l){w.ROASForm._l=1;var s=d.createElement('script');s.src='https://my.roasform.com/roasform-embed.js';s.async=true;d.head.appendChild(s)}})(window,document,{formId:'924236-f7060d-0db987',mode:'inline',inheritBackground:false,container:'#roasform-924236-f7060d-0db987'});
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client stories -->
+    <section class="section" aria-labelledby="stories-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Client stories</p>
+          <h2 id="stories-title">Real clients. Real results.</h2>
+          <p class="lead">Doctors and professionals who went viral with the Adamax Studios AI content system.</p>
+        </div>
+
+        <div class="stories">
+          <article class="story">
+            <div>
+              <h3><em>36M+</em> organic views driving ideal clients</h3>
+              <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted, including highly aligned discovery calls from her target audience. She moved away from paid ads and collaborations that didn't convert, towards content that builds trust, relationships and real inbound demand tied directly to her mission.</p>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 300 views to <em>2M+</em> in one day</h3>
+              <p>After being stuck at 200–300 views, Rohit published just two videos with Adamax and the first passed 2 million organic views, driving engagement, saves, shares and inbound conversations within days. Pairing his expertise with our AI-powered content system removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 800 views to <em>12M views a month</em></h3>
+              <p>Mahreen now runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony and Apture. She grew from 500 followers to 350K+ with Adamax, and now generates over 12 million organic views every month.</p>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
+            </div>
+          </article>
+        </div>
+
+        <div class="stories-cta">
+          <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
+            See if you qualify
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof grid (rendered from the list in the script below) -->
+    <section class="section" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">More results</p>
+          <h2 id="proof-title">Real numbers. No ads.</h2>
+          <p class="lead">Organic results from Adamax Studios clients.</p>
+        </div>
+        <div class="proof-grid" id="proofGrid"></div>
+      </div>
+    </section>
+
+    <!-- End card -->
+    <section class="end-card" aria-labelledby="end-title">
+      <div class="container">
+        <!-- Metallic lockup only where its artwork can render ≥320px wide; flat lockup below that -->
+        <picture>
+          <source media="(min-width: 470px)" srcset="assets/adamax-metallic-lockup-on-dark.webp" />
+          <img class="metallic" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="1080" height="360" loading="lazy" />
+        </picture>
+        <h2 id="end-title">Book your viral audit</h2>
+        <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
+          See if you qualify
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </a>
+        <p class="caption">Free 45-minute call. 1 million+ real views, or your money back.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="#">Terms and conditions</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <script>
+  // Always start at the top, so GHL never lands visitors on the #qualify anchor.
+  if (history.replaceState && location.hash) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  </script>
+
+  <script>
+  (function () {
+    var CDN = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
+
+    // Screenshots with the old brand name covered up are served locally.
+    var REDACTED = [
+      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
+      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
+      '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430', '696faa9b4a6464ce7ac6e42d',
+      '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56',
+      '696faa9bd4fb9005fe818dce', '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd',
+      '696faa9bd4fb909ec6818dc6', '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd'
+    ];
+
+    function proofSrc(id) {
+      return REDACTED.indexOf(id) !== -1 ? 'assets/testimonials/' + id + '.webp' : CDN + id + '.png';
+    }
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('.js-year').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
+
+    /* ── CTAs: smooth-scroll to the form without adding a #hash to the URL ── */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-scroll-to]');
+      if (!link) return;
+      var target = document.getElementById(link.getAttribute('data-scroll-to'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    /* ── Results carousel ── */
+    var carouselImages = [
+      '69df93e380b446d0fbafb024', '69df93e32b7a6ecd79c9509f', '69df93e3db7c222f7150d194',
+      '69df93e327c94c7e4e59e77c', '69df93e306cfeed5500fbe2f', '69df93e3acdf45d673debf39',
+      '69df93e32b7a6ecd79c9509e', '69df93e3190683601a5d6d6f'
+    ];
+
+    var carousel = document.getElementById('carousel');
+    var track = document.getElementById('carouselTrack');
+
+    function buildCarousel() {
+      if (track.childElementCount) return;
+      var frag = document.createDocumentFragment();
+      // Two copies of the set, so translateX(-50%) loops seamlessly.
+      carouselImages.concat(carouselImages).forEach(function (id, i) {
+        var img = document.createElement('img');
+        img.src = CDN + id + '.png';
+        img.className = 'carousel-item';
+        img.decoding = 'async';
+        if (i < carouselImages.length) {
+          img.alt = 'Doctor result';
+        } else {
+          img.alt = '';
+          img.setAttribute('aria-hidden', 'true');
+        }
+        frag.appendChild(img);
+      });
+      track.appendChild(frag);
+    }
+
+    function afterLoad(fn) {
+      if (document.readyState === 'complete') setTimeout(fn, 800);
+      else window.addEventListener('load', function () { setTimeout(fn, 800); }, { once: true });
+    }
+    afterLoad(buildCarousel);
+
+    if ('IntersectionObserver' in window) {
+      // Pause the marquee while it's off-screen.
+      new IntersectionObserver(function (entries) {
+        carousel.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+      }).observe(carousel);
+    }
+
+    /* ── Proof grid ── */
+    var proofImages = [
+      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
+      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
+      '696faa9b4a64648261c6e42f', '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430',
+      '696faa9b4a6464ce7ac6e42d', '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8568237b4b',
+      '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56', '696faa9bd4fb9005fe818dce',
+      '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd', '696faa9bd4fb909ec6818dc6',
+      '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd', '67b2d7b811feb954bdd4044c',
+      '67b2d7b870fcfe76ac265ef8', '67b2d7b8afe6aed4f6aa8858', '67b2d7b911feb93fc0d40450',
+      '67b2d7b911feb94ac5d4044d', '67b2d7b911feb9d5dad4044f', '67b2d7b911feb9f51cd4044e',
+      '67b2d7b92aa0e900b6efb03d', '67b2d7b92aa0e93f19efb041', '67b2d7b92aa0e943e6efb03c',
+      '67b2d7b92aa0e94648efb042', '67b2d7b92aa0e952c3efb040', '67b2d7b92aa0e96ac8efb03b',
+      '67b2d7b92aa0e98d79efb03a', '67b2d7b92aa0e9950defb03f', '67b2d7b92aa0e9e2e9efb03e',
+      '67b2d7b92de3ab01559d3519', '67b2d7b92de3ab138f9d3517', '67b2d7b92de3ab37689d3516',
+      '67b2d7b92de3ab40909d3514', '67b2d7b92de3ab50bd9d3518', '67b2d7b92de3abc1269d3515',
+      '67b2d7b92de3abe3bd9d351a', '67b2d7b970fcfe2dac265efc', '67b2d7b970fcfe6457265efa',
+      '67b2d7b970fcfe89a1265efb', '67b2d7b970fcfea762265ef9', '67b2d7b9afe6ae0279aa8859',
+      '67b2d7b9afe6ae5ac9aa885b', '67b2d7b9afe6ae62a8aa885a'
+    ];
+
+    var grid = document.getElementById('proofGrid');
+    var gridFrag = document.createDocumentFragment();
+    proofImages.forEach(function (id) {
+      var item = document.createElement('div');
+      item.className = 'proof-item';
+      var img = document.createElement('img');
+      img.src = proofSrc(id);
+      img.alt = 'Client result';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      item.appendChild(img);
+      gridFrag.appendChild(item);
+    });
+    grid.appendChild(gridFrag);
+
+    /* ── Client story videos ── */
+    var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
+
+    function pauseOthers(current) {
+      videos.forEach(function (v) { if (v !== current) v.pause(); });
+    }
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      // Muted autoplay while in view. Once a visitor unmutes a video it is no
+      // longer auto-resumed, so sound never starts without them asking.
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var v = entry.target;
+          if (entry.isIntersecting) {
+            if (v.muted) v.play().catch(function () {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.3 });
+      videos.forEach(function (v) { observer.observe(v); });
+    }
+
+    var SPEAKER = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5"/></svg>';
+
+    videos.forEach(function (v) {
+      // The button intercepts the first click so the browser's native
+      // play/pause toggle doesn't cancel our restart. Once removed,
+      // the native controls work normally.
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'unmute';
+      btn.setAttribute('aria-label', 'Play with sound from the beginning');
+      btn.innerHTML = '<span>' + SPEAKER + 'Play with sound</span>';
+      v.parentElement.appendChild(btn);
+
+      btn.addEventListener('click', function () {
+        pauseOthers(v);
+        v.muted = false;
+        v.currentTime = 0;
+        v.play().catch(function () {});
+        btn.remove();
+      });
+
+      // Starting one with sound via the native controls stops the rest.
+      v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); });
+    });
+  })();
+  </script>
+
+</body>
+</html>
