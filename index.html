@@ -172,6 +172,18 @@ a { color: var(--sky); }
 
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
+/* A short lit segment that travels round the hexagon outline */
+.badge .trace {
+  stroke-dasharray: 16 84;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(3, 204, 255, 0.7));
+  animation: trace 3.2s linear 0.9s infinite, trace-in 0.4s ease-out 0.9s forwards;
+}
+
+@keyframes trace    { to { stroke-dashoffset: -100; } }
+@keyframes trace-in { to { opacity: 1; } }
+
 .hero h1 { max-width: 880px; margin: 0 auto; }
 
 /* ── Buttons ── */
@@ -536,6 +548,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .badge .tick { stroke-dashoffset: 0; }
+  .badge .trace { display: none; }
 }
 </style>
 </head>
@@ -560,6 +573,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
             </linearGradient>
           </defs>
           <polygon points="32,1.5 62.5,19 62.5,53 32,70.5 1.5,53 1.5,19" fill="#030D1A" stroke="url(#facet)" stroke-width="2" stroke-linejoin="round" />
+          <polygon class="trace" points="32,1.5 62.5,19 62.5,53 32,70.5 1.5,53 1.5,19" pathLength="100" fill="none" stroke="#03CCFF" stroke-width="2" stroke-linejoin="round" />
           <polyline class="tick" points="20,37 28.5,45.5 44.5,28.5" fill="none" stroke="#009BFC" stroke-width="2.5" stroke-linecap="square" />
         </svg>
       </div>
