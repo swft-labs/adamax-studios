@@ -22,14 +22,38 @@
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin />
-  <link rel="preconnect" href="https://fast.wistia.com" crossorigin />
+  <!-- Self-hosted fonts (latin subset), preloaded so the headline, which is the LCP
+       element, paints in its brand font without a render-blocking stylesheet -->
+  <link rel="preload" href="assets/fonts/krona-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- The VSL is the primary content: fetch the Wistia player and its thumbnail early -->
+  <link rel="preload" href="https://fast.wistia.com/player.js" as="script" />
+  <link rel="modulepreload" href="https://fast.wistia.com/embed/340vni851v.js" />
+  <link rel="preload" href="https://fast.wistia.com/embed/medias/340vni851v/swatch" as="image" fetchpriority="high" />
+  <link rel="preconnect" href="https://fast.wistia.net" />
+  <link rel="preconnect" href="https://embed-cloudfront.wistia.com" crossorigin />
   <link rel="preconnect" href="https://my.roasform.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    @font-face {
+      font-family: 'Krona One';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/krona-one-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('assets/fonts/manrope-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
     /* ============================================================
        Adamax Studios brand tokens (Brand Kit v1.0)
        ============================================================ */
@@ -255,10 +279,12 @@
       pointer-events: none;
     }
 
+    /* transform (not left) so the sweep never registers as layout shift:
+       -60% → 130% of the button = 475% of the 40%-wide streak */
     @keyframes sweep {
-      0%   { left: -60%; }
-      35%  { left: 130%; }
-      100% { left: 130%; }
+      0%   { transform: translateX(0) skewX(-30deg); }
+      35%  { transform: translateX(475%) skewX(-30deg); }
+      100% { transform: translateX(475%) skewX(-30deg); }
     }
 
     .btn-block { width: 100%; }
@@ -390,6 +416,19 @@
     .hero-video .frame { aspect-ratio: 16 / 9; }
     .frame wistia-player { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 
+    /* Wistia lays its player out from 0px to full size when its API becomes ready,
+       which counts as layout shift. Keep the player hidden until then (script below)
+       and show the preloaded, blurred thumbnail in its place. */
+    .hero-video wistia-player { visibility: hidden; }
+    .hero-video wistia-player.is-ready { visibility: visible; }
+
+    .vsl-swatch {
+      position: absolute;
+      inset: -12px;
+      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/340vni851v/swatch');
+      filter: blur(5px);
+    }
+
     /* ── Sections ── */
     .section {
       padding: var(--s6) 0;
@@ -404,30 +443,22 @@
       mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
     }
 
+    /* Moved by the script below: a single set of images loops by moving each image
+       to the end of the row once it has scrolled out of view. */
     .carousel-track {
       display: flex;
       width: max-content;
-      animation: marquee 48s linear infinite;
       will-change: transform;
     }
-
-    .carousel:hover .carousel-track,
-    .carousel.is-offscreen .carousel-track { animation-play-state: paused; }
 
     .carousel-item {
       height: var(--carousel-h);
       width: auto;
       flex: 0 0 auto;
-      /* margin (not gap) keeps the duplicated set exactly 50% wide, so the loop is seamless */
       margin-right: var(--s3);
       border: 1px solid var(--hairline);
       border-radius: var(--r-card);
       background: var(--surface);
-    }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
     }
 
     /* ── Qualify form ── */
@@ -642,7 +673,6 @@
       .btn-primary::after { animation: none; display: none; }
       .cta-trace .trace { display: none; }
       .carousel { overflow-x: auto; }
-      .carousel-track { animation: none; }
     }
   </style>
 </head>
@@ -679,7 +709,7 @@
           <!-- VSL (Wistia, media 340vni851v) -->
           <div class="hero-video reveal d3">
             <div class="frame">
-              <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/340vni851v.js" async type="module"></script><style>wistia-player[media-id='340vni851v']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/340vni851v/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <wistia-player media-id="340vni851v" aspect="1.7777777777777777"></wistia-player>
+              <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/340vni851v.js" async type="module"></script><style>wistia-player[media-id='340vni851v']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/340vni851v/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <div class="vsl-swatch" aria-hidden="true"></div><wistia-player media-id="340vni851v" aspect="1.7777777777777777"></wistia-player>
             </div>
           </div>
 
@@ -700,7 +730,7 @@
       </div>
     </section>
 
-    <!-- Results carousel (images injected after window load so they don't compete with the VSL) -->
+    <!-- Results carousel: one set of images, looped by the script below -->
     <section class="section" aria-labelledby="results-title">
       <div class="container">
         <div class="section-head">
@@ -709,7 +739,15 @@
           <p class="lead">A few of the 1,200+ doctors we've worked with.</p>
         </div>
         <div class="carousel" id="carousel">
-          <div class="carousel-track" id="carouselTrack"></div>
+          <div class="carousel-track" id="carouselTrack">
+            <img class="carousel-item" src="assets/results/69df93e380b446d0fbafb024-480.webp" srcset="assets/results/69df93e380b446d0fbafb024-300.webp 300w, assets/results/69df93e380b446d0fbafb024-480.webp 480w, assets/results/69df93e380b446d0fbafb024-720.webp 720w, assets/results/69df93e380b446d0fbafb024-900.webp 900w, assets/results/69df93e380b446d0fbafb024-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 11K to 296K followers, +340M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e32b7a6ecd79c9509f-480.webp" srcset="assets/results/69df93e32b7a6ecd79c9509f-300.webp 300w, assets/results/69df93e32b7a6ecd79c9509f-480.webp 480w, assets/results/69df93e32b7a6ecd79c9509f-720.webp 720w, assets/results/69df93e32b7a6ecd79c9509f-900.webp 900w, assets/results/69df93e32b7a6ecd79c9509f-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 54K to 296K followers, +280M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e3db7c222f7150d194-480.webp" srcset="assets/results/69df93e3db7c222f7150d194-300.webp 300w, assets/results/69df93e3db7c222f7150d194-480.webp 480w, assets/results/69df93e3db7c222f7150d194-720.webp 720w, assets/results/69df93e3db7c222f7150d194-900.webp 900w, assets/results/69df93e3db7c222f7150d194-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 234K to 463K followers, +510M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e327c94c7e4e59e77c-480.webp" srcset="assets/results/69df93e327c94c7e4e59e77c-300.webp 300w, assets/results/69df93e327c94c7e4e59e77c-480.webp 480w, assets/results/69df93e327c94c7e4e59e77c-720.webp 720w, assets/results/69df93e327c94c7e4e59e77c-900.webp 900w, assets/results/69df93e327c94c7e4e59e77c-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 0 to 142K followers, +240M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e306cfeed5500fbe2f-480.webp" srcset="assets/results/69df93e306cfeed5500fbe2f-300.webp 300w, assets/results/69df93e306cfeed5500fbe2f-480.webp 480w, assets/results/69df93e306cfeed5500fbe2f-720.webp 720w, assets/results/69df93e306cfeed5500fbe2f-900.webp 900w, assets/results/69df93e306cfeed5500fbe2f-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 0 to 1.4M followers, +850M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e3acdf45d673debf39-480.webp" srcset="assets/results/69df93e3acdf45d673debf39-300.webp 300w, assets/results/69df93e3acdf45d673debf39-480.webp 480w, assets/results/69df93e3acdf45d673debf39-720.webp 720w, assets/results/69df93e3acdf45d673debf39-900.webp 900w, assets/results/69df93e3acdf45d673debf39-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 30K to 664K followers, +560M views" loading="lazy" decoding="async" />
+            <img class="carousel-item" src="assets/results/69df93e32b7a6ecd79c9509e-480.webp" srcset="assets/results/69df93e32b7a6ecd79c9509e-300.webp 300w, assets/results/69df93e32b7a6ecd79c9509e-480.webp 480w, assets/results/69df93e32b7a6ecd79c9509e-720.webp 720w, assets/results/69df93e32b7a6ecd79c9509e-900.webp 900w, assets/results/69df93e32b7a6ecd79c9509e-1080.webp 1080w" sizes="(min-width: 760px) 240px, 300px" width="1080" height="1080" alt="Doctor result: from 780 to 223K followers, +310M views" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
     </section>
@@ -790,7 +828,58 @@
           <h2 id="proof-title">Real numbers. No ads.</h2>
           <p class="lead">Organic results from Adamax Studios clients.</p>
         </div>
-        <div class="proof-grid" id="proofGrid"></div>
+        <div class="proof-grid" id="proofGrid">
+          <div class="proof-item"><img src="assets/proof/696faa9b0e12ab6e16d65f32-540.webp" srcset="assets/proof/696faa9b0e12ab6e16d65f32-360.webp 360w, assets/proof/696faa9b0e12ab6e16d65f32-540.webp 540w, assets/proof/696faa9b0e12ab6e16d65f32-720.webp 720w, assets/proof/696faa9b0e12ab6e16d65f32-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client reports almost 200K TikTok views on a video posted the day before" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b0e12abae96d65f31-540.webp" srcset="assets/proof/696faa9b0e12abae96d65f31-360.webp 360w, assets/proof/696faa9b0e12abae96d65f31-540.webp 540w, assets/proof/696faa9b0e12abae96d65f31-720.webp 720w, assets/proof/696faa9b0e12abae96d65f31-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client shares YouTube Studio stats for a new video with 1,160,148 views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b15885e14a5f6fec1-540.webp" srcset="assets/proof/696faa9b15885e14a5f6fec1-360.webp 360w, assets/proof/696faa9b15885e14a5f6fec1-540.webp 540w, assets/proof/696faa9b15885e14a5f6fec1-720.webp 720w, assets/proof/696faa9b15885e14a5f6fec1-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: a clip stuck at 150 views passes 1K, and another reaches 1.2 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b193b56731c7be105-540.webp" srcset="assets/proof/696faa9b193b56731c7be105-360.webp 360w, assets/proof/696faa9b193b56731c7be105-540.webp 540w, assets/proof/696faa9b193b56731c7be105-720.webp 720w, assets/proof/696faa9b193b56731c7be105-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client shares Instagram insights on accounts reached, with a clip at 607K views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a64643e83c6e431-540.webp" srcset="assets/proof/696faa9b4a64643e83c6e431-360.webp 360w, assets/proof/696faa9b4a64643e83c6e431-540.webp 540w, assets/proof/696faa9b4a64643e83c6e431-720.webp 720w, assets/proof/696faa9b4a64643e83c6e431-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: the team congratulates Karak with Mahreen on 100K TikTok followers" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a646454f9c6e433-540.webp" srcset="assets/proof/696faa9b4a646454f9c6e433-360.webp 360w, assets/proof/696faa9b4a646454f9c6e433-540.webp 540w, assets/proof/696faa9b4a646454f9c6e433-720.webp 720w, assets/proof/696faa9b4a646454f9c6e433-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: Dr. Hasia expects to pass 100K followers by the end of the week" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a64648261c6e42f-540.webp" srcset="assets/proof/696faa9b4a64648261c6e42f-360.webp 360w, assets/proof/696faa9b4a64648261c6e42f-540.webp 540w, assets/proof/696faa9b4a64648261c6e42f-720.webp 720w, assets/proof/696faa9b4a64648261c6e42f-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client shares view counts for recent clips, from 9.7K to 32K views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a6464b67dc6e42e-540.webp" srcset="assets/proof/696faa9b4a6464b67dc6e42e-360.webp 360w, assets/proof/696faa9b4a6464b67dc6e42e-540.webp 540w, assets/proof/696faa9b4a6464b67dc6e42e-720.webp 720w, assets/proof/696faa9b4a6464b67dc6e42e-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: the team and a client coordinating the next round of clips" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a6464c326c6e430-540.webp" srcset="assets/proof/696faa9b4a6464c326c6e430-360.webp 360w, assets/proof/696faa9b4a6464c326c6e430-540.webp 540w, assets/proof/696faa9b4a6464c326c6e430-720.webp 720w, assets/proof/696faa9b4a6464c326c6e430-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: a client’s second clip reaches 294K views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b4a6464ce7ac6e42d-540.webp" srcset="assets/proof/696faa9b4a6464ce7ac6e42d-360.webp 360w, assets/proof/696faa9b4a6464ce7ac6e42d-540.webp 540w, assets/proof/696faa9b4a6464ce7ac6e42d-720.webp 720w, assets/proof/696faa9b4a6464ce7ac6e42d-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: grid of clips led by one at 1.3M views, with the team congratulating Mahreen" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b7b1aed22ad237b5e-540.webp" srcset="assets/proof/696faa9b7b1aed22ad237b5e-360.webp 360w, assets/proof/696faa9b7b1aed22ad237b5e-540.webp 540w, assets/proof/696faa9b7b1aed22ad237b5e-720.webp 720w, assets/proof/696faa9b7b1aed22ad237b5e-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client’s channel at 34.2K views in 30 days, with congratulations" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b7b1aed8568237b4b-540.webp" srcset="assets/proof/696faa9b7b1aed8568237b4b-360.webp 360w, assets/proof/696faa9b7b1aed8568237b4b-540.webp 540w, assets/proof/696faa9b7b1aed8568237b4b-720.webp 720w, assets/proof/696faa9b7b1aed8568237b4b-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client reports 116K combined followers across Facebook, Instagram, YouTube, TikTok and LinkedIn" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b7b1aed8e82237b5d-540.webp" srcset="assets/proof/696faa9b7b1aed8e82237b5d-360.webp 360w, assets/proof/696faa9b7b1aed8e82237b5d-540.webp 540w, assets/proof/696faa9b7b1aed8e82237b5d-720.webp 720w, assets/proof/696faa9b7b1aed8e82237b5d-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: Weverton’s channel goes from zero to nearly 1 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9b7b1aeda491237b56-540.webp" srcset="assets/proof/696faa9b7b1aeda491237b56-360.webp 360w, assets/proof/696faa9b7b1aeda491237b56-540.webp 540w, assets/proof/696faa9b7b1aeda491237b56-720.webp 720w, assets/proof/696faa9b7b1aeda491237b56-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: a video at 24.7M views that grew 5M views in the last 10 days" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9bd4fb9005fe818dce-540.webp" srcset="assets/proof/696faa9bd4fb9005fe818dce-360.webp 360w, assets/proof/696faa9bd4fb9005fe818dce-540.webp 540w, assets/proof/696faa9bd4fb9005fe818dce-720.webp 720w, assets/proof/696faa9bd4fb9005fe818dce-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: monthly performance report for Karak with Mahreen showing 19,369,582 views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9bd4fb905e9d818dcf-540.webp" srcset="assets/proof/696faa9bd4fb905e9d818dcf-360.webp 360w, assets/proof/696faa9bd4fb905e9d818dcf-540.webp 540w, assets/proof/696faa9bd4fb905e9d818dcf-720.webp 720w, assets/proof/696faa9bd4fb905e9d818dcf-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: client says a clip is at 300K views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9bd4fb906b16818dcd-540.webp" srcset="assets/proof/696faa9bd4fb906b16818dcd-360.webp 360w, assets/proof/696faa9bd4fb906b16818dcd-540.webp 540w, assets/proof/696faa9bd4fb906b16818dcd-720.webp 720w, assets/proof/696faa9bd4fb906b16818dcd-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: congratulations on a clip reaching 1.3M views on TikTok" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9bd4fb909ec6818dc6-540.webp" srcset="assets/proof/696faa9bd4fb909ec6818dc6-360.webp 360w, assets/proof/696faa9bd4fb909ec6818dc6-540.webp 540w, assets/proof/696faa9bd4fb909ec6818dc6-720.webp 720w, assets/proof/696faa9bd4fb909ec6818dc6-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: performance summary with 79,979,708 total views, +125,000 Instagram and +62,000 TikTok followers" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9beb392b4659fed3e1-540.webp" srcset="assets/proof/696faa9beb392b4659fed3e1-360.webp 360w, assets/proof/696faa9beb392b4659fed3e1-540.webp 540w, assets/proof/696faa9beb392b4659fed3e1-720.webp 720w, assets/proof/696faa9beb392b4659fed3e1-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: a client clip reaches 2.3 million views on Instagram" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/696faa9beb392b8803fed3dd-540.webp" srcset="assets/proof/696faa9beb392b8803fed3dd-360.webp 360w, assets/proof/696faa9beb392b8803fed3dd-540.webp 540w, assets/proof/696faa9beb392b8803fed3dd-720.webp 720w, assets/proof/696faa9beb392b8803fed3dd-1318.webp 1318w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1318" height="2650" alt="Chat: Dr. Niya is congratulated on hitting 1M views on her first clip" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b811feb954bdd4044c-540.webp" srcset="assets/proof/67b2d7b811feb954bdd4044c-360.webp 360w, assets/proof/67b2d7b811feb954bdd4044c-540.webp 540w, assets/proof/67b2d7b811feb954bdd4044c-720.webp 720w, assets/proof/67b2d7b811feb954bdd4044c-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 5.1 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b870fcfe76ac265ef8-540.webp" srcset="assets/proof/67b2d7b870fcfe76ac265ef8-360.webp 360w, assets/proof/67b2d7b870fcfe76ac265ef8-540.webp 540w, assets/proof/67b2d7b870fcfe76ac265ef8-720.webp 720w, assets/proof/67b2d7b870fcfe76ac265ef8-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9.9 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b8afe6aed4f6aa8858-540.webp" srcset="assets/proof/67b2d7b8afe6aed4f6aa8858-360.webp 360w, assets/proof/67b2d7b8afe6aed4f6aa8858-540.webp 540w, assets/proof/67b2d7b8afe6aed4f6aa8858-720.webp 720w, assets/proof/67b2d7b8afe6aed4f6aa8858-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 7.5 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b911feb93fc0d40450-540.webp" srcset="assets/proof/67b2d7b911feb93fc0d40450-360.webp 360w, assets/proof/67b2d7b911feb93fc0d40450-540.webp 540w, assets/proof/67b2d7b911feb93fc0d40450-720.webp 720w, assets/proof/67b2d7b911feb93fc0d40450-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 14.7 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b911feb94ac5d4044d-540.webp" srcset="assets/proof/67b2d7b911feb94ac5d4044d-360.webp 360w, assets/proof/67b2d7b911feb94ac5d4044d-540.webp 540w, assets/proof/67b2d7b911feb94ac5d4044d-720.webp 720w, assets/proof/67b2d7b911feb94ac5d4044d-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 12.1 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b911feb9d5dad4044f-540.webp" srcset="assets/proof/67b2d7b911feb9d5dad4044f-360.webp 360w, assets/proof/67b2d7b911feb9d5dad4044f-540.webp 540w, assets/proof/67b2d7b911feb9d5dad4044f-720.webp 720w, assets/proof/67b2d7b911feb9d5dad4044f-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9.4 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b911feb9f51cd4044e-540.webp" srcset="assets/proof/67b2d7b911feb9f51cd4044e-360.webp 360w, assets/proof/67b2d7b911feb9f51cd4044e-540.webp 540w, assets/proof/67b2d7b911feb9f51cd4044e-720.webp 720w, assets/proof/67b2d7b911feb9f51cd4044e-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 12.8 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e900b6efb03d-540.webp" srcset="assets/proof/67b2d7b92aa0e900b6efb03d-360.webp 360w, assets/proof/67b2d7b92aa0e900b6efb03d-540.webp 540w, assets/proof/67b2d7b92aa0e900b6efb03d-720.webp 720w, assets/proof/67b2d7b92aa0e900b6efb03d-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 7.9 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e93f19efb041-540.webp" srcset="assets/proof/67b2d7b92aa0e93f19efb041-360.webp 360w, assets/proof/67b2d7b92aa0e93f19efb041-540.webp 540w, assets/proof/67b2d7b92aa0e93f19efb041-720.webp 720w, assets/proof/67b2d7b92aa0e93f19efb041-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 7.8 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e943e6efb03c-540.webp" srcset="assets/proof/67b2d7b92aa0e943e6efb03c-360.webp 360w, assets/proof/67b2d7b92aa0e943e6efb03c-540.webp 540w, assets/proof/67b2d7b92aa0e943e6efb03c-720.webp 720w, assets/proof/67b2d7b92aa0e943e6efb03c-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 6.3 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e94648efb042-540.webp" srcset="assets/proof/67b2d7b92aa0e94648efb042-360.webp 360w, assets/proof/67b2d7b92aa0e94648efb042-540.webp 540w, assets/proof/67b2d7b92aa0e94648efb042-720.webp 720w, assets/proof/67b2d7b92aa0e94648efb042-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 18.5 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e952c3efb040-540.webp" srcset="assets/proof/67b2d7b92aa0e952c3efb040-360.webp 360w, assets/proof/67b2d7b92aa0e952c3efb040-540.webp 540w, assets/proof/67b2d7b92aa0e952c3efb040-720.webp 720w, assets/proof/67b2d7b92aa0e952c3efb040-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 15.8 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e96ac8efb03b-540.webp" srcset="assets/proof/67b2d7b92aa0e96ac8efb03b-360.webp 360w, assets/proof/67b2d7b92aa0e96ac8efb03b-540.webp 540w, assets/proof/67b2d7b92aa0e96ac8efb03b-720.webp 720w, assets/proof/67b2d7b92aa0e96ac8efb03b-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 6.3 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e98d79efb03a-540.webp" srcset="assets/proof/67b2d7b92aa0e98d79efb03a-360.webp 360w, assets/proof/67b2d7b92aa0e98d79efb03a-540.webp 540w, assets/proof/67b2d7b92aa0e98d79efb03a-720.webp 720w, assets/proof/67b2d7b92aa0e98d79efb03a-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9.3 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e9950defb03f-540.webp" srcset="assets/proof/67b2d7b92aa0e9950defb03f-360.webp 360w, assets/proof/67b2d7b92aa0e9950defb03f-540.webp 540w, assets/proof/67b2d7b92aa0e9950defb03f-720.webp 720w, assets/proof/67b2d7b92aa0e9950defb03f-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 12.3 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92aa0e9e2e9efb03e-540.webp" srcset="assets/proof/67b2d7b92aa0e9e2e9efb03e-360.webp 360w, assets/proof/67b2d7b92aa0e9e2e9efb03e-540.webp 540w, assets/proof/67b2d7b92aa0e9e2e9efb03e-720.webp 720w, assets/proof/67b2d7b92aa0e9e2e9efb03e-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 10.2 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3ab01559d3519-540.webp" srcset="assets/proof/67b2d7b92de3ab01559d3519-360.webp 360w, assets/proof/67b2d7b92de3ab01559d3519-540.webp 540w, assets/proof/67b2d7b92de3ab01559d3519-720.webp 720w, assets/proof/67b2d7b92de3ab01559d3519-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 14.1 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3ab138f9d3517-540.webp" srcset="assets/proof/67b2d7b92de3ab138f9d3517-360.webp 360w, assets/proof/67b2d7b92de3ab138f9d3517-540.webp 540w, assets/proof/67b2d7b92de3ab138f9d3517-720.webp 720w, assets/proof/67b2d7b92de3ab138f9d3517-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 77.5 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3ab37689d3516-540.webp" srcset="assets/proof/67b2d7b92de3ab37689d3516-360.webp 360w, assets/proof/67b2d7b92de3ab37689d3516-540.webp 540w, assets/proof/67b2d7b92de3ab37689d3516-720.webp 720w, assets/proof/67b2d7b92de3ab37689d3516-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 8 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3ab40909d3514-540.webp" srcset="assets/proof/67b2d7b92de3ab40909d3514-360.webp 360w, assets/proof/67b2d7b92de3ab40909d3514-540.webp 540w, assets/proof/67b2d7b92de3ab40909d3514-720.webp 720w, assets/proof/67b2d7b92de3ab40909d3514-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 19.6 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3ab50bd9d3518-540.webp" srcset="assets/proof/67b2d7b92de3ab50bd9d3518-360.webp 360w, assets/proof/67b2d7b92de3ab50bd9d3518-540.webp 540w, assets/proof/67b2d7b92de3ab50bd9d3518-720.webp 720w, assets/proof/67b2d7b92de3ab50bd9d3518-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 24.7 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3abc1269d3515-540.webp" srcset="assets/proof/67b2d7b92de3abc1269d3515-360.webp 360w, assets/proof/67b2d7b92de3abc1269d3515-540.webp 540w, assets/proof/67b2d7b92de3abc1269d3515-720.webp 720w, assets/proof/67b2d7b92de3abc1269d3515-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 16.5 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b92de3abe3bd9d351a-540.webp" srcset="assets/proof/67b2d7b92de3abe3bd9d351a-360.webp 360w, assets/proof/67b2d7b92de3abe3bd9d351a-540.webp 540w, assets/proof/67b2d7b92de3abe3bd9d351a-720.webp 720w, assets/proof/67b2d7b92de3abe3bd9d351a-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 4.2 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b970fcfe2dac265efc-540.webp" srcset="assets/proof/67b2d7b970fcfe2dac265efc-360.webp 360w, assets/proof/67b2d7b970fcfe2dac265efc-540.webp 540w, assets/proof/67b2d7b970fcfe2dac265efc-720.webp 720w, assets/proof/67b2d7b970fcfe2dac265efc-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 11.6 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b970fcfe6457265efa-540.webp" srcset="assets/proof/67b2d7b970fcfe6457265efa-360.webp 360w, assets/proof/67b2d7b970fcfe6457265efa-540.webp 540w, assets/proof/67b2d7b970fcfe6457265efa-720.webp 720w, assets/proof/67b2d7b970fcfe6457265efa-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 10.1 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b970fcfe89a1265efb-540.webp" srcset="assets/proof/67b2d7b970fcfe89a1265efb-360.webp 360w, assets/proof/67b2d7b970fcfe89a1265efb-540.webp 540w, assets/proof/67b2d7b970fcfe89a1265efb-720.webp 720w, assets/proof/67b2d7b970fcfe89a1265efb-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b970fcfea762265ef9-540.webp" srcset="assets/proof/67b2d7b970fcfea762265ef9-360.webp 360w, assets/proof/67b2d7b970fcfea762265ef9-540.webp 540w, assets/proof/67b2d7b970fcfea762265ef9-720.webp 720w, assets/proof/67b2d7b970fcfea762265ef9-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b9afe6ae0279aa8859-540.webp" srcset="assets/proof/67b2d7b9afe6ae0279aa8859-360.webp 360w, assets/proof/67b2d7b9afe6ae0279aa8859-540.webp 540w, assets/proof/67b2d7b9afe6ae0279aa8859-720.webp 720w, assets/proof/67b2d7b9afe6ae0279aa8859-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 2.7 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b9afe6ae5ac9aa885b-540.webp" srcset="assets/proof/67b2d7b9afe6ae5ac9aa885b-360.webp 360w, assets/proof/67b2d7b9afe6ae5ac9aa885b-540.webp 540w, assets/proof/67b2d7b9afe6ae5ac9aa885b-720.webp 720w, assets/proof/67b2d7b9afe6ae5ac9aa885b-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 9.8 million views" loading="lazy" decoding="async" /></div>
+          <div class="proof-item"><img src="assets/proof/67b2d7b9afe6ae62a8aa885a-540.webp" srcset="assets/proof/67b2d7b9afe6ae62a8aa885a-360.webp 360w, assets/proof/67b2d7b9afe6ae62a8aa885a-540.webp 540w, assets/proof/67b2d7b9afe6ae62a8aa885a-720.webp 720w, assets/proof/67b2d7b9afe6ae62a8aa885a-1080.webp 1080w" sizes="(min-width: 1120px) 339px, (min-width: 760px) calc((100vw - 104px) / 3), (min-width: 481px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)" width="1080" height="1920" alt="Client video with 21.8 million views" loading="lazy" decoding="async" /></div>
+        </div>
       </div>
     </section>
 
@@ -838,22 +927,6 @@
 
   <script>
   (function () {
-    var CDN = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
-
-    // Screenshots with the old brand name covered up are served locally.
-    var REDACTED = [
-      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
-      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
-      '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430', '696faa9b4a6464ce7ac6e42d',
-      '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56',
-      '696faa9bd4fb9005fe818dce', '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd',
-      '696faa9bd4fb909ec6818dc6', '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd'
-    ];
-
-    function proofSrc(id) {
-      return REDACTED.indexOf(id) !== -1 ? 'assets/testimonials/' + id + '.webp' : CDN + id + '.png';
-    }
-
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('.js-year').forEach(function (el) {
@@ -870,84 +943,46 @@
       target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
 
-    /* ── Results carousel ── */
-    var carouselImages = [
-      '69df93e380b446d0fbafb024', '69df93e32b7a6ecd79c9509f', '69df93e3db7c222f7150d194',
-      '69df93e327c94c7e4e59e77c', '69df93e306cfeed5500fbe2f', '69df93e3acdf45d673debf39',
-      '69df93e32b7a6ecd79c9509e', '69df93e3190683601a5d6d6f'
-    ];
+    /* ── VSL: reveal the Wistia player once its layout has settled ── */
+    var vsl = document.querySelector('.hero-video wistia-player');
+    if (vsl) {
+      var showVsl = function () { vsl.classList.add('is-ready'); };
+      vsl.addEventListener('api-ready', function () { requestAnimationFrame(showVsl); }, { once: true });
+      setTimeout(showVsl, 12000);   // never leave the player hidden if the event doesn't arrive
+    }
 
+    /* ── Results carousel ──
+       One set of images scrolls left; when the first image is fully out of view it
+       is moved to the end of the row, so the loop is seamless without duplicates. */
     var carousel = document.getElementById('carousel');
     var track = document.getElementById('carouselTrack');
+    var SPEED = 45;              // px per second
+    var offset = 0, last = 0, hovering = false, onscreen = true;
 
-    function buildCarousel() {
-      if (track.childElementCount) return;
-      var frag = document.createDocumentFragment();
-      // Two copies of the set, so translateX(-50%) loops seamlessly.
-      carouselImages.concat(carouselImages).forEach(function (id, i) {
-        var img = document.createElement('img');
-        img.src = CDN + id + '.png';
-        img.className = 'carousel-item';
-        img.decoding = 'async';
-        if (i < carouselImages.length) {
-          img.alt = 'Doctor result';
-        } else {
-          img.alt = '';
-          img.setAttribute('aria-hidden', 'true');
+    function stepCarousel(now) {
+      var dt = last ? Math.min(now - last, 100) / 1000 : 0;
+      last = now;
+      if (!hovering && onscreen) {
+        offset -= SPEED * dt;
+        var first = track.firstElementChild;
+        var span = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
+        if (-offset >= span) {
+          track.appendChild(first);
+          offset += span;
         }
-        frag.appendChild(img);
-      });
-      track.appendChild(frag);
+        track.style.transform = 'translate3d(' + offset.toFixed(2) + 'px, 0, 0)';
+      }
+      requestAnimationFrame(stepCarousel);
     }
 
-    function afterLoad(fn) {
-      if (document.readyState === 'complete') setTimeout(fn, 800);
-      else window.addEventListener('load', function () { setTimeout(fn, 800); }, { once: true });
+    if (!reduceMotion) {
+      carousel.addEventListener('mouseenter', function () { hovering = true; });
+      carousel.addEventListener('mouseleave', function () { hovering = false; });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) { onscreen = entries[0].isIntersecting; }).observe(carousel);
+      }
+      requestAnimationFrame(stepCarousel);
     }
-    afterLoad(buildCarousel);
-
-    if ('IntersectionObserver' in window) {
-      // Pause the marquee while it's off-screen.
-      new IntersectionObserver(function (entries) {
-        carousel.classList.toggle('is-offscreen', !entries[0].isIntersecting);
-      }).observe(carousel);
-    }
-
-    /* ── Proof grid ── */
-    var proofImages = [
-      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
-      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
-      '696faa9b4a64648261c6e42f', '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430',
-      '696faa9b4a6464ce7ac6e42d', '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8568237b4b',
-      '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56', '696faa9bd4fb9005fe818dce',
-      '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd', '696faa9bd4fb909ec6818dc6',
-      '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd', '67b2d7b811feb954bdd4044c',
-      '67b2d7b870fcfe76ac265ef8', '67b2d7b8afe6aed4f6aa8858', '67b2d7b911feb93fc0d40450',
-      '67b2d7b911feb94ac5d4044d', '67b2d7b911feb9d5dad4044f', '67b2d7b911feb9f51cd4044e',
-      '67b2d7b92aa0e900b6efb03d', '67b2d7b92aa0e93f19efb041', '67b2d7b92aa0e943e6efb03c',
-      '67b2d7b92aa0e94648efb042', '67b2d7b92aa0e952c3efb040', '67b2d7b92aa0e96ac8efb03b',
-      '67b2d7b92aa0e98d79efb03a', '67b2d7b92aa0e9950defb03f', '67b2d7b92aa0e9e2e9efb03e',
-      '67b2d7b92de3ab01559d3519', '67b2d7b92de3ab138f9d3517', '67b2d7b92de3ab37689d3516',
-      '67b2d7b92de3ab40909d3514', '67b2d7b92de3ab50bd9d3518', '67b2d7b92de3abc1269d3515',
-      '67b2d7b92de3abe3bd9d351a', '67b2d7b970fcfe2dac265efc', '67b2d7b970fcfe6457265efa',
-      '67b2d7b970fcfe89a1265efb', '67b2d7b970fcfea762265ef9', '67b2d7b9afe6ae0279aa8859',
-      '67b2d7b9afe6ae5ac9aa885b', '67b2d7b9afe6ae62a8aa885a'
-    ];
-
-    var grid = document.getElementById('proofGrid');
-    var gridFrag = document.createDocumentFragment();
-    proofImages.forEach(function (id) {
-      var item = document.createElement('div');
-      item.className = 'proof-item';
-      var img = document.createElement('img');
-      img.src = proofSrc(id);
-      img.alt = 'Client result';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      item.appendChild(img);
-      gridFrag.appendChild(item);
-    });
-    grid.appendChild(gridFrag);
 
     /* ── Client story videos ── */
     var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
