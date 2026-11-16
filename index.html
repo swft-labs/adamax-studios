@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spreed — Viral Audit</title>
+  <meta name="description" content="We'll get you 1 million+ real views or your money back. Watch the 4-minute training and book a free 45-minute Viral Audit call with the Spreed team." />
+  <meta name="theme-color" content="#09090B" />
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="We'll Get You 1 Million+ Real Views — Or Your Money Back" />
+  <meta property="og:description" content="Trusted by 1,200+ doctors &amp; 9B+ views generated. Book a free 45-minute Viral Audit call." />
+  <meta property="og:image" content="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin />
+  <link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:       #09090B;
+      --card:     #272729;
+      --pink:     #f43dbe;
+      --pink-dim: #d130a3;
+      --text:     #F4F4F5;
+      --muted:    #71717A;
+      --border:   rgba(244, 61, 190, 0.15);
+      --carousel-h: 358px;
+      --carousel-gap: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Radial glow top-center ── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      max-width: 100vw;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(244, 61, 190, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Layout shell ── */
+    .shell {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 0 40px;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 4px 7px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(244, 61, 190, 0.06);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--pink);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.05s forwards;
+    }
+
+    .stars {
+      color: var(--pink);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .rating {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .divider {
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Headline ── */
+    h1 {
+      font-weight: 800;
+      font-size: clamp(22px, 3.6vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-align: center;
+      color: var(--text);
+      max-width: 740px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.15s forwards;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--pink);
+    }
+
+    .nowrap { white-space: nowrap; }
+
+    /* ── Subheadline ── */
+    .sub {
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--muted);
+      text-align: center;
+      max-width: 580px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.25s forwards;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      width: 100%;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.35s forwards;
+      /* pink border surround */
+      padding: 3px;
+      border-radius: 16px;
+      background: var(--pink);
+      box-shadow:
+        0 0 28px rgba(244, 61, 190, 0.35),
+        0 0 60px rgba(244, 61, 190, 0.15);
+    }
+
+    .video-inner-wrap {
+      border-radius: 13px;
+      overflow: hidden;
+      width: 100%;
+      background: var(--bg);
+    }
+
+    .video-wrap vturb-smartplayer {
+      display: block;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      width: 100%;
+      flex-shrink: 0;
+      margin-top: 12px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.5s forwards;
+    }
+
+    /* Repeat CTAs further down the page: no entrance animation, centred + narrower */
+    .cta-wrap--section {
+      max-width: 520px;
+      margin: 16px auto 0;
+      opacity: 1;
+      animation: none;
+    }
+
+    .cta-wrap--bottom { margin-top: 40px; }
+
+    /* Rotating border light wrapper */
+    .cta-border {
+      position: relative;
+      border-radius: 12px;
+      padding: 2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 20%,
+        rgba(255,255,255,0.9) 40%,
+        var(--pink) 50%,
+        rgba(255,255,255,0.9) 60%,
+        transparent 80%
+      );
+      animation: rotateBorder 2.5s linear infinite;
+    }
+
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes rotateBorder {
+      to { --angle: 360deg; }
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 32px;
+      border-radius: 10px;
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(14px, 1.5vw, 17px);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+      box-shadow: 0 4px 24px rgba(244, 61, 190, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* shimmer sweep */
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: skewX(-20deg);
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { left: -100%; }
+      60%  { left: 160%; }
+      100% { left: 160%; }
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(244, 61, 190, 0.5);
+    }
+
+    .cta-btn:active { transform: translateY(0); }
+
+    .cta-btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+
+    /* ── Trust line ── */
+    .trust {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.6s forwards;
+    }
+
+    .cta-wrap--section .trust {
+      opacity: 1;
+      animation: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      flex-shrink: 0;
+      padding: 32px 0 24px;
+      margin-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      text-align: center;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .footer-copy a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .footer-copy a:hover { color: var(--text); }
+
+    .footer-disc {
+      font-size: 10px;
+      color: #3F3F46;
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ── Form section ── */
+    .form-section {
+      width: 100%;
+      padding: 16px 0 32px;
+      scroll-margin-top: 16px;
+    }
+
+    .form-wrap {
+      border-radius: 13px;
+      overflow: hidden;
+      background: #ffffff;
+      /* Reserve space immediately so GHL resize doesn't cause layout jump */
+      min-height: 1152px;
+      contain: layout;
+    }
+
+    .form-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 1152px;
+      border: none;
+    }
+
+    /* ── Proof carousel ── */
+    .proof-section {
+      width: 100%;
+      padding: 32px 0 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .proof-label {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .logo-slider {
+      width: 100%;
+      overflow: hidden;
+      /* keep the row's height reserved before the images are injected */
+      min-height: calc(var(--carousel-h) + 20px);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+
+    .logo-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      padding: 10px 0;
+      animation: scrollCarousel 40s linear infinite;
+      will-change: transform;
+    }
+
+    .logo-slider:hover .logo-track,
+    .logo-slider.is-offscreen .logo-track {
+      animation-play-state: paused;
+    }
+
+    .logo-item {
+      height: var(--carousel-h);
+      width: auto;
+      object-fit: contain;
+      flex: 0 0 auto;
+      display: block;
+      /* margin (not flex gap) so the duplicated set is exactly 50% wide -> seamless loop */
+      margin-right: var(--carousel-gap);
+      border-radius: 12px;
+      border: 2px solid var(--pink);
+    }
+
+    @keyframes scrollCarousel {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── Testimonials section ── */
+    .testimonials-section {
+      width: 100%;
+      padding: 48px 0 16px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .testimonials-label {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .testimonials-sub {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .testimonial-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .testimonial-card:last-of-type {
+      border-bottom: none;
+    }
+
+    .testimonial-text h3 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .testimonial-text h3 em {
+      font-style: normal;
+      color: var(--pink);
+    }
+
+    .testimonial-text p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .testimonial-video-wrap {
+      padding: 3px;
+      border-radius: 14px;
+      background: var(--pink);
+      box-shadow:
+        0 0 24px rgba(244, 61, 190, 0.3),
+        0 0 50px rgba(244, 61, 190, 0.12);
+    }
+
+    .testimonial-video-inner {
+      border-radius: 11px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      aspect-ratio: 16/9;
+    }
+
+    .testimonial-video-inner video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* "Tap for sound" hint shown until the visitor unmutes */
+    .unmute-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .unmute-overlay span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 100px;
+      background: rgba(9, 9, 11, 0.75);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .unmute-overlay:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -4px;
+    }
+
+    /* ── Proof grid section ── */
+    .proof-grid-section {
+      width: 100%;
+      padding: 40px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .proof-grid-label {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .proof-grid-sub {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .proof-grid {
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    .proof-grid-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid rgba(244, 61, 190, 0.3);
+      display: block;
+      width: 100%;
+      background: var(--card);
+    }
+
+    .proof-grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .testimonial-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .proof-grid { columns: 2; }
+      .testimonials-label { font-size: 18px; }
+      .testimonial-text h3 { font-size: 18px; }
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Laptop: tighten everything to fit in ~900px viewport ── */
+    @media (min-width: 768px) {
+      :root { --carousel-h: 228px; }
+      nav { padding: 10px 0; }
+      .logo { height: 26px; }
+      main { padding: 16px 0 16px; }
+      .badge { margin-bottom: 10px; padding: 4px 10px; font-size: 10px; }
+      h1 { font-size: 32px; margin-bottom: 8px; }
+      .sub { font-size: 13px; margin-bottom: 12px; }
+      .video-wrap { margin-bottom: 12px; }
+      .cta-wrap { margin-top: 8px; }
+      .cta-btn { padding: 13px 32px; font-size: 14px; }
+      .trust { margin-top: 5px; font-size: 11px; }
+      .proof-section { padding: 16px 0 4px; }
+      .proof-label { font-size: 16px; margin-bottom: 12px; }
+      footer { padding: 12px 0 10px; margin-top: 6px; }
+      .footer-copy { font-size: 10px; }
+      .footer-disc { font-size: 9px; }
+    }
+
+    /* ── Mobile adjustments ── */
+    @media (max-width: 480px) {
+      .shell { padding: 0 16px; }
+      nav { padding: 14px 0; }
+      .logo { height: 26px; }
+      .badge { margin-bottom: 14px; font-size: 10px; letter-spacing: 0.03em; }
+      .badge .divider { display: none; }
+      h1 { margin-bottom: 10px; }
+      .sub { margin-bottom: 14px; }
+      .video-wrap { margin-bottom: 12px; }
+      .cta-btn { padding: 14px 24px; }
+    }
+
+    /* ── Respect reduced-motion preferences ── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .badge, h1, .sub, .video-wrap, .cta-wrap, .trust {
+        opacity: 1;
+        animation: none;
+      }
+      .cta-border, .cta-btn::before { animation: none; }
+      .cta-border { background: rgba(255,255,255,0.6); }
+      .logo-slider { overflow-x: auto; }
+      .logo-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shell">
+
+    <!-- Nav -->
+    <nav>
+      <img
+        src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png"
+        alt="Spreed"
+        class="logo"
+        fetchpriority="high"
+      />
+    </nav>
+
+    <!-- Main -->
+    <main>
+
+      <div class="badge">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="rating">4.9/5</span>
+        <span class="divider" aria-hidden="true">·</span>
+        <span>Trusted by 1,200+ doctors &amp; 9B+ views generated</span>
+      </div>
+
+      <h1>We'll Get You <em>1 Million+</em> <span class="nowrap">Real Views</span><br><span class="nowrap">Or Your Money Back</span></h1>
+
+      <p class="sub">Watch the 4-minute video training below.</p>
+
+      <!-- Video (vturb / ConverteAI smartplayer) -->
+      <div class="video-wrap">
+        <div class="video-inner-wrap">
+          <vturb-smartplayer id="vid-69f349e0c4812a9b1a751036" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/1200be6e-6fcb-4724-87ac-03a7f7bc2d31/players/69f349e0c4812a9b1a751036/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-wrap">
+        <div class="cta-border">
+          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
+        </div>
+        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
+      </div>
+
+    </main>
+
+    <!-- Proof carousel (images injected after window load so they don't compete with the VSL) -->
+    <section class="proof-section" aria-label="Doctor results">
+      <p class="proof-label">A Few Of Our 1,200+ Doctor Results</p>
+      <div class="logo-slider" id="logoSlider">
+        <div class="logo-track" id="logoTrack"></div>
+      </div>
+    </section>
+
+    <!-- Qualify Form (GoHighLevel inline form) -->
+    <section class="form-section" id="qualify" aria-label="See if you qualify">
+      <div class="form-wrap">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/Gsa0YAtp6rVAKB0jeEOv"
+          style="width:100%;height:1152px;border:none;display:block;"
+          id="inline-Gsa0YAtp6rVAKB0jeEOv"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Form 14"
+          data-height="1152"
+          data-layout-iframe-id="inline-Gsa0YAtp6rVAKB0jeEOv"
+          data-form-id="Gsa0YAtp6rVAKB0jeEOv"
+          title="Form 14">
+        </iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" aria-label="Client testimonials">
+      <p class="testimonials-label">Real Clients. Real Results.</p>
+      <p class="testimonials-sub">Doctors and professionals who went viral with Spreed's AI system.</p>
+
+      <!-- Julie -->
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          <h3><em>36M+</em> Organic Views Driving Ideal Clients</h3>
+          <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted — including highly aligned discovery calls from her target audience. She shifted from paid ads and collaborations that didn't convert to content that builds trust, relationships, and real inbound demand tied directly to her mission.</p>
+        </div>
+        <div class="testimonial-video-wrap">
+          <div class="testimonial-video-inner">
+            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's testimonial"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rohit -->
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          <h3>From 300 Views to <em>2.0M+</em> in One Day</h3>
+          <p>After being stuck at 200–300 views, Rohit published just two videos with Spreed and his first surpassed 2 million organic views — driving high engagement, saves, shares, and inbound conversations within days. By combining his expertise with Spreed's AI-powered content system, Rohit removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
+        </div>
+        <div class="testimonial-video-wrap">
+          <div class="testimonial-video-inner">
+            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's testimonial"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mahreen -->
+      <div class="testimonial-card">
+        <div class="testimonial-text">
+          <h3>From 800 Views to <em>12M Views/Month</em> (350k+ Followers)</h3>
+          <p>Today, Mahreen runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony, and Apture. She grew from 500 followers to 350K+ using Spreed — and now generates over 12 million organic views every single month.</p>
+        </div>
+        <div class="testimonial-video-wrap">
+          <div class="testimonial-video-inner">
+            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's testimonial"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA after testimonials -->
+      <div class="cta-wrap cta-wrap--section">
+        <div class="cta-border">
+          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
+        </div>
+        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
+      </div>
+    </section>
+
+    <!-- Proof Grid (rendered from the list in the script below) -->
+    <section class="proof-grid-section" aria-label="More results">
+      <p class="proof-grid-label">More Results From Spreed Users</p>
+      <p class="proof-grid-sub">1,200+ doctors. Real numbers. No ads.</p>
+      <div class="proof-grid" id="proofGrid">
+        <noscript>
+          <div class="proof-grid-item"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faa9b0e12ab6e16d65f32.png" alt="Spreed client result"></div>
+        </noscript>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="cta-wrap cta-wrap--section cta-wrap--bottom">
+        <div class="cta-border">
+          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
+        </div>
+        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p class="footer-copy">Copyright © <span id="year">2026</span> Spreed FZE. All Rights Reserved. &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></p>
+      <p class="footer-disc">This website is not a part of the Facebook website or Facebook Inc. Additionally, this website is NOT endorsed by Facebook in any way. Facebook is a trademark of Facebook, Inc.</p>
+    </footer>
+
+  </div>
+
+  <script>
+  // Always start at top — prevents GHL from landing on the #qualify anchor.
+  if (history.replaceState && location.hash) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  </script>
+
+  <script>
+  (function () {
+    var CDN = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ── CTA buttons: smooth-scroll to the form without touching the URL hash ── */
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-scroll-to]');
+      if (!link) return;
+      var target = document.getElementById(link.getAttribute('data-scroll-to'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    /* ── Proof carousel ── */
+    var carouselImages = [
+      '69df93e380b446d0fbafb024', '69df93e32b7a6ecd79c9509f', '69df93e3db7c222f7150d194',
+      '69df93e327c94c7e4e59e77c', '69df93e306cfeed5500fbe2f', '69df93e3acdf45d673debf39',
+      '69df93e32b7a6ecd79c9509e', '69df93e3190683601a5d6d6f'
+    ];
+
+    var slider = document.getElementById('logoSlider');
+    var track = document.getElementById('logoTrack');
+
+    function buildCarousel() {
+      if (track.childElementCount) return;
+      var frag = document.createDocumentFragment();
+      // Duplicate the set so translateX(-50%) loops seamlessly.
+      carouselImages.concat(carouselImages).forEach(function (id, i) {
+        var img = document.createElement('img');
+        img.src = CDN + id + '.png';
+        img.className = 'logo-item';
+        img.alt = i < carouselImages.length ? 'Doctor result' : '';
+        if (i >= carouselImages.length) img.setAttribute('aria-hidden', 'true');
+        img.decoding = 'async';
+        frag.appendChild(img);
+      });
+      track.appendChild(frag);
+    }
+
+    if (document.readyState === 'complete') {
+      setTimeout(buildCarousel, 800);
+    } else {
+      window.addEventListener('load', function () { setTimeout(buildCarousel, 800); }, { once: true });
+    }
+
+    // Pause the carousel animation while it's off-screen (saves battery / main thread).
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        slider.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+      }).observe(slider);
+    }
+
+    /* ── Proof grid ── */
+    var proofImages = [
+      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
+      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
+      '696faa9b4a64648261c6e42f', '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430',
+      '696faa9b4a6464ce7ac6e42d', '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8568237b4b',
+      '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56', '696faa9bd4fb9005fe818dce',
+      '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd', '696faa9bd4fb909ec6818dc6',
+      '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd', '67b2d7b811feb954bdd4044c',
+      '67b2d7b870fcfe76ac265ef8', '67b2d7b8afe6aed4f6aa8858', '67b2d7b911feb93fc0d40450',
+      '67b2d7b911feb94ac5d4044d', '67b2d7b911feb9d5dad4044f', '67b2d7b911feb9f51cd4044e',
+      '67b2d7b92aa0e900b6efb03d', '67b2d7b92aa0e93f19efb041', '67b2d7b92aa0e943e6efb03c',
+      '67b2d7b92aa0e94648efb042', '67b2d7b92aa0e952c3efb040', '67b2d7b92aa0e96ac8efb03b',
+      '67b2d7b92aa0e98d79efb03a', '67b2d7b92aa0e9950defb03f', '67b2d7b92aa0e9e2e9efb03e',
+      '67b2d7b92de3ab01559d3519', '67b2d7b92de3ab138f9d3517', '67b2d7b92de3ab37689d3516',
+      '67b2d7b92de3ab40909d3514', '67b2d7b92de3ab50bd9d3518', '67b2d7b92de3abc1269d3515',
+      '67b2d7b92de3abe3bd9d351a', '67b2d7b970fcfe2dac265efc', '67b2d7b970fcfe6457265efa',
+      '67b2d7b970fcfe89a1265efb', '67b2d7b970fcfea762265ef9', '67b2d7b9afe6ae0279aa8859',
+      '67b2d7b9afe6ae5ac9aa885b', '67b2d7b9afe6ae62a8aa885a'
+    ];
+
+    var grid = document.getElementById('proofGrid');
+    var gridFrag = document.createDocumentFragment();
+    proofImages.forEach(function (id) {
+      var item = document.createElement('div');
+      item.className = 'proof-grid-item';
+      var img = document.createElement('img');
+      img.src = CDN + id + '.png';
+      img.alt = 'Spreed client result';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      item.appendChild(img);
+      gridFrag.appendChild(item);
+    });
+    grid.textContent = '';
+    grid.appendChild(gridFrag);
+
+    /* ── Testimonial videos ── */
+    var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
+
+    function pauseOthers(current) {
+      videos.forEach(function (v) { if (v !== current) v.pause(); });
+    }
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      // Muted autoplay while in view. Once a visitor has unmuted a video we
+      // stop auto-resuming it, so sound never starts without them asking.
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var v = entry.target;
+          if (entry.isIntersecting) {
+            if (v.muted) v.play().catch(function () {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.3 });
+      videos.forEach(function (v) { observer.observe(v); });
+    }
+
+    videos.forEach(function (v) {
+      // The overlay intercepts the first click so the browser's native
+      // play/pause toggle doesn't immediately cancel our restart.
+      // Once removed, native controls work normally.
+      var overlay = document.createElement('button');
+      overlay.type = 'button';
+      overlay.className = 'unmute-overlay';
+      overlay.setAttribute('aria-label', 'Play with sound from the beginning');
+      overlay.innerHTML = '<span><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.47 4.47 0 0 0 2.5-4z"/></svg>Tap for sound</span>';
+      v.parentElement.appendChild(overlay);
+
+      overlay.addEventListener('click', function () {
+        pauseOthers(v);
+        v.muted = false;
+        v.currentTime = 0;
+        v.play().catch(function () {});
+        overlay.remove();
+      });
+
+      // If a visitor starts one video via native controls, stop the rest.
+      v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); });
+    });
+  })();
+  </script>
+
+</body>
+</html>
