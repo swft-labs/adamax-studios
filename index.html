@@ -11,6 +11,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
+<link rel="preconnect" href="https://fast.wistia.com" crossorigin />
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/8ak013qk1x.js" async type="module"></script>
 <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
@@ -393,7 +396,16 @@ button.btn { cursor: pointer; }
   pointer-events: none;
 }
 
-.video-frame vturb-smartplayer { display: block; width: 100%; margin: 0 auto; }
+.video-frame vturb-smartplayer,
+.video-frame wistia-player { display: block; width: 100%; margin: 0 auto; }
+
+/* Blurred poster until the Wistia player loads */
+wistia-player[media-id='8ak013qk1x']:not(:defined) {
+  background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/8ak013qk1x/swatch');
+  display: block;
+  filter: blur(5px);
+  padding-top: 56.25%;
+}
 
 .video-list { list-style: none; display: flex; flex-direction: column; }
 
@@ -682,7 +694,7 @@ button.btn { cursor: pointer; }
       </div>
 
       <div class="video-frame">
-        <vturb-smartplayer id="vid-69f34d52c10edec7d51f0117" data-load="eager"></vturb-smartplayer>
+        <wistia-player media-id="8ak013qk1x" aspect="1.7777777777777777"></wistia-player>
       </div>
     </div>
   </section>
@@ -904,9 +916,10 @@ button.btn { cursor: pointer; }
     if (e.key === 'Escape' && !calMenu.hidden) { setMenu(false); calToggle.focus(); }
   });
 
-  /* ── vturb players ──
-     Step 1 loads immediately; the five optional videos load as they
-     approach the viewport so they don't compete with the main video. */
+  /* ── vturb players (Step 3) ──
+     The main Step 1 video is Wistia and loads with the page. These five
+     optional videos load as they approach the viewport so they don't
+     compete with it. */
   function loadPlayer(el) {
     if (el.dataset.loaded) return;
     el.dataset.loaded = '1';
@@ -917,10 +930,7 @@ button.btn { cursor: pointer; }
     document.head.appendChild(s);
   }
 
-  var lazy = [];
-  document.querySelectorAll('vturb-smartplayer').forEach(function (el) {
-    if (el.dataset.load === 'eager') loadPlayer(el); else lazy.push(el);
-  });
+  var lazy = Array.prototype.slice.call(document.querySelectorAll('vturb-smartplayer'));
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
