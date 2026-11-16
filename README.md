@@ -65,6 +65,6 @@ The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts 
 - **Carousel images:** the `<img class="carousel-item">` tags inside `#carouselTrack`. Each needs its `results/` WebP widths, `width`/`height` and `alt`.
 - **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
 - **VSL:** the Wistia player stays hidden behind a blurred thumbnail until Wistia's `api-ready` event (12s fallback). Wistia's own layout pass would otherwise count as layout shift.
-- **Client stories:** the three `.story` cards (text beside a video). Each has a headline, one line and three stat chips. Videos autoplay muted while in view and show a "Play with sound" button. Each has a headline, one line (who, specialty, timeframe) and three stat chips; wrap the number in a chip in `<strong>` to colour it.
+- **Client stories:** the three `.story` cards (text beside a video). Each has a headline, one line and three stat chips. Wrap the number in a chip in `<strong>` to colour it. Videos autoplay muted while in view and show a "Play with sound" button.
 - **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`). Its colours and theme are set in the ROASForm dashboard.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
