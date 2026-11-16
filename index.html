@@ -538,51 +538,45 @@
 
     .chips strong { font-weight: 700; color: var(--sky); }
 
-    /* ── Client videos: vertical tiles. The files are 16:9 with the 9:16 footage
-       centred, so a 9:16 box with object-fit: cover crops away exactly the black
-       bars. Swipeable row on phones, three across from 760px. ── */
-    .clips-label { margin-top: var(--s6); }
+    /* ── Client stories: text (headline, one line, three stat chips) beside the video ── */
+    .stories { display: grid; gap: var(--s5); }
 
-    .clips {
-      display: flex;
-      gap: var(--s3);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-padding-inline: var(--gutter);   /* snap tiles to the text edge, not the screen edge */
-      margin: 0 calc(var(--gutter) * -1);
-      padding: 0 var(--gutter) var(--s2);
-      scrollbar-width: none;
+    .story {
+      display: grid;
+      gap: var(--s4);
+      padding: var(--s4);
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      align-items: center;
     }
-
-    .clips::-webkit-scrollbar { display: none; }
-
-    .clip { flex: 0 0 72%; scroll-snap-align: start; }
 
     @media (min-width: 760px) {
-      .clips { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); overflow: visible; margin: 0; padding: 0; }
+      .story { grid-template-columns: 1fr 1fr; gap: var(--s5); padding: var(--s5); }
     }
 
-    .clip-media {
+    .story h3 {
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--ink);
+    }
+
+    .story h3 em { font-style: normal; color: var(--sky); }
+
+    .story-media {
       position: relative;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 16 / 9;
       border: 1px solid var(--hairline);
       border-radius: var(--r-card);
       overflow: hidden;
       background: var(--ground);
     }
 
-    .clip-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .clip h3 {
-      margin-top: var(--s3);
-      font-family: var(--text);
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 26px;
-      color: var(--ink);
-    }
-
-    .clip h3 em { font-style: normal; color: var(--sky); }
+    .cases-label { margin-top: var(--s6); }
 
     /* "Play with sound" tag, shown until the visitor unmutes */
     .unmute {
@@ -850,6 +844,54 @@
           <h2 id="stories-title">Real clients. Real results.</h2>
         </div>
 
+        <div class="stories">
+          <article class="story">
+            <div>
+              <h3><em>36M+</em> organic views driving ideal clients</h3>
+              <p class="case-who">Julie, stalled at 6,000 followers before Adamax</p>
+              <ul class="chips">
+                <li><strong>36M+</strong> views</li>
+                <li><strong>22,000+</strong> followers</li>
+                <li><strong>Inbound</strong> discovery calls</li>
+              </ul>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 300 views to <em>2M+</em> in one day</h3>
+              <p class="case-who">Rohit, stuck at 200–300 views before Adamax</p>
+              <ul class="chips">
+                <li><strong>2M+</strong> views on video one</li>
+                <li><strong>2</strong> videos published</li>
+                <li><strong>Inbound</strong> conversations in days</li>
+              </ul>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 800 views to <em>12M views a month</em></h3>
+              <p class="case-who">Mahreen, coaching business and podcast host</p>
+              <ul class="chips">
+                <li><strong>12M</strong> views a month</li>
+                <li><strong>350K+</strong> followers</li>
+                <li>Brand deals with <strong>TikTok, Amazon, Sony</strong></li>
+              </ul>
+            </div>
+            <div class="story-media">
+              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
+            </div>
+          </article>
+        </div>
+
+        <p class="eyebrow cases-label">More case studies</p>
         <div class="cases">
           <article class="case">
             <h3>From underbooked to a second clinic.</h3>
@@ -889,31 +931,6 @@
               <li>Fees up <strong>40%</strong></li>
               <li><strong>$74K</strong> ebook week</li>
             </ul>
-          </article>
-        </div>
-
-        <p class="eyebrow clips-label">Client videos</p>
-        <div class="clips">
-          <article class="clip">
-            <div class="clip-media">
-              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
-            </div>
-            <h3><em>36M+</em> organic views driving ideal clients</h3>
-            <p class="case-who">Julie, 6,000 to 22,000+ followers</p>
-          </article>
-          <article class="clip">
-            <div class="clip-media">
-              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
-            </div>
-            <h3>From 300 views to <em>2M+</em> in one day</h3>
-            <p class="case-who">Rohit, 2M+ views on his first video</p>
-          </article>
-          <article class="clip">
-            <div class="clip-media">
-              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
-            </div>
-            <h3>From 800 views to <em>12M views a month</em></h3>
-            <p class="case-who">Mahreen, 500 to 350K+ followers</p>
           </article>
         </div>
 
