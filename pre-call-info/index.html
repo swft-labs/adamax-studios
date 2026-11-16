@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#000000" />
+<title>You're booked — Adamax Studios viral audit</title>
+<link rel="icon" type="image/png" href="/pre-call-info/assets/favicon.png" />
+<link rel="apple-touch-icon" href="/pre-call-info/assets/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fast.wistia.com" crossorigin />
+<link rel="preconnect" href="https://my.roasform.com" crossorigin />
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/8ak013qk1x.js" async type="module"></script>
+<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   Adamax Studios brand tokens (Brand Kit v1.0)
+   ============================================================ */
+:root {
+  /* Brand colours */
+  --azure:    #006BE5;  /* the only button blue, always white text */
+  --sky:      #009BFC;  /* rules, accents, links on dark */
+  --cobalt:   #024AA1;
+  --navy:     #02244E;
+  --midnight: #00142C;
+  --glow:     #03CCFF;  /* thin lit edges only, never a fill */
+
+  /* Dark theme */
+  --ground:    #000000;
+  --surface:   #030D1A;
+  --raised:    #0A172E;
+  --hairline:  #172F52;
+  --ink:       #FFFFFF;
+  --ink-muted: #9AA8BD;
+  --ink-faint: #56657C;
+
+  /* Type */
+  --display: 'Krona One', 'Arial Black', sans-serif;
+  --text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing scale: 4 / 8 / 16 / 24 / 40 / 64 */
+  --s1: 4px;  --s2: 8px;  --s3: 16px;
+  --s4: 24px; --s5: 40px; --s6: 64px;
+
+  /* Corners: slightly softened, never round */
+  --r-tag: 4px; --r-card: 8px; --r-panel: 16px;
+
+  --page:  720px;
+  --nav-h: 77px;
+  --hex: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 15px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: var(--sky); }
+
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+
+.container {
+  max-width: calc(var(--page) + 2 * var(--s4));
+  margin: 0 auto;
+  padding: 0 var(--s4);
+}
+
+/* ── Type ── */
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.display-lg { font-size: clamp(28px, 7vw, 40px); line-height: 1.1; }
+.display-md { font-size: clamp(20px, 5.2vw, 24px); line-height: 1.2; }
+
+.eyebrow {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+/* Leading blue rule, as on the brand kit section labels */
+.eyebrow--rule { display: flex; align-items: center; gap: var(--s3); }
+.eyebrow--rule::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--sky);
+  flex-shrink: 0;
+}
+
+.muted { color: var(--ink-muted); }
+.caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
+
+/* ── Nav ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ground);
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  justify-content: center;
+  padding: 6px var(--s4);
+}
+
+.site-nav img { width: 192px; }
+
+/* ── Sections ── */
+.section {
+  padding: var(--s6) 0;
+  border-top: 1px solid var(--hairline);
+  scroll-margin-top: var(--nav-h);
+}
+
+.section-head { margin-bottom: var(--s5); }
+.section-head .display { margin: var(--s3) 0 var(--s2); }
+.section-head p { max-width: 560px; }
+
+/* Centred step headings: "STEP 1: WATCH THIS BEFORE YOUR CALL" */
+.section-head--center { text-align: center; }
+.section-head--center .display { margin-top: 0; }
+.section-head--center p { margin: 0 auto; }
+
+.display-step { font-size: clamp(22px, 3.6vw, 32px); line-height: 1.2; }
+.display em { font-style: normal; color: var(--sky); }
+.nowrap { white-space: nowrap; }
+
+.container.container--wide { max-width: calc(960px + 2 * var(--s4)); }
+
+.section--flush { border-top: 0; padding-top: var(--s5); }
+
+/* ── Hero (title card: centred) ── */
+.hero {
+  padding: var(--s6) 0 var(--s5);
+  text-align: center;
+}
+
+.badge {
+  width: 64px;
+  height: 72px;
+  margin: 0 auto var(--s4);
+}
+
+.badge svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.badge .tick {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw 0.6s 0.3s ease-out forwards;
+}
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* A short lit segment that travels round the hexagon outline */
+.badge .trace {
+  stroke-dasharray: 16 84;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(3, 204, 255, 0.7));
+  animation: trace 3.2s linear 0.9s infinite, trace-in 0.4s ease-out 0.9s forwards;
+}
+
+@keyframes trace    { to { stroke-dashoffset: -100; } }
+@keyframes trace-in { to { opacity: 1; } }
+
+.hero h1 { max-width: 880px; margin: 0 auto; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 52px;
+  padding: 0 var(--s4);
+  border: 0;
+  border-radius: var(--r-card);
+  font: 700 15px/1 var(--text);
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.btn svg { flex-shrink: 0; }
+
+.btn--primary { background: var(--azure); }
+.btn--primary:hover,
+.btn--primary[aria-expanded="true"] { background: #1677EA; }
+
+button.btn { cursor: pointer; }
+
+/* ── Add to calendar menu ── */
+.cal { position: relative; }
+
+.cal-menu {
+  position: absolute;
+  top: calc(100% + var(--s2));
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: var(--s1);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  text-align: left;
+}
+
+.cal-menu[hidden] { display: none; }
+
+/* ROASForm Add to Calendar, under the video and the same width */
+.video-atc { margin-top: var(--s3); }
+
+.cal-links { display: flex; flex-direction: column; }
+.cal-links[hidden] { display: none; }
+
+.cal-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border-radius: var(--r-tag);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.cal-links a + a { border-top: 1px solid var(--hairline); }
+.cal-links a:hover { background: var(--raised); }
+
+.cal-fallback {
+  padding: var(--s2) var(--s3);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--ink-muted);
+}
+
+.cal-fallback strong { color: var(--ink); font-weight: 600; }
+
+/* Light sweep at the brand's 60° angle */
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-30deg);
+  animation: sweep 4s ease-in-out 1s infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0%   { left: -60%; }
+  30%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* ── Step cards (hero) ── */
+.step-cards {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-top: var(--s5);
+  text-align: left;
+}
+
+.step-cards > li { display: flex; }
+
+.step-card {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.step-card:hover,
+.step-card[aria-expanded="true"] { border-color: var(--cobalt); background: var(--raised); }
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-tag);
+  background: var(--azure);
+  color: var(--ink);
+  font: 700 13px/1 var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-body { flex: 1; min-width: 0; }
+
+.step-title { display: block; font-weight: 700; font-size: 16px; line-height: 22px; }
+
+.step-sub { display: block; font-size: 14px; line-height: 20px; color: var(--ink-muted); margin-top: var(--s1); }
+
+.step-icon { color: var(--sky); flex-shrink: 0; margin-top: 2px; }
+
+/* ── Client avatars (hexagon crops) ── */
+.clients {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s3);
+  margin-top: var(--s5);
+}
+
+.hexes { display: flex; gap: var(--s1); }
+
+.hex {
+  width: 40px;
+  height: 46px;
+  padding: 1.5px;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--sky), var(--navy));
+}
+
+.hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: var(--hex);
+}
+
+.clients-count { text-align: left; font-weight: 700; font-size: 15px; line-height: 20px; }
+.clients-count span { display: block; font-size: 13px; font-weight: 500; color: var(--ink-muted); }
+
+/* ── Video frames ── */
+.video-frame {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  background: var(--ground);
+  overflow: hidden;
+}
+
+/* Lit top edge */
+.video-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-panel {
+  padding: var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+}
+
+.video-frame wistia-player { display: block; width: 100%; margin: 0 auto; }
+
+/* Blurred poster until the Wistia player loads */
+wistia-player[media-id='8ak013qk1x']:not(:defined) {
+  background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/8ak013qk1x/swatch');
+  display: block;
+  filter: blur(5px);
+  padding-top: 56.25%;
+}
+
+/* ── Checklist ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  padding: var(--s1) var(--s4);
+}
+
+.numbers-card { padding: var(--s4); max-width: var(--page); margin: 0 auto; }
+
+.numbers {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.numbers li {
+  position: relative;
+  padding-left: var(--s4);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+/* Small triangle bullets, as in the brand kit */
+.numbers li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 9px;
+  height: 8px;
+  background: var(--sky);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* ── Proof: client cases ── */
+.case-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s3);
+}
+
+.case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 168px;
+  gap: var(--s4);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  transition: border-color 0.16s ease;
+}
+.case:hover { border-color: var(--cobalt); }
+.case[hidden] { display: none; }
+
+.case-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+/* Right half: the video preview, links to the case */
+.case-preview {
+  position: relative;
+  display: block;
+  align-self: start;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--ground);
+  transition: border-color 0.16s ease;
+}
+
+.case-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.case-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.75));
+  pointer-events: none;
+}
+
+.case-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  line-height: 0;
+  transition: transform 0.16s ease;
+}
+
+.case-watch {
+  position: absolute;
+  left: var(--s2);
+  right: var(--s2);
+  bottom: var(--s2);
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.case-preview:hover { border-color: var(--sky); }
+.case-preview:hover img { transform: scale(1.04); }
+.case-preview:hover .case-play { transform: translate(-50%, -50%) scale(1.08); }
+
+.case-head { display: flex; align-items: center; gap: var(--s3); }
+
+.case-avatar {
+  width: 52px;
+  height: 60px;
+  padding: 2px;
+  flex-shrink: 0;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--sky), var(--navy));
+}
+
+.case-avatar img,
+.case-avatar span {
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+}
+
+.case-avatar span {
+  background: linear-gradient(160deg, var(--cobalt), var(--midnight));
+  color: var(--ink);
+  font: 400 15px/1 var(--display);
+}
+
+.case-id { flex: 1; min-width: 0; }
+.case-name { font-weight: 700; font-size: 15px; line-height: 20px; }
+.case-niche { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+.case-stat {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.case-stat b {
+  display: block;
+  font: 400 28px/1.1 var(--display);
+  letter-spacing: 0;
+  color: var(--sky);
+  margin-bottom: 2px;
+}
+
+.case-detail { font-size: 14px; line-height: 21px; color: var(--ink); margin-top: calc(-1 * var(--s2)); }
+.case-detail--lead { margin-top: 0; }
+
+.case-links { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: auto; }
+
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-tag);
+  background: var(--ground);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+.case-link { max-width: 100%; }
+.case-link span {
+  color: var(--ink-muted);
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.case-link svg { flex-shrink: 0; }
+a.case-link:hover { border-color: var(--sky); }
+a.case-link:hover svg { color: var(--sky); }
+.case-link svg { color: var(--ink-faint); }
+.case-platform { font-size: 13px; font-weight: 600; color: var(--ink-faint); align-self: center; }
+.case-platform span { color: var(--ink-faint); font-weight: 500; }
+.case-platform span::before { content: '· '; }
+
+@media (max-width: 900px) {
+  .case-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Results panel ── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  padding: var(--s5);
+}
+
+.panel .display { margin: var(--s3) 0 var(--s2); }
+.panel p { max-width: 460px; }
+.panel .btn { margin-top: var(--s4); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: var(--s5);
+  border-top: 1px solid var(--hairline);
+}
+
+.stat { padding-top: var(--s4); }
+.stat + .stat { padding-left: var(--s4); border-left: 1px solid var(--hairline); }
+.stat b { display: block; font: 400 clamp(18px, 4.6vw, 24px)/1.2 var(--display); }
+.stat span { display: block; margin-top: var(--s1); font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+/* ── End card: lockup centred on black, one angled accent ── */
+.end-card {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--hairline);
+  padding: 96px var(--s4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s4);
+  text-align: center;
+}
+
+.end-card img { width: min(480px, 100%); min-width: 320px; position: relative; z-index: 1; }
+
+.end-card p { position: relative; z-index: 1; }
+
+.angle-accent {
+  --band: 120px;
+  --edge: 48px;
+  position: absolute;
+  right: calc(var(--band) * 0.5);
+  bottom: 0;
+  height: 100%;
+  width: calc(var(--band) + var(--edge));
+  pointer-events: none;
+}
+
+.angle-accent::before,
+.angle-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: skewX(-30deg);
+}
+
+.angle-accent::before { left: 0; width: var(--band); background: var(--midnight); }
+.angle-accent::after  { left: var(--band); width: var(--edge); background: linear-gradient(0deg, var(--azure), var(--sky)); }
+
+/* ── Footer ── */
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  padding: var(--s5) 0;
+  text-align: center;
+}
+
+.site-footer .caption { margin-bottom: var(--s2); }
+
+.legal {
+  font-size: 11px;
+  line-height: 17px;
+  color: var(--ink-faint);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  :root { --nav-h: 71px; }
+  .site-nav img { width: 176px; }
+  .section, .hero { padding: 48px 0; }
+  .hero { padding-bottom: var(--s5); }
+  .section--flush { padding-top: var(--s4); }
+  .container { padding: 0 20px; }
+  .step-cards { grid-template-columns: 1fr; gap: var(--s2); }
+  .step-card { padding: var(--s3); }
+  .video-panel { padding: var(--s2); border-radius: var(--r-card); }
+  .numbers-card { padding: var(--s3); }
+  .btn { width: 100%; }
+  .video-atc { margin-top: var(--s2); }
+  .card { padding: var(--s1) var(--s3); }
+  .panel { padding: var(--s4); }
+  .panel .btn { width: 100%; }
+  .stat + .stat { padding-left: var(--s3); }
+  .stat b { font-size: 17px; }
+  .case-grid { grid-template-columns: 1fr; gap: var(--s2); }
+  .case { padding: var(--s3); grid-template-columns: minmax(0, 1fr) 112px; gap: var(--s3); }
+  .case-play svg { width: 36px; height: 41px; }
+  .case-watch { font-size: 11px; }
+  .end-card { padding: 64px 20px; }
+  .end-card img { min-width: 0; width: 320px; }
+  .angle-accent { --band: 64px; --edge: 24px; right: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .badge .tick { stroke-dashoffset: 0; }
+  .badge .trace { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <img src="/pre-call-info/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" />
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container container--wide">
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 64 72">
+          <defs>
+            <linearGradient id="facet" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#02244E" />
+              <stop offset="0.55" stop-color="#006BE5" />
+              <stop offset="1" stop-color="#009BFC" />
+            </linearGradient>
+          </defs>
+          <polygon points="32,1.5 62.5,19 62.5,53 32,70.5 1.5,53 1.5,19" fill="#030D1A" stroke="url(#facet)" stroke-width="2" stroke-linejoin="round" />
+          <polygon class="trace" points="32,1.5 62.5,19 62.5,53 32,70.5 1.5,53 1.5,19" pathLength="100" fill="none" stroke="#03CCFF" stroke-width="2" stroke-linejoin="round" />
+          <polyline class="tick" points="20,37 28.5,45.5 44.5,28.5" fill="none" stroke="#009BFC" stroke-width="2.5" stroke-linecap="square" />
+        </svg>
+      </div>
+
+      <h1 class="display display-lg">You're <em>booked</em>. <span class="nowrap">3 steps</span> before your call.</h1>
+
+      <ol class="step-cards">
+        <li>
+          <a href="#watch" class="step-card">
+            <span class="step-num">1</span>
+            <span class="step-body">
+              <span class="step-title">Watch the video below</span>
+              <span class="step-sub">4 minutes on what we'll cover and what you'll walk away with.</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#numbers" class="step-card">
+            <span class="step-num">2</span>
+            <span class="step-body">
+              <span class="step-title">Have five numbers ready</span>
+              <span class="step-sub">So we can skip the basics and move fast on the call.</span>
+            </span>
+          </a>
+        </li>
+        <li class="cal" id="calendar">
+          <button type="button" class="step-card cal-toggle" aria-expanded="false" aria-controls="cal-menu-hero">
+            <span class="step-num">3</span>
+            <span class="step-body">
+              <span class="step-title">Add the call to your calendar</span>
+              <span class="step-sub">One tap: Google, Apple or Outlook.</span>
+            </span>
+            <svg class="step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
+          </button>
+          <div class="cal-menu" id="cal-menu-hero" hidden>
+            <div class="cal-links">
+              <a class="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+              <a class="cal-ics" href="#" download="adamax-viral-audit.ics">Apple or Outlook (.ics)</a>
+              <a class="cal-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+            </div>
+            <p class="cal-fallback" hidden>Open the calendar invite in your email and tap <strong>Add to calendar</strong>. It has your exact date, time and Zoom link.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="clients">
+        <div class="hexes">
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683eca9eeca240118bed7cc3.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc09eca2403cdbed7de4.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec03833fad9e25db.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec0383d4089e25dc.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc4639883b17e466db5f.jpeg" alt="" width="40" height="46"></div>
+        </div>
+        <p class="clients-count">1,200+ clients<span>served by Adamax Studios</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 1 -->
+  <section class="section section--flush" id="watch" aria-labelledby="watch-title">
+    <div class="container container--wide">
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="watch-title">Step 1: <em>Watch this</em> before your call</h2>
+        <p class="muted">What we'll do together, what you'll walk away with, and how to get the most from your viral audit.</p>
+      </div>
+
+      <div class="video-panel">
+        <div class="video-frame">
+          <wistia-player media-id="8ak013qk1x" aspect="1.7777777777777777"></wistia-player>
+        </div>
+
+        <div class="video-atc">
+          <!-- ROASForm Add to Calendar -->
+          <div class="roas-atc"
+            data-format="dropdown"
+            data-variant="solid"
+            data-shape="rounded"
+            data-size="md"
+            data-width="full"
+            data-align="center"
+            data-calendars="google,apple,outlook"
+            data-title="Add to Calendar"
+            data-icon="true"
+            data-round-icons="false"
+            style="--roas-bg:#2563eb; --roas-text:#ffffff; --roas-hover-bg:#1d4ed8; --roas-hover-text:#ffffff; --roas-size:15px; --roas-pad:11px 20px; --roas-radius:8px; --roas-shadow:0 4px 10px -2px rgba(0,0,0,.2); --roas-gap:14px; --roas-menu-bg:#ffffff; --roas-menu-text:#1f2937; --roas-menu-hover-bg:#f3f4f6; --roas-menu-hover-text:#111827; --roas-transition:150ms"></div>
+          <script src="https://my.roasform.com/roasform-atc.js" async></script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="section" id="numbers" aria-labelledby="numbers-title">
+    <div class="container container--wide">
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="numbers-title">Step 2: <em>Have these</em> numbers ready</h2>
+        <p class="muted">The more of this you have ready, the faster we move and the more specific your strategy will be.</p>
+      </div>
+
+      <div class="card numbers-card">
+        <ul class="numbers">
+          <li>Follower count on your main platform (Instagram, TikTok or YouTube)</li>
+          <li>Average views per post over the last 30 days</li>
+          <li>New patients or clients you get from social media each month</li>
+          <li>Current monthly revenue from your practice or clinic</li>
+          <li>Your revenue goal for the next 90 days</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section" id="proof" aria-labelledby="proof-title">
+    <div class="container container--wide">
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="proof-title"><em>Real results</em> from real clients</h2>
+        <p class="muted">Organic views, followers and patients from doctors and clinics like yours, plus results across other industries.</p>
+      </div>
+
+      <ul class="case-grid" id="case-grid"></ul>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section" aria-labelledby="results-title">
+    <div class="container">
+      <div class="panel">
+        <p class="eyebrow eyebrow--rule">While you wait</p>
+        <h2 class="display display-md" id="results-title">See client results</h2>
+        <p class="muted">You're in good company. Over 1,200 clients have been through this exact process. See their view counts, follower growth and full case studies.</p>
+        <a href="https://viral.adamaxstudios.com/client-results" target="_blank" rel="noopener" class="btn btn--primary">
+          Browse client results
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <div class="stats">
+          <div class="stat"><b>4.9/5</b><span>Client rating</span></div>
+          <div class="stat"><b>1,200+</b><span>Clients served</span></div>
+          <div class="stat"><b>9B+</b><span>Views generated</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End card -->
+  <section class="end-card" aria-label="Adamax Studios">
+    <div class="angle-accent" aria-hidden="true"></div>
+    <img src="/pre-call-info/assets/adamax-metallic-lockup-on-dark.webp" alt="Adamax Studios" width="960" height="320" loading="lazy" />
+    <p class="eyebrow">See you on the call</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="caption">&copy; <span class="js-year">2026</span> Swift Labs LLC DBA Adamax Studios. All rights reserved.</p>
+    <p class="legal">
+      This website is operated and maintained by Swift Labs LLC DBA Adamax Studios. Use of this website is governed by its Terms of Service and Privacy Policy. Adamax Studios provides AI-powered content creation and distribution services for medical professionals. We do not guarantee specific business, revenue, or marketing results. Any case studies, client outcomes, or examples presented on this website are illustrative only, are not typical, and should not be interpreted as a promise or guarantee of future performance. Results vary based on numerous factors including market conditions, offer strength, content quality, niche, individual effort, and execution. All content on this website is the intellectual property of Swift Labs LLC DBA Adamax Studios and may not be copied, reproduced, or distributed without prior written permission. This website is not part of, endorsed by, or affiliated with Facebook, Meta, Instagram, TikTok, YouTube, or Google. All third-party trademarks are the property of their respective owners.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ── CONFIG ── */
+  var CALL_MINUTES    = 45;
+  var CALL_TITLE      = 'Viral audit call · Adamax Studios';
+  var CALL_DETAILS    = 'Your free viral audit call with Adamax Studios. Join with the Zoom link in your confirmation email.';
+
+  /* ── Footer year ── */
+  document.querySelectorAll('.js-year').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+
+  /* ── Add to calendar (header card) ──
+     Reads the same roasform_* params the ROASForm booking redirect appends,
+     which the ROASForm button under the video also uses:
+       roasform_start, roasform_end, roasform_tz, roasform_title,
+       roasform_location, roasform_desc
+     Manual fallback: ?start=<ISO 8601 or Unix>&duration=<min>&join=<url>.
+     Without a start time the menu points people to their email invite. */
+  var params   = new URLSearchParams(location.search);
+  var rawStart = params.get('roasform_start') || params.get('start') || params.get('start_time');
+  var startAt  = null;
+  var links    = null;
+  if (rawStart) {
+    startAt = /^\d+$/.test(rawStart)
+      ? new Date(rawStart.length > 10 ? +rawStart : rawStart * 1000)
+      : new Date(rawStart);
+    if (isNaN(startAt)) startAt = null;
+  }
+
+  if (startAt) {
+    var minutes = parseInt(params.get('duration'), 10) || CALL_MINUTES;
+    var endAt   = new Date(params.get('roasform_end') || NaN);
+    if (isNaN(endAt) || endAt <= startAt) endAt = new Date(startAt.getTime() + minutes * 60000);
+    var join    = params.get('roasform_location') || params.get('join') || '';
+    var tz      = params.get('roasform_tz') || '';
+    var title   = params.get('roasform_title') || CALL_TITLE;
+    var details = params.get('roasform_desc') || (CALL_DETAILS + (join ? '\n\nJoin: ' + join : ''));
+    var stamp   = function (d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
+    var q       = encodeURIComponent;
+    var icsText = function (t) { return t.replace(/[\\,;]/g, '\\$&').replace(/\n/g, '\\n'); };
+
+    links = {};
+    links.google =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + q(title) +
+      '&dates=' + stamp(startAt) + '/' + stamp(endAt) +
+      (tz ? '&ctz=' + q(tz) : '') +
+      '&details=' + q(details) +
+      (join ? '&location=' + q(join) : '');
+
+    links.outlook =
+      'https://outlook.live.com/calendar/0/action/compose?rru=addevent' +
+      '&subject=' + q(title) +
+      '&startdt=' + q(startAt.toISOString()) +
+      '&enddt=' + q(endAt.toISOString()) +
+      '&body=' + q(details) +
+      (join ? '&location=' + q(join) : '');
+
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Adamax Studios//Viral audit//EN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + stamp(startAt) + '-viral-audit@adamaxstudios',
+      'DTSTAMP:' + stamp(new Date()),
+      'DTSTART:' + stamp(startAt),
+      'DTEND:' + stamp(endAt),
+      'SUMMARY:' + icsText(title),
+      'DESCRIPTION:' + icsText(details),
+      join ? 'LOCATION:' + icsText(join) : '',
+      'BEGIN:VALARM', 'TRIGGER:-PT15M', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText(title), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].filter(Boolean).join('\r\n');
+    links.ics = 'data:text/calendar;charset=utf-8,' + q(ics);
+  }
+
+  /* Wire up every .cal block (currently the header card) */
+  var cals = Array.prototype.slice.call(document.querySelectorAll('.cal')).map(function (cal) {
+    var menu = cal.querySelector('.cal-menu');
+    if (links) {
+      menu.querySelector('.cal-google').href  = links.google;
+      menu.querySelector('.cal-outlook').href = links.outlook;
+      menu.querySelector('.cal-ics').href     = links.ics;
+    } else {
+      menu.querySelector('.cal-links').hidden = true;
+      menu.querySelector('.cal-fallback').hidden = false;
+    }
+    return { el: cal, toggle: cal.querySelector('.cal-toggle'), menu: menu };
+  });
+
+  function setMenu(c, open) {
+    c.menu.hidden = !open;
+    c.toggle.setAttribute('aria-expanded', String(open));
+  }
+  function closeAll(except) {
+    cals.forEach(function (c) { if (c !== except) setMenu(c, false); });
+  }
+  cals.forEach(function (c) {
+    c.toggle.addEventListener('click', function () {
+      var open = c.menu.hidden;
+      closeAll(c);
+      setMenu(c, open);
+    });
+    c.menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(c, false); });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.cal')) closeAll();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    cals.forEach(function (c) {
+      if (!c.menu.hidden) { setMenu(c, false); c.toggle.focus(); }
+    });
+  });
+
+  /* ── Proof: client cases ──
+     Order: doctors, dentists and aesthetics first, then health-adjacent
+     (sleep, weight loss), then other industries; most views first within
+     each group. Every url was checked live. A link with an empty url
+     renders as plain text, not a button. "img" = profile photo saved in
+     /pre-call-info/assets/proof/; without one the card shows initials.
+     "thumb" = 9:16 preview of the account's video in .../proof/thumbs/;
+     clicking it opens the first link. */
+  var IMG = '/pre-call-info/assets/proof/';
+  var CASES = [
+    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', thumb: 'aesthetics.webp', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
+    { name: 'Dentist account', niche: 'Dentist', thumb: 'dentist.webp', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
+    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', thumb: 'luiz.webp', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
+      links: [
+        { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
+        { p: 'TikTok', label: '@dr.luizmarcelo', url: 'https://www.tiktok.com/@dr.luizmarcelo' }] },
+    { name: 'Dr. Rafif Tayara', niche: 'Doctors', thumb: 'tayara.webp', img: 'doctortayara.webp', stat: '1M', label: 'views',
+      detail: 'Based in Dubai',
+      links: [{ p: 'Instagram', label: '@doctortayara', url: 'https://www.instagram.com/doctortayara/reels/' }] },
+    { name: 'Dr. Dorival', niche: 'Doctors', thumb: 'dorival.webp', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
+      detail: 'In under 2 months, with comments from people asking to book consultations',
+      links: [{ p: 'Instagram', label: '@drdorivalriccijr', url: 'https://www.instagram.com/drdorivalriccijr/reels/' }] },
+    { name: 'Doctor example', niche: 'Doctors', thumb: 'doctorexample.webp', img: 'herberthferreira4.webp',
+      detail: 'An example video from the doctors niche',
+      links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
+    { name: 'Sleep coach account', niche: 'Sleep coach', thumb: 'sleep.webp', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
+    { name: 'Weight loss account', niche: 'Weight loss', thumb: 'weightloss.webp', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
+      links: [{ p: 'TikTok', label: 'Top video', url: 'https://www.tiktok.com/@natassiadsouza/video/7400405778957389063' }] },
+    { name: 'Nayra Del Duca', niche: 'Accountant', thumb: 'nayra.webp', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
+      detail: 'And 600K+ followers in under 6 months',
+      links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
+    { name: 'Travel account', niche: 'Travel', thumb: 'travel.webp', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
+      links: [{ p: 'Facebook', label: 'Profile', url: 'https://www.facebook.com/rohit.khubchandani' }] },
+    { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', thumb: 'stargen.webp', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
+      detail: 'And 60K+ new followers from one clip',
+      links: [{ p: 'Facebook', label: 'Reels', url: 'https://www.facebook.com/stargendiamondsusa/reels/' }] },
+    { name: 'Numo Investimentos', niche: 'Real estate', thumb: 'numo.webp', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
+      detail: 'In 3 months, with 10K+ new followers and 4 properties sold',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DMNmHxXOK2S/' }] },
+    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-a.webp', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZvFQ_dsyLs/' }] },
+    { name: 'DOXA', niche: 'Business and marketing', thumb: 'doxa.webp', img: 'doxascale.webp', stat: '4M+', label: 'views',
+      detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbdjPDYuVeI/' }] },
+    { name: 'Pneus Bransales', niche: 'Tyres and automotive', thumb: 'pneus.webp', img: 'joaobransales.webp', stat: '4M', label: 'views',
+      detail: 'For owner João Gonsales',
+      links: [
+        { p: 'Instagram', label: '@joaobransales', url: 'https://www.instagram.com/joaobransales/reels/' },
+        { p: 'TikTok', label: '@joaobransales', url: 'https://www.tiktok.com/@joaobransales' },
+        { p: 'YouTube', label: '@pneusbransales', url: 'https://www.youtube.com/@pneusbransales/shorts' }] },
+    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-b.webp', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
+      detail: "And hundreds of 'I want this' comments",
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZIfIS6hjFK/' }] },
+    { name: 'Billionaires Mansions', niche: 'Luxury real estate', thumb: 'billionaires.webp', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
+      links: [{ p: 'TikTok', label: '@billionairemansiondubai', url: 'https://www.tiktok.com/@billionairemansiondubai' }] },
+    { name: 'Marinna Real Estate', niche: 'Real estate', thumb: 'marinna.webp', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
+      detail: 'From the video audience, with under 10 videos posted',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
+  ];
+
+  function escHtml(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function initials(name) {
+    return name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2)
+      .map(function (w) { return w[0]; }).join('').toUpperCase();
+  }
+  var PLAY = '<svg viewBox="0 0 64 72" width="44" height="50"><polygon points="32,2 62,19.5 62,52.5 32,70 2,52.5 2,19.5" fill="rgba(0,0,0,0.55)" stroke="#03CCFF" stroke-width="2" stroke-linejoin="round"/><path d="M26 24.5v23l19-11.5z" fill="#fff"/></svg>';
+  var ARROW = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+
+  var grid = document.getElementById('case-grid');
+  grid.innerHTML = CASES.map(function (c) {
+    var avatar = c.img
+      ? '<img src="' + IMG + c.img + '" alt="" width="52" height="60" loading="lazy">'
+      : '<span>' + escHtml(initials(c.name)) + '</span>';
+    var links = c.links.map(function (l) {
+      var inner = escHtml(l.p) + ' <span>' + escHtml(l.label) + '</span>';
+      return l.url
+        ? '<a class="case-link" href="' + escHtml(l.url) + '" target="_blank" rel="noopener" aria-label="' +
+            escHtml(c.name + ' on ' + l.p + ' (opens in a new tab)') + '">' + inner + ARROW + '</a>'
+        : '<span class="case-platform">' + inner + '</span>';
+    }).join('');
+    var main = c.links[0];
+    var preview = c.thumb && main && main.url
+      ? '<a class="case-preview" href="' + escHtml(main.url) + '" target="_blank" rel="noopener" aria-label="' +
+          escHtml('Watch ' + c.name + ' on ' + main.p + ' (opens in a new tab)') + '">' +
+          '<img src="' + IMG + 'thumbs/' + c.thumb + '" alt="" width="360" height="640" loading="lazy">' +
+          '<span class="case-play" aria-hidden="true">' + PLAY + '</span>' +
+          '<span class="case-watch" aria-hidden="true">Watch on ' + escHtml(main.p) + '</span></a>'
+      : '';
+    return '<li class="case">' +
+      '<div class="case-body">' +
+        '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
+          '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
+          '<div class="case-niche">' + escHtml(c.niche) + '</div></div></div>' +
+        (c.stat ? '<div class="case-stat"><b>' + escHtml(c.stat) + '</b> ' + escHtml(c.label) + '</div>' : '') +
+        (c.detail ? '<p class="case-detail' + (c.stat ? '' : ' case-detail--lead') + '">' + escHtml(c.detail) + '</p>' : '') +
+        '<div class="case-links">' + links + '</div>' +
+      '</div>' + preview + '</li>';
+  }).join('');
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,9 +1,5 @@
 {
   "redirects": [
     { "source": "/pre-call-info/", "destination": "/pre-call-info", "permanent": false }
-  ],
-  "rewrites": [
-    { "source": "/pre-call-info", "destination": "https://adamax-pre-call.vercel.app/pre-call-info" },
-    { "source": "/pre-call-info/:path*", "destination": "https://adamax-pre-call.vercel.app/pre-call-info/:path*" }
   ]
 }
