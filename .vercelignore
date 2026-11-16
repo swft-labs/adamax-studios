@@ -1,5 +1,0 @@
-# Deploy only the page and its assets.
-/*
-!index.html
-!pre-call-info
-!vercel.json
