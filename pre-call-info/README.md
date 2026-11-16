@@ -26,12 +26,12 @@ Both calendar buttons read the booking from the URL params the ROASForm booking 
 
 ## Editing the proof cards
 
-Edit the `CASES` array in the script. Order: doctors, dentists and aesthetics first, then sleep and weight loss, then other industries, most views first within each group.
+Edit the `CASES` array in the script. The named doctors come first, then the other medical and health cases (doctor example, aesthetics, dentist, weight loss). Cases marked `more: true` are hidden behind a "Show N more client results" button under the grid. DOXA was removed on purpose.
 
 - `stat` / `label`: the headline number (e.g. `100M+` / `views`). `detail`: optional line underneath.
 - `links`: platform buttons. The first link is also where the video preview goes.
 - `img`: profile photo in `assets/proof/`. Without one the card shows initials.
-- `thumb`: preview frame in `assets/proof/thumbs/`.
+- `thumb`: 9:16 preview frame in `assets/proof/thumbs/`, taken from the account's own video.
 
 Every link was checked live when added. `instagram.com/billionaremansions` was unavailable, so that case links to TikTok only.
 

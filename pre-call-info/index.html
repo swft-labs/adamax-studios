@@ -588,6 +588,16 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   transition: border-color 0.16s ease, color 0.16s ease;
 }
 .case-link { max-width: 100%; }
+
+.proof-more { display: flex; justify-content: center; margin-top: var(--s4); }
+.proof-more[hidden] { display: none; }
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+}
+.btn--ghost:hover { border-color: var(--sky); }
 .case-link span {
   color: var(--ink-muted);
   font-weight: 500;
@@ -864,10 +874,14 @@ a.case-link:hover svg { color: var(--sky); }
     <div class="container container--wide">
       <div class="section-head section-head--center">
         <h2 class="display display-step" id="proof-title"><em>Real results</em> from real clients</h2>
-        <p class="muted">Organic views, followers and patients from doctors and clinics like yours, plus results across other industries.</p>
+        <p class="muted">Doctors, dentists and clinics growing with organic video. Results from other industries are one tap away.</p>
       </div>
 
       <ul class="case-grid" id="case-grid"></ul>
+
+      <div class="proof-more">
+        <button type="button" class="btn btn--ghost" id="proof-more" aria-controls="case-grid" aria-expanded="false"></button>
+      </div>
     </div>
   </section>
 
@@ -1026,19 +1040,15 @@ a.case-link:hover svg { color: var(--sky); }
   });
 
   /* ── Proof: client cases ──
-     Order: doctors, dentists and aesthetics first, then health-adjacent
-     (sleep, weight loss), then other industries; most views first within
-     each group. Every url was checked live. A link with an empty url
+     The named doctors first, then the other medical and health cases.
+     Cases with more: true sit behind the "Show more" button. Every url
+     was checked live. A link with an empty url
      renders as plain text, not a button. "img" = profile photo saved in
      /pre-call-info/assets/proof/; without one the card shows initials.
      "thumb" = 9:16 preview of the account's video in .../proof/thumbs/;
      clicking it opens the first link. */
   var IMG = '/pre-call-info/assets/proof/';
   var CASES = [
-    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', thumb: 'aesthetics.webp', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
-      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
-    { name: 'Dentist account', niche: 'Dentist', thumb: 'dentist.webp', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
-      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
     { name: 'Dr. Luiz Marcelo', niche: 'Doctors', thumb: 'luiz.webp', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
       links: [
         { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
@@ -1052,38 +1062,39 @@ a.case-link:hover svg { color: var(--sky); }
     { name: 'Doctor example', niche: 'Doctors', thumb: 'doctorexample.webp', img: 'herberthferreira4.webp',
       detail: 'An example video from the doctors niche',
       links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
-    { name: 'Sleep coach account', niche: 'Sleep coach', thumb: 'sleep.webp', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
-      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
+    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', thumb: 'aesthetics.webp', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
+    { name: 'Dentist account', niche: 'Dentist', thumb: 'dentist.webp', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
     { name: 'Weight loss account', niche: 'Weight loss', thumb: 'weightloss.webp', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
       links: [{ p: 'TikTok', label: 'Top video', url: 'https://www.tiktok.com/@natassiadsouza/video/7400405778957389063' }] },
-    { name: 'Nayra Del Duca', niche: 'Accountant', thumb: 'nayra.webp', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
+    { name: 'Sleep coach account', more: true, niche: 'Sleep coach', thumb: 'sleep.webp', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
+    { name: 'Nayra Del Duca', more: true, niche: 'Accountant', thumb: 'nayra.webp', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
       detail: 'And 600K+ followers in under 6 months',
       links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
-    { name: 'Travel account', niche: 'Travel', thumb: 'travel.webp', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
+    { name: 'Travel account', more: true, niche: 'Travel', thumb: 'travel.webp', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
       links: [{ p: 'Facebook', label: 'Profile', url: 'https://www.facebook.com/rohit.khubchandani' }] },
-    { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', thumb: 'stargen.webp', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
+    { name: 'Stargen Diamonds USA', more: true, niche: 'Diamonds and jewelry', thumb: 'stargen.webp', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
       detail: 'And 60K+ new followers from one clip',
       links: [{ p: 'Facebook', label: 'Reels', url: 'https://www.facebook.com/stargendiamondsusa/reels/' }] },
-    { name: 'Numo Investimentos', niche: 'Real estate', thumb: 'numo.webp', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
+    { name: 'Numo Investimentos', more: true, niche: 'Real estate', thumb: 'numo.webp', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
       detail: 'In 3 months, with 10K+ new followers and 4 properties sold',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DMNmHxXOK2S/' }] },
-    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-a.webp', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
+    { name: 'Real estate account', more: true, niche: 'Real estate', thumb: 'realestate-a.webp', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZvFQ_dsyLs/' }] },
-    { name: 'DOXA', niche: 'Business and marketing', thumb: 'doxa.webp', img: 'doxascale.webp', stat: '4M+', label: 'views',
-      detail: 'In under 30 days',
-      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbdjPDYuVeI/' }] },
-    { name: 'Pneus Bransales', niche: 'Tyres and automotive', thumb: 'pneus.webp', img: 'joaobransales.webp', stat: '4M', label: 'views',
+    { name: 'Pneus Bransales', more: true, niche: 'Tyres and automotive', thumb: 'pneus.webp', img: 'joaobransales.webp', stat: '4M', label: 'views',
       detail: 'For owner João Gonsales',
       links: [
         { p: 'Instagram', label: '@joaobransales', url: 'https://www.instagram.com/joaobransales/reels/' },
         { p: 'TikTok', label: '@joaobransales', url: 'https://www.tiktok.com/@joaobransales' },
         { p: 'YouTube', label: '@pneusbransales', url: 'https://www.youtube.com/@pneusbransales/shorts' }] },
-    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-b.webp', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
+    { name: 'Real estate account', more: true, niche: 'Real estate', thumb: 'realestate-b.webp', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
       detail: "And hundreds of 'I want this' comments",
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZIfIS6hjFK/' }] },
-    { name: 'Billionaires Mansions', niche: 'Luxury real estate', thumb: 'billionaires.webp', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
+    { name: 'Billionaires Mansions', more: true, niche: 'Luxury real estate', thumb: 'billionaires.webp', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
       links: [{ p: 'TikTok', label: '@billionairemansiondubai', url: 'https://www.tiktok.com/@billionairemansiondubai' }] },
-    { name: 'Marinna Real Estate', niche: 'Real estate', thumb: 'marinna.webp', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
+    { name: 'Marinna Real Estate', more: true, niche: 'Real estate', thumb: 'marinna.webp', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
       detail: 'From the video audience, with under 10 videos posted',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
   ];
@@ -1120,7 +1131,7 @@ a.case-link:hover svg { color: var(--sky); }
           '<span class="case-play" aria-hidden="true">' + PLAY + '</span>' +
           '<span class="case-watch" aria-hidden="true">Watch on ' + escHtml(main.p) + '</span></a>'
       : '';
-    return '<li class="case">' +
+    return '<li class="case' + (c.more ? ' case--more" hidden' : '"') + '>' +
       '<div class="case-body">' +
         '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
           '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
@@ -1131,6 +1142,18 @@ a.case-link:hover svg { color: var(--sky); }
       '</div>' + preview + '</li>';
   }).join('');
 
+
+  var moreBtn = document.getElementById('proof-more');
+  var extra = grid.querySelectorAll('.case--more');
+  if (!extra.length) moreBtn.parentNode.hidden = true;
+  moreBtn.textContent = 'Show ' + extra.length + ' more client results';
+  moreBtn.addEventListener('click', function () {
+    var open = moreBtn.getAttribute('aria-expanded') !== 'true';
+    Array.prototype.forEach.call(extra, function (li) { li.hidden = !open; });
+    moreBtn.setAttribute('aria-expanded', String(open));
+    moreBtn.textContent = open ? 'Show fewer' : 'Show ' + extra.length + ' more client results';
+    if (!open) document.getElementById('proof').scrollIntoView({ block: 'start' });
+  });
 })();
 </script>
 
