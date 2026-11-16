@@ -441,14 +441,14 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
 .case-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--s3);
 }
 
 .case {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 168px;
+  gap: var(--s4);
   padding: var(--s4);
   background: var(--surface);
   border: 1px solid var(--hairline);
@@ -457,6 +457,68 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
 }
 .case:hover { border-color: var(--cobalt); }
 .case[hidden] { display: none; }
+
+.case-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+/* Right half: the video preview, links to the case */
+.case-preview {
+  position: relative;
+  display: block;
+  align-self: start;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--ground);
+  transition: border-color 0.16s ease;
+}
+
+.case-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.case-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.75));
+  pointer-events: none;
+}
+
+.case-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  line-height: 0;
+  transition: transform 0.16s ease;
+}
+
+.case-watch {
+  position: absolute;
+  left: var(--s2);
+  right: var(--s2);
+  bottom: var(--s2);
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.case-preview:hover { border-color: var(--sky); }
+.case-preview:hover img { transform: scale(1.04); }
+.case-preview:hover .case-play { transform: translate(-50%, -50%) scale(1.08); }
 
 .case-head { display: flex; align-items: center; gap: var(--s3); }
 
@@ -525,7 +587,16 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   text-decoration: none;
   transition: border-color 0.16s ease, color 0.16s ease;
 }
-.case-link span { color: var(--ink-muted); font-weight: 500; }
+.case-link { max-width: 100%; }
+.case-link span {
+  color: var(--ink-muted);
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.case-link svg { flex-shrink: 0; }
 a.case-link:hover { border-color: var(--sky); }
 a.case-link:hover svg { color: var(--sky); }
 .case-link svg { color: var(--ink-faint); }
@@ -534,7 +605,7 @@ a.case-link:hover svg { color: var(--sky); }
 .case-platform span::before { content: '· '; }
 
 @media (max-width: 900px) {
-  .case-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Results panel ── */
@@ -639,7 +710,9 @@ a.case-link:hover svg { color: var(--sky); }
   .stat + .stat { padding-left: var(--s3); }
   .stat b { font-size: 17px; }
   .case-grid { grid-template-columns: 1fr; gap: var(--s2); }
-  .case { padding: var(--s3); }
+  .case { padding: var(--s3); grid-template-columns: minmax(0, 1fr) 112px; gap: var(--s3); }
+  .case-play svg { width: 36px; height: 41px; }
+  .case-watch { font-size: 11px; }
   .end-card { padding: 64px 20px; }
   .end-card img { min-width: 0; width: 320px; }
   .angle-accent { --band: 64px; --edge: 24px; right: 0; }
@@ -957,58 +1030,60 @@ a.case-link:hover svg { color: var(--sky); }
      (sleep, weight loss), then other industries; most views first within
      each group. Every url was checked live. A link with an empty url
      renders as plain text, not a button. "img" = profile photo saved in
-     /pre-call-info/assets/proof/; without one the card shows initials. */
+     /pre-call-info/assets/proof/; without one the card shows initials.
+     "thumb" = 9:16 preview of the account's video in .../proof/thumbs/;
+     clicking it opens the first link. */
   var IMG = '/pre-call-info/assets/proof/';
   var CASES = [
-    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
+    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', thumb: 'aesthetics.webp', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
-    { name: 'Dentist account', niche: 'Dentist', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
+    { name: 'Dentist account', niche: 'Dentist', thumb: 'dentist.webp', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
-    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
+    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', thumb: 'luiz.webp', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
       links: [
         { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
         { p: 'TikTok', label: '@dr.luizmarcelo', url: 'https://www.tiktok.com/@dr.luizmarcelo' }] },
-    { name: 'Dr. Rafif Tayara', niche: 'Doctors', img: 'doctortayara.webp', stat: '1M', label: 'views',
+    { name: 'Dr. Rafif Tayara', niche: 'Doctors', thumb: 'tayara.webp', img: 'doctortayara.webp', stat: '1M', label: 'views',
       detail: 'Based in Dubai',
       links: [{ p: 'Instagram', label: '@doctortayara', url: 'https://www.instagram.com/doctortayara/reels/' }] },
-    { name: 'Dr. Dorival', niche: 'Doctors', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
+    { name: 'Dr. Dorival', niche: 'Doctors', thumb: 'dorival.webp', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
       detail: 'In under 2 months, with comments from people asking to book consultations',
       links: [{ p: 'Instagram', label: '@drdorivalriccijr', url: 'https://www.instagram.com/drdorivalriccijr/reels/' }] },
-    { name: 'Doctor example', niche: 'Doctors', img: 'herberthferreira4.webp',
+    { name: 'Doctor example', niche: 'Doctors', thumb: 'doctorexample.webp', img: 'herberthferreira4.webp',
       detail: 'An example video from the doctors niche',
       links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
-    { name: 'Sleep coach account', niche: 'Sleep coach', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
+    { name: 'Sleep coach account', niche: 'Sleep coach', thumb: 'sleep.webp', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
-    { name: 'Weight loss account', niche: 'Weight loss', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
+    { name: 'Weight loss account', niche: 'Weight loss', thumb: 'weightloss.webp', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
       links: [{ p: 'TikTok', label: 'Top video', url: 'https://www.tiktok.com/@natassiadsouza/video/7400405778957389063' }] },
-    { name: 'Nayra Del Duca', niche: 'Accountant', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
+    { name: 'Nayra Del Duca', niche: 'Accountant', thumb: 'nayra.webp', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
       detail: 'And 600K+ followers in under 6 months',
       links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
-    { name: 'Travel account', niche: 'Travel', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
+    { name: 'Travel account', niche: 'Travel', thumb: 'travel.webp', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
       links: [{ p: 'Facebook', label: 'Profile', url: 'https://www.facebook.com/rohit.khubchandani' }] },
-    { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
+    { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', thumb: 'stargen.webp', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
       detail: 'And 60K+ new followers from one clip',
       links: [{ p: 'Facebook', label: 'Reels', url: 'https://www.facebook.com/stargendiamondsusa/reels/' }] },
-    { name: 'Numo Investimentos', niche: 'Real estate', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
+    { name: 'Numo Investimentos', niche: 'Real estate', thumb: 'numo.webp', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
       detail: 'In 3 months, with 10K+ new followers and 4 properties sold',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DMNmHxXOK2S/' }] },
-    { name: 'Real estate account', niche: 'Real estate', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
+    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-a.webp', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZvFQ_dsyLs/' }] },
-    { name: 'DOXA', niche: 'Business and marketing', img: 'doxascale.webp', stat: '4M+', label: 'views',
+    { name: 'DOXA', niche: 'Business and marketing', thumb: 'doxa.webp', img: 'doxascale.webp', stat: '4M+', label: 'views',
       detail: 'In under 30 days',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbdjPDYuVeI/' }] },
-    { name: 'Pneus Bransales', niche: 'Tyres and automotive', img: 'joaobransales.webp', stat: '4M', label: 'views',
+    { name: 'Pneus Bransales', niche: 'Tyres and automotive', thumb: 'pneus.webp', img: 'joaobransales.webp', stat: '4M', label: 'views',
       detail: 'For owner João Gonsales',
       links: [
         { p: 'Instagram', label: '@joaobransales', url: 'https://www.instagram.com/joaobransales/reels/' },
         { p: 'TikTok', label: '@joaobransales', url: 'https://www.tiktok.com/@joaobransales' },
         { p: 'YouTube', label: '@pneusbransales', url: 'https://www.youtube.com/@pneusbransales/shorts' }] },
-    { name: 'Real estate account', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
+    { name: 'Real estate account', niche: 'Real estate', thumb: 'realestate-b.webp', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
       detail: "And hundreds of 'I want this' comments",
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZIfIS6hjFK/' }] },
-    { name: 'Billionaires Mansions', niche: 'Luxury real estate', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
+    { name: 'Billionaires Mansions', niche: 'Luxury real estate', thumb: 'billionaires.webp', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
       links: [{ p: 'TikTok', label: '@billionairemansiondubai', url: 'https://www.tiktok.com/@billionairemansiondubai' }] },
-    { name: 'Marinna Real Estate', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
+    { name: 'Marinna Real Estate', niche: 'Real estate', thumb: 'marinna.webp', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
       detail: 'From the video audience, with under 10 videos posted',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
   ];
@@ -1022,6 +1097,7 @@ a.case-link:hover svg { color: var(--sky); }
     return name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2)
       .map(function (w) { return w[0]; }).join('').toUpperCase();
   }
+  var PLAY = '<svg viewBox="0 0 64 72" width="44" height="50"><polygon points="32,2 62,19.5 62,52.5 32,70 2,52.5 2,19.5" fill="rgba(0,0,0,0.55)" stroke="#03CCFF" stroke-width="2" stroke-linejoin="round"/><path d="M26 24.5v23l19-11.5z" fill="#fff"/></svg>';
   var ARROW = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
 
   var grid = document.getElementById('case-grid');
@@ -1036,13 +1112,23 @@ a.case-link:hover svg { color: var(--sky); }
             escHtml(c.name + ' on ' + l.p + ' (opens in a new tab)') + '">' + inner + ARROW + '</a>'
         : '<span class="case-platform">' + inner + '</span>';
     }).join('');
+    var main = c.links[0];
+    var preview = c.thumb && main && main.url
+      ? '<a class="case-preview" href="' + escHtml(main.url) + '" target="_blank" rel="noopener" aria-label="' +
+          escHtml('Watch ' + c.name + ' on ' + main.p + ' (opens in a new tab)') + '">' +
+          '<img src="' + IMG + 'thumbs/' + c.thumb + '" alt="" width="360" height="640" loading="lazy">' +
+          '<span class="case-play" aria-hidden="true">' + PLAY + '</span>' +
+          '<span class="case-watch" aria-hidden="true">Watch on ' + escHtml(main.p) + '</span></a>'
+      : '';
     return '<li class="case">' +
-      '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
-        '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
-        '<div class="case-niche">' + escHtml(c.niche) + '</div></div></div>' +
-      (c.stat ? '<div class="case-stat"><b>' + escHtml(c.stat) + '</b> ' + escHtml(c.label) + '</div>' : '') +
-      (c.detail ? '<p class="case-detail' + (c.stat ? '' : ' case-detail--lead') + '">' + escHtml(c.detail) + '</p>' : '') +
-      '<div class="case-links">' + links + '</div></li>';
+      '<div class="case-body">' +
+        '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
+          '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
+          '<div class="case-niche">' + escHtml(c.niche) + '</div></div></div>' +
+        (c.stat ? '<div class="case-stat"><b>' + escHtml(c.stat) + '</b> ' + escHtml(c.label) + '</div>' : '') +
+        (c.detail ? '<p class="case-detail' + (c.stat ? '' : ' case-detail--lead') + '">' + escHtml(c.detail) + '</p>' : '') +
+        '<div class="case-links">' + links + '</div>' +
+      '</div>' + preview + '</li>';
   }).join('');
 
 })();
