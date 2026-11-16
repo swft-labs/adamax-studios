@@ -569,14 +569,6 @@ a.case-link:hover svg { color: var(--sky); }
 .case-platform span { color: var(--ink-faint); font-weight: 500; }
 .case-platform span::before { content: '· '; }
 
-.proof-more { display: flex; justify-content: center; margin-top: var(--s4); }
-
-.btn--ghost {
-  background: transparent;
-  border: 1px solid var(--hairline);
-  cursor: pointer;
-}
-.btn--ghost:hover { border-color: var(--sky); }
 
 @media (max-width: 900px) {
   .case-grid { grid-template-columns: repeat(2, 1fr); }
@@ -848,10 +840,6 @@ a.case-link:hover svg { color: var(--sky); }
       </div>
 
       <ul class="case-grid" id="case-grid"></ul>
-
-      <div class="proof-more">
-        <button type="button" class="btn btn--ghost" id="proof-more" hidden>Show all cases</button>
-      </div>
     </div>
   </section>
 
@@ -1068,7 +1056,6 @@ a.case-link:hover svg { color: var(--sky); }
       detail: 'From the video audience, with under 10 videos posted',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
   ];
-  var INITIAL = 6;
 
   function escHtml(t) {
     return String(t).replace(/[&<>"']/g, function (c) {
@@ -1103,7 +1090,6 @@ a.case-link:hover svg { color: var(--sky); }
   }).join('');
 
   var filter = document.getElementById('niche-filter');
-  var more   = document.getElementById('proof-more');
   var count  = document.getElementById('proof-count');
   var counts = {};
   CASES.forEach(function (c) { counts[c.niche] = (counts[c.niche] || 0) + 1; });
@@ -1112,21 +1098,16 @@ a.case-link:hover svg { color: var(--sky); }
       return '<option value="' + escHtml(n) + '">' + escHtml(n) + ' (' + counts[n] + ')</option>';
     }).join('');
 
-  var expanded = false;
   function applyFilter() {
     var niche = filter.value, matches = 0;
     Array.prototype.forEach.call(grid.children, function (li) {
       var match = !niche || li.getAttribute('data-niche') === niche;
+      li.hidden = !match;
       if (match) matches++;
-      var show = match && (niche || expanded || matches <= INITIAL);
-      li.hidden = !show;
     });
-    more.hidden = !!niche || expanded || matches <= INITIAL;
-    more.textContent = 'Show all ' + matches + ' cases';
     count.textContent = matches + (matches === 1 ? ' case' : ' cases') + ' · most views first';
   }
   filter.addEventListener('change', applyFilter);
-  more.addEventListener('click', function () { expanded = true; applyFilter(); });
   applyFilter();
 })();
 </script>
