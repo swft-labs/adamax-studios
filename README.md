@@ -10,6 +10,8 @@ A single landing page, styled to the Adamax Studios Brand Kit v1.0:
   - `proof/`: the 50 proof-grid images,
   - `testimonials/`: the 3 client story videos.
 
+Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`) and `pre-call-info/` (`/pre-call-info`, the page people see after booking a call).
+
 | File | Brand kit source | Used for |
 |---|---|---|
 | `adamax-lockup-on-dark.webp` | lockup on dark (default) | nav, footer, end card on narrow screens |
