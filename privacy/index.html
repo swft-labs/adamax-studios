@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy policy — Adamax Studios</title>
+  <meta name="description" content="How Adamax Studios collects, uses and shares personal information on viral.adamaxstudios.com." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://viral.adamaxstudios.com/privacy" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/krona-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    @font-face { font-family: 'Krona One'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/krona-one-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/manrope-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+    /* Adamax Studios brand tokens (Brand Kit v1.0), shared with the landing page */
+    :root {
+      --sky: #009BFC; --ground: #000000; --surface: #030D1A; --hairline: #172F52;
+      --ink: #FFFFFF; --ink-muted: #9AA8BD;
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px; --s6: 64px;
+      --gutter: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: var(--ground); color: var(--ink); font-family: var(--text); font-size: 16px; line-height: 26px; -webkit-font-smoothing: antialiased; }
+
+    .container { width: 100%; max-width: calc(720px + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+    .wide { max-width: calc(1040px + var(--gutter) * 2); }
+
+    .site-nav { border-bottom: 1px solid var(--hairline); }
+    .site-nav .container { display: flex; justify-content: center; padding-top: var(--s3); padding-bottom: var(--s3); }
+    .lockup { --lockup-w: 184px; width: var(--lockup-w); max-width: none; height: auto; display: block; }
+
+    main { padding: var(--s5) 0 var(--s6); }
+
+    .eyebrow { display: flex; align-items: center; gap: var(--s3); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--sky); margin-bottom: var(--s3); }
+    .eyebrow::before { content: ''; flex: 0 0 40px; height: 1px; background: var(--sky); }
+
+    h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(24px, 4vw, 34px); line-height: 1.15; }
+    .updated { margin-top: var(--s2); font-size: 13px; color: var(--ink-muted); }
+    .intro { margin-top: var(--s4); font-size: 18px; line-height: 28px; color: var(--ink); }
+
+    h2 { margin-top: var(--s5); font-size: 20px; line-height: 28px; font-weight: 700; color: var(--ink); }
+    main p, main li { color: var(--ink-muted); }
+    main p { margin-top: var(--s3); }
+    main ul { margin-top: var(--s3); padding-left: 20px; display: grid; gap: var(--s2); }
+    main strong { color: var(--ink); font-weight: 600; }
+    main a { color: var(--sky); text-underline-offset: 2px; }
+
+    .back { display: inline-block; margin-top: var(--s5); font-weight: 600; font-size: 14px; color: var(--sky); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+
+    .site-footer { border-top: 1px solid var(--hairline); padding: var(--s5) 0; }
+    .site-footer .container { display: grid; gap: var(--s3); }
+    .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); }
+    .footer-row .lockup { margin-left: calc(var(--lockup-w) * -0.102); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+    .footer-links a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover, .footer-links a[aria-current] { color: var(--sky); }
+    .caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
+    .legal { font-size: 12px; line-height: 18px; color: #5D6B80; max-width: 75ch; }
+
+    @media (min-width: 760px) { :root { --gutter: 40px; } main { padding: var(--s6) 0; } .lockup { --lockup-w: 196px; } }
+    @media (max-width: 480px) { :root { --gutter: 20px; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="container">
+      <a href="/" aria-label="Adamax Studios home"><img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" /></a>
+    </div>
+  </header>
+
+  <main>
+    <article class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: November 17, 2026</p>
+      <p class="intro">This policy explains how Adamax Studios (&ldquo;we&rdquo;, &ldquo;us&rdquo;) collects, uses and shares personal information when you visit viral.adamaxstudios.com and related pages (the &ldquo;Site&rdquo;), fill in our qualification form or book a call with us.</p>
+
+      <h2>Information we collect</h2>
+
+      <p><strong>Information you give us.</strong> When you complete the qualification form, book a call or contact us, we collect what you provide, such as your name, email address, phone number, details about your practice and your answers to the qualification questions.</p>
+
+      <p><strong>Information collected automatically.</strong> When you visit the Site we and our service providers collect technical information such as your IP address, browser and device type, the pages you view, how you interact with the training video, and the page that referred you. We collect this using cookies, pixels and similar technologies, including the Meta (Facebook) Pixel and video analytics from our video host.</p>
+
+      <h2>How we use your information</h2>
+
+      <ul>
+        <li>To assess whether your practice is a fit for our services and to contact you about your enquiry.</li>
+        <li>To schedule and hold strategy calls, and to provide our services if you become a client.</li>
+        <li>To measure and improve the Site, our content and our advertising, including measuring the results of ads on platforms such as Meta.</li>
+        <li>To keep the Site secure and prevent misuse.</li>
+        <li>To comply with legal obligations and enforce our terms.</li>
+      </ul>
+
+      <h2>How we share your information</h2>
+
+      <p>We share personal information only as described here:</p>
+
+      <ul>
+        <li><strong>Service providers</strong> that help us run the Site and our business, such as our form, scheduling, video hosting, website hosting, email and customer-relationship tools. They may use the information only to provide services to us.</li>
+        <li><strong>Advertising and analytics partners</strong> such as Meta, which receive information collected by their pixels to measure ad performance and, where permitted, to show you relevant ads.</li>
+        <li><strong>Legal and safety</strong> reasons, when required by law or to protect our rights, users or others.</li>
+        <li><strong>Business transfers</strong>, if Adamax Studios is involved in a merger, acquisition or sale of assets.</li>
+      </ul>
+
+      <p>We do not sell your personal information in exchange for money.</p>
+
+      <h2>Cookies and your choices</h2>
+
+      <p>You can block or delete cookies in your browser settings; some parts of the Site, such as the video player or form, may not work properly without them. You can manage how Meta uses information for ads in your Facebook or Instagram ad settings. You can unsubscribe from our marketing emails at any time using the link in those emails.</p>
+
+      <h2>How long we keep information</h2>
+
+      <p>We keep personal information for as long as we need it for the purposes described in this policy, including to provide our services, keep business records and meet legal obligations, and then delete or anonymise it.</p>
+
+      <h2>Your rights</h2>
+
+      <p>Depending on where you live, you may have the right to access, correct, delete or receive a copy of your personal information, to object to or restrict certain processing, and to withdraw consent. To make a request, reply to any email we have sent you, or reach us through the qualification form on <a href="/">viral.adamaxstudios.com</a>. We will respond as required by applicable law.</p>
+
+      <h2>Security</h2>
+
+      <p>We use reasonable technical and organisational measures to protect personal information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
+
+      <h2>International transfers</h2>
+
+      <p>Our service providers may process information in countries other than the one where you live. Where required, we rely on appropriate safeguards for these transfers.</p>
+
+      <h2>Children</h2>
+
+      <p>The Site is intended for medical practices and other businesses. It is not directed at children, and we do not knowingly collect personal information from anyone under 18.</p>
+
+      <h2>Changes to this policy</h2>
+
+      <p>We may update this policy from time to time. We will post the updated version on this page with a new &ldquo;Last updated&rdquo; date.</p>
+
+      <h2>Contact us</h2>
+
+      <p>If you have questions about this policy or how we handle your information, reply to any email we have sent you, or reach us through the qualification form on <a href="/">viral.adamaxstudios.com</a>.</p>
+
+      <a class="back" href="/">&larr; Back to Adamax Studios</a>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container wide">
+      <div class="footer-row">
+        <img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="/privacy" aria-current="page">Privacy policy</a>
+          <a href="/terms">Terms of service</a>
+          <a href="/results-disclaimer">Results disclaimer</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <script>document.querySelectorAll('.js-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>

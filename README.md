@@ -12,6 +12,8 @@ A single landing page, styled to the Adamax Studios Brand Kit v1.0:
 
 Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`) and `pre-call-info/` (`/pre-call-info`, the page people see after booking a call).
 
+Legal pages linked from the footer: `privacy/` (`/privacy`), `terms/` (`/terms`) and `results-disclaimer/` (`/results-disclaimer`). They share the landing page's fonts and logo via absolute `/assets/…` paths. **They are drafts written from what the site actually does (the ROAS form, the Meta Pixel it loads, Wistia, Vercel hosting, edited screenshots) and need legal review.** They don't yet name a legal entity, address, contact email or governing law.
+
 | File | Brand kit source | Used for |
 |---|---|---|
 | `adamax-lockup-on-dark.webp` | lockup on dark (default) | nav, footer, end card on narrow screens |
