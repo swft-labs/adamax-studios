@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>You're Booked — Spreed Viral Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #09090B;
+  --bg2:     #111113;
+  --card:    #1A1A1C;
+  --border:  rgba(255,255,255,0.07);
+  --pink:    #f43dbe;
+  --green:   #22C55E;
+  --blue:    #3B82F6;
+  --text:    #F4F4F5;
+  --muted:   #71717A;
+  --faint:   #3F3F46;
+  --nav-h:   69px;
+}
+
+html { scroll-behavior: smooth; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ── Nav ── */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { height: 28px; width: auto; }
+
+/* ── Sections ── */
+.section {
+  width: 100%;
+  padding: 72px 24px;
+  background: var(--bg);
+  scroll-margin-top: var(--nav-h);
+}
+
+.inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  padding: 64px 24px 56px;
+  background: var(--bg);
+}
+
+.check-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+  color: var(--green);
+  position: relative;
+  animation: checkPulse 2s ease-in-out infinite;
+}
+
+/* Ripple rings */
+.check-circle::before,
+.check-circle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  opacity: 0;
+  animation: ripple 2s ease-out infinite;
+}
+
+.check-circle::after { animation-delay: 0.7s; }
+
+@keyframes checkPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  50%      { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.check-circle svg { width: 28px; height: 28px; }
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero h1 span { font-weight: 300; }
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 12px;
+}
+
+.hero-confirm-label {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 20px 0 16px;
+}
+
+/* ── Confirm buttons ── */
+.confirm-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder { to { --angle: 360deg; } }
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  60%  { left: 160%; }
+  100% { left: 160%; }
+}
+
+/* Animated conic-gradient border wrapper */
+.confirm-border {
+  --accent: var(--blue);
+  border-radius: 10px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 20%,
+    rgba(255,255,255,0.9) 40%,
+    var(--accent) 50%,
+    rgba(255,255,255,0.9) 60%,
+    transparent 80%
+  );
+  animation: rotateBorder 2.5s linear infinite;
+}
+
+.confirm-border--green { --accent: var(--green); }
+
+.btn-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 14px 26px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn-confirm svg { flex-shrink: 0; }
+
+.btn-confirm--blue  { background: var(--blue);  box-shadow: 0 4px 20px rgba(59,130,246,0.4); }
+.btn-confirm--green { background: var(--green); box-shadow: 0 4px 20px rgba(34,197,94,0.4); }
+
+/* Shimmer sweep */
+.btn-confirm::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 55%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.btn-confirm:hover  { transform: translateY(-2px); }
+.btn-confirm--blue:hover  { box-shadow: 0 8px 28px rgba(59,130,246,0.55); }
+.btn-confirm--green:hover { box-shadow: 0 8px 28px rgba(34,197,94,0.55); }
+.btn-confirm:active { transform: translateY(0); }
+
+.btn-confirm:focus-visible,
+.btn-pink:focus-visible,
+.step-card:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ── Step cards (overview) ── */
+.steps-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.step-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+.step-card:hover { border-color: rgba(244,61,190,0.4); transform: translateY(-1px); }
+
+.step-card--optional { border-color: rgba(244,61,190,0.15); }
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.step-num--optional {
+  background: rgba(244,61,190,0.15);
+  color: var(--pink);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.step-card-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.step-card-title small {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.step-card-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── Avatars ── */
+.avatars-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  /* Pink ring via box-shadow so it doesn't affect layout */
+  box-shadow: 0 0 0 2.5px var(--pink), 0 0 0 4.5px var(--bg);
+  background: var(--card);
+  overflow: hidden;
+  margin-left: -12px;
+  flex-shrink: 0;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.avatar-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-left: 14px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.avatar-count span { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+
+/* ── Step detail sections ── */
+.step-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-eyebrow::before { content: '●'; font-size: 8px; }
+
+.step-headline {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.step-headline em,
+.video-title em {
+  font-style: normal;
+  color: var(--pink);
+}
+
+.step-desc {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* ── Card / checklist box ── */
+.checklist-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.checklist-box--media { padding: 24px; }
+
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.video-divider { height: 1px; background: var(--border); }
+
+.video-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+/* ── Video embed ── */
+.video-wrap {
+  padding: 3px;
+  border-radius: 14px;
+  background: var(--pink);
+  box-shadow: 0 0 32px rgba(244,61,190,0.3), 0 0 64px rgba(244,61,190,0.12);
+}
+
+.video-inner {
+  border-radius: 11px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-inner vturb-smartplayer {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Checklist ── */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.checklist-item:last-child { border-bottom: none; }
+
+.check-icon {
+  color: var(--green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.check-icon svg { width: 18px; height: 18px; display: block; }
+
+.checklist-item-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.checklist-item-text strong { font-weight: 600; }
+
+.checklist-item-text a { color: var(--pink); text-decoration: underline; text-underline-offset: 2px; }
+
+.sub-list {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sub-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sub-list li::before {
+  content: '→';
+  color: var(--pink);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+/* ── Cases CTA ── */
+.cta-box { text-align: center; padding: 32px 28px; }
+
+.kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.cta-title {
+  font-size: clamp(20px, 2.8vw, 26px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 400px;
+  margin: 0 auto 28px;
+}
+
+.btn-pink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  background: var(--pink);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(244,61,190,0.35);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn-pink:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(244,61,190,0.5); }
+.btn-pink:active { transform: translateY(0); }
+
+/* ── Social proof ── */
+.proof { text-align: center; }
+
+.proof-headline {
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.proof-sub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 360px;
+  margin: 0 auto 24px;
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(34,197,94,0.3);
+  background: rgba(34,197,94,0.07);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.trust-pill .stars { letter-spacing: 1px; }
+.trust-pill .score { font-weight: 700; color: var(--text); }
+.trust-pill .dot   { color: rgba(255,255,255,0.2); }
+
+/* ── Footer ── */
+footer {
+  padding: 32px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+
+.footer-inner { max-width: 680px; margin: 0 auto; }
+
+.footer-logo { height: 22px; width: auto; opacity: 0.5; margin: 0 auto 16px; }
+
+.copyright { font-size: 11px; color: var(--faint); margin-bottom: 8px; }
+
+.disclaimer {
+  font-size: 10px;
+  color: var(--faint);
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .confirm-btns { flex-direction: column; align-items: center; }
+  .confirm-border { width: 100%; max-width: 320px; }
+  .btn-confirm { width: 100%; }
+  .section { padding: 52px 20px; }
+  .checklist-box { padding: 20px; }
+  .checklist-box--media { padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <img
+    src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png"
+    alt="Spreed"
+    class="logo"
+  />
+</nav>
+
+<main>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="check-circle" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+
+  <h1><strong>You're Booked.</strong> <span>Your Viral<br>Audit Call is scheduled.</span></h1>
+  <p class="hero-sub">Check your email for the calendar invite — it has your exact date, time, and Zoom link.</p>
+
+  <p class="hero-confirm-label">To confirm you'll attend, tap one of the buttons below and hit send:</p>
+
+  <div class="confirm-btns" id="confirm">
+    <div class="confirm-border">
+      <a id="confirm-sms" href="#" class="btn-confirm btn-confirm--blue">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Confirm via Text
+      </a>
+    </div>
+    <div class="confirm-border confirm-border--green">
+      <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener" class="btn-confirm btn-confirm--green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Confirm via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <p class="steps-label">Then do these two things before your call:</p>
+  <div class="step-cards">
+    <a href="#step1" class="step-card">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-card-title">Watch the pre-call video below</div>
+        <div class="step-card-sub">4 minutes. Shows you exactly what we'll cover and what you'll walk away with.</div>
+      </div>
+    </a>
+    <a href="#step2" class="step-card">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-card-title">Gather your numbers before we meet</div>
+        <div class="step-card-sub">5 quick metrics that let us skip the fluff and move fast on the call.</div>
+      </div>
+    </a>
+    <a href="#step3" class="step-card step-card--optional">
+      <div class="step-num step-num--optional">OPT</div>
+      <div>
+        <div class="step-card-title">Watch 5 deeper-dive videos <small>(optional)</small></div>
+        <div class="step-card-sub">How our process works, why AI, success rate, and more — answered before the call.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="avatars-row">
+    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683eca9eeca240118bed7cc3.jpeg" alt="Client" width="48" height="48"></div>
+    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc09eca2403cdbed7de4.jpeg" alt="Client" width="48" height="48"></div>
+    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec03833fad9e25db.jpeg" alt="Client" width="48" height="48"></div>
+    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec0383d4089e25dc.jpeg" alt="Client" width="48" height="48"></div>
+    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc4639883b17e466db5f.jpeg" alt="Client" width="48" height="48"></div>
+    <div class="avatar-count">
+      1,200+ Clients
+      <span>Successfully Served</span>
+    </div>
+  </div>
+</header>
+
+<!-- Step 1 -->
+<section class="section" id="step1">
+  <div class="inner">
+    <div class="step-eyebrow">Step 1 — Watch First</div>
+    <h2 class="step-headline">Watch This <em>Before Your Call</em></h2>
+    <p class="step-desc">This short video explains what we'll do together, what you'll walk away with, and how to get the most out of your Viral Audit session.</p>
+
+    <div class="checklist-box checklist-box--media">
+      <div class="video-wrap">
+        <div class="video-inner">
+          <vturb-smartplayer id="vid-69f34d52c10edec7d51f0117" data-load="eager"></vturb-smartplayer>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step 2 -->
+<section class="section" id="step2">
+  <div class="inner">
+    <div class="step-eyebrow">Step 2 — Before We Meet</div>
+    <h2 class="step-headline">How to Show Up <em>Prepared</em></h2>
+    <p class="step-desc">The more of this you have ready, the faster we can move and the more specific your viral strategy will be.</p>
+
+    <div class="checklist-box">
+
+      <div class="checklist-item">
+        <span class="check-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="checklist-item-text">
+          <strong>Add the call to your calendar</strong> from the email invite we just sent.
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <span class="check-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="checklist-item-text">
+          <strong>If you haven't yet</strong>, tap one of the <a href="#confirm">confirmation buttons</a> at the top of this page so we know you're coming.
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <span class="check-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="checklist-item-text">
+          <strong>Get these 5 numbers</strong> so we can move fast on the call:
+          <ul class="sub-list">
+            <li>Your current follower count on your main platform (Instagram, TikTok, or YouTube)</li>
+            <li>Your average views per post over the last 30 days</li>
+            <li>How many new patients or clients you currently get from social media per month</li>
+            <li>Your current monthly revenue from your practice or clinic</li>
+            <li>Your revenue goal for the next 90 days</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Step 3 -->
+<section class="section" id="step3">
+  <div class="inner">
+    <div class="step-eyebrow">Step 3 — Optional</div>
+    <h2 class="step-headline">Go <em>Deeper</em> Before the Call</h2>
+    <p class="step-desc">Five short videos that answer the most common questions clients have before their Viral Audit. Watch whichever ones feel most relevant to you.</p>
+
+    <div class="checklist-box checklist-box--media video-list">
+
+      <div>
+        <h3 class="video-title">How Does Our <em>Process</em> Work?</h3>
+        <div class="video-wrap"><div class="video-inner">
+          <vturb-smartplayer id="vid-69f3518f67b3f7b15624d9ae"></vturb-smartplayer>
+        </div></div>
+      </div>
+
+      <div class="video-divider" aria-hidden="true"></div>
+
+      <div>
+        <h3 class="video-title">Why Choose <em>Spreed</em> Over Every Other Option?</h3>
+        <div class="video-wrap"><div class="video-inner">
+          <vturb-smartplayer id="vid-69f351598dfd6d0e7b1f3b5b"></vturb-smartplayer>
+        </div></div>
+      </div>
+
+      <div class="video-divider" aria-hidden="true"></div>
+
+      <div>
+        <h3 class="video-title">Why Is <em>AI</em> Now Mandatory for Content?</h3>
+        <div class="video-wrap"><div class="video-inner">
+          <vturb-smartplayer id="vid-69f350d67dfa1bb6cfc64153"></vturb-smartplayer>
+        </div></div>
+      </div>
+
+      <div class="video-divider" aria-hidden="true"></div>
+
+      <div>
+        <h3 class="video-title">Will This Work <em>In Any Industry?</em></h3>
+        <div class="video-wrap"><div class="video-inner">
+          <vturb-smartplayer id="vid-69f350b5c2504d7d6caad94b"></vturb-smartplayer>
+        </div></div>
+      </div>
+
+      <div class="video-divider" aria-hidden="true"></div>
+
+      <div>
+        <h3 class="video-title">What's Our <em>Success Rate?</em></h3>
+        <div class="video-wrap"><div class="video-inner">
+          <vturb-smartplayer id="vid-69f35129e1d248316d31e346"></vturb-smartplayer>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Cases CTA -->
+<section class="section">
+  <div class="inner">
+    <div class="checklist-box cta-box">
+      <p class="kicker">While you wait for your call</p>
+      <h2 class="cta-title">See What Clients Like You Have Achieved</h2>
+      <p class="cta-sub">Real results from 1,200+ clients — view counts, follower growth, and in-depth case studies.</p>
+      <a href="https://goviral.spreed.ai/cases" target="_blank" rel="noopener" class="btn-pink">
+        Browse All Client Results
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Social proof -->
+<section class="section proof">
+  <div class="inner">
+    <h2 class="proof-headline">You're in good company.</h2>
+    <p class="proof-sub">Over 1,200 clients have gone through this exact process. We look forward to doing the same for you.</p>
+
+    <div class="trust-pill">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span class="score">4.9/5</span>
+      <span class="dot" aria-hidden="true">·</span>
+      Trusted by 1,200+ clients &amp; 9B+ views generated
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" alt="Spreed" class="footer-logo" loading="lazy">
+    <p class="copyright">Copyright © 2026 Spreed FZE. All Rights Reserved.</p>
+    <p class="disclaimer">
+      This website is operated and maintained by Spreed FZE. Use of this website is governed by its Terms of Service and Privacy Policy. Spreed provides AI-powered content creation and distribution services for medical professionals. We do not guarantee specific business, revenue, or marketing results. Any case studies, client outcomes, or examples presented on this website are illustrative only, are not typical, and should not be interpreted as a promise or guarantee of future performance. Results vary based on numerous factors including market conditions, offer strength, content quality, niche, individual effort, and execution. All content on this website is the intellectual property of Spreed FZE and may not be copied, reproduced, or distributed without prior written permission. This website is not part of, endorsed by, or affiliated with Facebook, Meta, Instagram, TikTok, YouTube, or Google. All third-party trademarks are the property of their respective owners.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ─────────────────────────────────────────────
+     CONFIG — edit these two values only.
+     Phone in international format, e.g. +971501234567
+     ───────────────────────────────────────────── */
+  var CONFIRM_PHONE   = '+971XXXXXXXXX';
+  var CONFIRM_MESSAGE = "Hi, I'm confirming my Viral Audit call with Spreed 📅";
+
+  var VTURB_ACCOUNT = '1200be6e-6fcb-4724-87ac-03a7f7bc2d31';
+
+  /* ── Confirmation links ── */
+  var phone  = CONFIRM_PHONE.replace(/[^\d+]/g, '');
+  var digits = phone.replace(/\D/g, '');
+  var body   = encodeURIComponent(CONFIRM_MESSAGE);
+  // iOS Messages expects "&body=", everyone else follows RFC 5724 "?body=".
+  var isIOS  = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  document.getElementById('confirm-sms').href =
+    'sms:' + phone + (isIOS ? '&' : '?') + 'body=' + body;
+  document.getElementById('confirm-whatsapp').href =
+    'https://wa.me/' + digits + '?text=' + body;
+
+  if (/x/i.test(CONFIRM_PHONE)) {
+    console.warn('[pre-call] CONFIRM_PHONE is still a placeholder — set your real number.');
+  }
+
+  /* ── vturb players ──
+     Step 1 loads immediately; the five optional videos load as they
+     approach the viewport so they don't compete with the main video. */
+  function loadPlayer(el) {
+    if (el.dataset.loaded) return;
+    el.dataset.loaded = '1';
+    var s = document.createElement('script');
+    s.src = 'https://scripts.converteai.net/' + VTURB_ACCOUNT +
+            '/players/' + el.id.replace(/^vid-/, '') + '/v4/player.js';
+    s.async = true;
+    document.head.appendChild(s);
+  }
+
+  var players = document.querySelectorAll('vturb-smartplayer');
+  var lazy = [];
+  players.forEach(function (el) {
+    if (el.dataset.load === 'eager') loadPlayer(el); else lazy.push(el);
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          loadPlayer(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '600px 0px' });
+    lazy.forEach(function (el) { io.observe(el); });
+  } else {
+    lazy.forEach(loadPlayer);
+  }
+})();
+</script>
+
+</body>
+</html>
