@@ -1,9 +1,8 @@
 # Adamax Studios — Viral Audit funnel
 
-Two pages, styled to the Adamax Studios Brand Kit v1.0:
+A single landing page, styled to the Adamax Studios Brand Kit v1.0:
 
-- **`index.html`**: landing page. VSL → "See if you qualify" CTA → results carousel → ROAS qualify form → client stories → proof grid → end card.
-- **`booking.html`**: booking step ("Pick a time") with the embedded GHL calendar (`escdhM2THRdejLTLUISY`). Marked `noindex`.
+- **`index.html`**: the page. VSL → "See if you qualify" CTA → results carousel → ROAS qualify form → client stories → proof grid → end card.
 - **`assets/`**: logo files resized for the web from the brand kit originals.
 
 | File | Brand kit source | Used for |
@@ -32,7 +31,7 @@ The vturb player shows "Video not found" outside its whitelisted domains. That's
 ## Brand rules applied
 
 - Built on pure black (`#000`). Surfaces `#030D1A`, hairlines `#172F52`. No drop shadows, glows or pills.
-- Azure `#006BE5` is the only button colour. Sky `#009BFC` is for eyebrows, rules and accents. Glow `#03CCFF` only as a thin lit edge (video frame, calendar loader).
+- Azure `#006BE5` is the only button colour. Sky `#009BFC` is for eyebrows, rules and accents. Glow `#03CCFF` only as a thin lit edge (video frame).
 - Krona One for uppercase headlines; Manrope for everything else. Left-aligned, except the end card.
 - Corners 4 / 8 / 16px; spacing 4 / 8 / 16 / 24 / 40 / 64. Angled accents use the mark's 60° cuts.
 - Logo PNGs have black built in, so they only sit on `#000`. Each PNG has ~10% black clear space per side, so the drawn logo is 80% of the file width. Sizes are set so the artwork stays above the brand minimums: 140px for the lockup, 320px for the metallic lockup.
@@ -44,17 +43,3 @@ The vturb player shows "Video not found" outside its whitelisted domains. That's
 - **Client stories:** the three `.story` blocks in the HTML.
 - **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`). Its colours and theme are set in the ROASForm dashboard.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
-
-## Booking page pre-fill
-
-`booking.html` forwards contact details from its own URL into the calendar widget, so set the qualify form's redirect to e.g.:
-
-```
-https://<your-domain>/booking?first_name={{first_name}}&last_name={{last_name}}&email={{email}}&phone={{phone}}
-```
-
-(Use whatever merge-field syntax ROASForm supports for its redirect URL.)
-
-- Accepted params: `first_name` / `firstName`, `last_name` / `lastName`, `email`, `phone`. Any `utm_*` params are passed through too.
-- The iframe `src` is set by script before its first load, so the widget only loads once.
-- A light-sweep loader shows until the widget loads (15s cap), with an "Open it in a new tab" fallback link carrying the same params.
