@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results disclaimer — Adamax Studios</title>
+  <meta name="description" content="How to read the results, case studies and testimonials shown on viral.adamaxstudios.com." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://viral.adamaxstudios.com/results-disclaimer" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/krona-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    @font-face { font-family: 'Krona One'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/krona-one-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/manrope-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+    /* Adamax Studios brand tokens (Brand Kit v1.0), shared with the landing page */
+    :root {
+      --sky: #009BFC; --ground: #000000; --surface: #030D1A; --hairline: #172F52;
+      --ink: #FFFFFF; --ink-muted: #9AA8BD;
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px; --s6: 64px;
+      --gutter: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: var(--ground); color: var(--ink); font-family: var(--text); font-size: 16px; line-height: 26px; -webkit-font-smoothing: antialiased; }
+
+    .container { width: 100%; max-width: calc(720px + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+    .wide { max-width: calc(1040px + var(--gutter) * 2); }
+
+    .site-nav { border-bottom: 1px solid var(--hairline); }
+    .site-nav .container { display: flex; justify-content: center; padding-top: var(--s3); padding-bottom: var(--s3); }
+    .lockup { --lockup-w: 184px; width: var(--lockup-w); max-width: none; height: auto; display: block; }
+
+    main { padding: var(--s5) 0 var(--s6); }
+
+    .eyebrow { display: flex; align-items: center; gap: var(--s3); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--sky); margin-bottom: var(--s3); }
+    .eyebrow::before { content: ''; flex: 0 0 40px; height: 1px; background: var(--sky); }
+
+    h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(24px, 4vw, 34px); line-height: 1.15; }
+    .updated { margin-top: var(--s2); font-size: 13px; color: var(--ink-muted); }
+    .intro { margin-top: var(--s4); font-size: 18px; line-height: 28px; color: var(--ink); }
+
+    h2 { margin-top: var(--s5); font-size: 20px; line-height: 28px; font-weight: 700; color: var(--ink); }
+    main p, main li { color: var(--ink-muted); }
+    main p { margin-top: var(--s3); }
+    main ul { margin-top: var(--s3); padding-left: 20px; display: grid; gap: var(--s2); }
+    main strong { color: var(--ink); font-weight: 600; }
+    main a { color: var(--sky); text-underline-offset: 2px; }
+
+    .back { display: inline-block; margin-top: var(--s5); font-weight: 600; font-size: 14px; color: var(--sky); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+
+    .site-footer { border-top: 1px solid var(--hairline); padding: var(--s5) 0; }
+    .site-footer .container { display: grid; gap: var(--s3); }
+    .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); }
+    .footer-row .lockup { margin-left: calc(var(--lockup-w) * -0.102); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+    .footer-links a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover, .footer-links a[aria-current] { color: var(--sky); }
+    .caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
+    .legal { font-size: 12px; line-height: 18px; color: #5D6B80; max-width: 75ch; }
+
+    @media (min-width: 760px) { :root { --gutter: 40px; } main { padding: var(--s6) 0; } .lockup { --lockup-w: 196px; } }
+    @media (max-width: 480px) { :root { --gutter: 20px; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="container">
+      <a href="/" aria-label="Adamax Studios home"><img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" /></a>
+    </div>
+  </header>
+
+  <main>
+    <article class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>Results disclaimer</h1>
+      <p class="updated">Last updated: November 17, 2026</p>
+      <p class="intro">This page explains how to read the results, case studies, testimonials and screenshots shown on viral.adamaxstudios.com and related pages (the &ldquo;Site&rdquo;).</p>
+
+      <h2>Results vary</h2>
+
+      <p>The views, followers, bookings, fee increases, revenue and other results shown on the Site were achieved by specific clients. They are not typical, and they are not a promise or prediction of what you will achieve. Outcomes depend on many factors, including your specialty and market, your offer and pricing, how consistently you take part in content production, how you follow up with enquiries, and changes to social media platforms and their algorithms.</p>
+
+      <h2>No guarantee of patients or income</h2>
+
+      <p>We do not guarantee any number of patients, bookings, sales, revenue or income. Any guarantee we advertise, including our views guarantee, applies only on the conditions set out in a client&rsquo;s written service agreement.</p>
+
+      <h2>About our case studies and screenshots</h2>
+
+      <ul>
+        <li>Case studies and testimonials come from real clients. Some names are shortened.</li>
+        <li>Figures such as views and followers were taken from the platforms&rsquo; own analytics or the client&rsquo;s accounts at the time the screenshot or case study was made, and may have changed since.</li>
+        <li>Some screenshots have been edited to cover personal details, the names of third parties and earlier branding. The figures and messages shown have not been changed.</li>
+      </ul>
+
+      <h2>Not medical advice</h2>
+
+      <p>Adamax Studios provides content and marketing services. Nothing on the Site is medical advice, and we make no claims about clinical outcomes. Each practice is responsible for making sure its content complies with the medical advertising rules and professional standards that apply to it.</p>
+
+      <h2>Platforms and trademarks</h2>
+
+      <p>Adamax Studios is not affiliated with, endorsed by or sponsored by Meta, Instagram, Facebook, TikTok, YouTube, Google or any other platform mentioned on the Site. All trademarks belong to their respective owners.</p>
+
+      <h2>Questions</h2>
+
+      <p>If you have questions about any result shown on the Site, reply to any email we have sent you, or reach us through the qualification form on <a href="/">viral.adamaxstudios.com</a>.</p>
+
+      <a class="back" href="/">&larr; Back to Adamax Studios</a>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container wide">
+      <div class="footer-row">
+        <img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms">Terms of service</a>
+          <a href="/results-disclaimer" aria-current="page">Results disclaimer</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <script>document.querySelectorAll('.js-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>

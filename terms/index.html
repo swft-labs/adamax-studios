@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of service — Adamax Studios</title>
+  <meta name="description" content="The terms that apply to your use of viral.adamaxstudios.com." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://viral.adamaxstudios.com/terms" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/krona-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <style>
+    @font-face { font-family: 'Krona One'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/krona-one-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/manrope-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+    /* Adamax Studios brand tokens (Brand Kit v1.0), shared with the landing page */
+    :root {
+      --sky: #009BFC; --ground: #000000; --surface: #030D1A; --hairline: #172F52;
+      --ink: #FFFFFF; --ink-muted: #9AA8BD;
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px; --s6: 64px;
+      --gutter: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: var(--ground); color: var(--ink); font-family: var(--text); font-size: 16px; line-height: 26px; -webkit-font-smoothing: antialiased; }
+
+    .container { width: 100%; max-width: calc(720px + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+    .wide { max-width: calc(1040px + var(--gutter) * 2); }
+
+    .site-nav { border-bottom: 1px solid var(--hairline); }
+    .site-nav .container { display: flex; justify-content: center; padding-top: var(--s3); padding-bottom: var(--s3); }
+    .lockup { --lockup-w: 184px; width: var(--lockup-w); max-width: none; height: auto; display: block; }
+
+    main { padding: var(--s5) 0 var(--s6); }
+
+    .eyebrow { display: flex; align-items: center; gap: var(--s3); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--sky); margin-bottom: var(--s3); }
+    .eyebrow::before { content: ''; flex: 0 0 40px; height: 1px; background: var(--sky); }
+
+    h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(24px, 4vw, 34px); line-height: 1.15; }
+    .updated { margin-top: var(--s2); font-size: 13px; color: var(--ink-muted); }
+    .intro { margin-top: var(--s4); font-size: 18px; line-height: 28px; color: var(--ink); }
+
+    h2 { margin-top: var(--s5); font-size: 20px; line-height: 28px; font-weight: 700; color: var(--ink); }
+    main p, main li { color: var(--ink-muted); }
+    main p { margin-top: var(--s3); }
+    main ul { margin-top: var(--s3); padding-left: 20px; display: grid; gap: var(--s2); }
+    main strong { color: var(--ink); font-weight: 600; }
+    main a { color: var(--sky); text-underline-offset: 2px; }
+
+    .back { display: inline-block; margin-top: var(--s5); font-weight: 600; font-size: 14px; color: var(--sky); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+
+    .site-footer { border-top: 1px solid var(--hairline); padding: var(--s5) 0; }
+    .site-footer .container { display: grid; gap: var(--s3); }
+    .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); }
+    .footer-row .lockup { margin-left: calc(var(--lockup-w) * -0.102); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+    .footer-links a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover, .footer-links a[aria-current] { color: var(--sky); }
+    .caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
+    .legal { font-size: 12px; line-height: 18px; color: #5D6B80; max-width: 75ch; }
+
+    @media (min-width: 760px) { :root { --gutter: 40px; } main { padding: var(--s6) 0; } .lockup { --lockup-w: 196px; } }
+    @media (max-width: 480px) { :root { --gutter: 20px; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="container">
+      <a href="/" aria-label="Adamax Studios home"><img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" /></a>
+    </div>
+  </header>
+
+  <main>
+    <article class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>Terms of service</h1>
+      <p class="updated">Last updated: November 17, 2026</p>
+      <p class="intro">These terms apply to your use of viral.adamaxstudios.com and related pages (the &ldquo;Site&rdquo;), operated by Adamax Studios (&ldquo;we&rdquo;, &ldquo;us&rdquo;). By using the Site you agree to them. If you don&rsquo;t agree, please don&rsquo;t use the Site.</p>
+
+      <h2>About the Site</h2>
+
+      <p>The Site provides information about Adamax Studios&rsquo; done-for-you organic content services for medical practices and lets you apply for a strategy call. Nothing on the Site is an offer that becomes binding when you submit the form. Our services are provided only under a separate written agreement, and if that agreement conflicts with these terms, the agreement applies.</p>
+
+      <h2>Our guarantee</h2>
+
+      <p>Any guarantee we advertise, including our views guarantee, applies only to clients and only on the conditions set out in their written service agreement.</p>
+
+      <h2>Using the Site</h2>
+
+      <ul>
+        <li>You must be at least 18 and using the Site for your practice or business.</li>
+        <li>Information you submit must be accurate and yours to share. By submitting the qualification form, you agree that we may contact you about your enquiry using the details you provide.</li>
+        <li>You may not misuse the Site, including by interfering with its operation, trying to access it in unauthorised ways, scraping it, or using it for anything unlawful.</li>
+      </ul>
+
+      <h2>Intellectual property</h2>
+
+      <p>The Site and its content, including text, design, logos, videos and images, belong to Adamax Studios or its licensors and are protected by intellectual property laws. You may view the Site for your own information, but you may not copy, modify, distribute or reuse its content without our written permission.</p>
+
+      <h2>Results and testimonials</h2>
+
+      <p>Results, case studies and testimonials on the Site describe the experiences of specific clients and are not typical or guaranteed. Please read our <a href="/results-disclaimer">results disclaimer</a>.</p>
+
+      <h2>Third-party services</h2>
+
+      <p>The Site uses and links to third-party services, such as our video player, form provider and social media platforms. We are not responsible for their content, policies or practices, and your use of them is subject to their own terms.</p>
+
+      <h2>Disclaimers</h2>
+
+      <p>The Site is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;. To the fullest extent permitted by law, we disclaim all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose and non-infringement, and we do not promise that the Site will be uninterrupted or error-free. Content on the Site is general information about our services; it is not medical, legal or financial advice.</p>
+
+      <h2>Limitation of liability</h2>
+
+      <p>To the fullest extent permitted by law, Adamax Studios will not be liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of profits, revenue, data or goodwill, arising from your use of the Site. Nothing in these terms limits liability that cannot be limited by law.</p>
+
+      <h2>Changes</h2>
+
+      <p>We may update these terms from time to time by posting a new version on this page. Continuing to use the Site after an update means you accept the updated terms.</p>
+
+      <h2>Contact us</h2>
+
+      <p>If you have questions about these terms, reply to any email we have sent you, or reach us through the qualification form on <a href="/">viral.adamaxstudios.com</a>.</p>
+
+      <a class="back" href="/">&larr; Back to Adamax Studios</a>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container wide">
+      <div class="footer-row">
+        <img class="lockup" src="/assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms" aria-current="page">Terms of service</a>
+          <a href="/results-disclaimer">Results disclaimer</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <script>document.querySelectorAll('.js-year').forEach(function (el) { el.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>
