@@ -146,16 +146,6 @@ a { color: var(--sky); }
 .display em { font-style: normal; color: var(--sky); }
 .nowrap { white-space: nowrap; }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 .container.container--wide { max-width: calc(960px + 2 * var(--s4)); }
 
 .section--flush { border-top: 0; padding-top: var(--s5); }
@@ -410,7 +400,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   padding-top: 56.25%;
 }
 
-
 /* ── Checklist ── */
 .card {
   background: var(--surface);
@@ -449,31 +438,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
 }
 
 /* ── Proof: client cases ── */
-.proof-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s3);
-  margin-bottom: var(--s3);
-}
-
-.proof-count { font-size: 13px; color: var(--ink-muted); }
-
-.select {
-  appearance: none;
-  -webkit-appearance: none;
-  min-width: 220px;
-  height: 44px;
-  padding: 0 40px 0 var(--s3);
-  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239AA8BD' stroke-width='1.5' stroke-linecap='square'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-tag);
-  color: var(--ink);
-  font: 600 14px/1 var(--text);
-  cursor: pointer;
-}
-.select:hover { border-color: var(--cobalt); }
-
 .case-grid {
   list-style: none;
   display: grid;
@@ -568,7 +532,6 @@ a.case-link:hover svg { color: var(--sky); }
 .case-platform { font-size: 13px; font-weight: 600; color: var(--ink-faint); align-self: center; }
 .case-platform span { color: var(--ink-faint); font-weight: 500; }
 .case-platform span::before { content: '· '; }
-
 
 @media (max-width: 900px) {
   .case-grid { grid-template-columns: repeat(2, 1fr); }
@@ -677,8 +640,6 @@ a.case-link:hover svg { color: var(--sky); }
   .stat b { font-size: 17px; }
   .case-grid { grid-template-columns: 1fr; gap: var(--s2); }
   .case { padding: var(--s3); }
-  .proof-bar { flex-direction: column-reverse; align-items: stretch; }
-  .select { width: 100%; }
   .end-card { padding: 64px 20px; }
   .end-card img { min-width: 0; width: 320px; }
   .angle-accent { --band: 64px; --edge: 24px; right: 0; }
@@ -830,13 +791,7 @@ a.case-link:hover svg { color: var(--sky); }
     <div class="container container--wide">
       <div class="section-head section-head--center">
         <h2 class="display display-step" id="proof-title"><em>Real results</em> from real clients</h2>
-        <p class="muted">Organic views, followers and sales from accounts like yours. Filter by industry to find your niche.</p>
-      </div>
-
-      <div class="proof-bar">
-        <p class="proof-count" id="proof-count" aria-live="polite"></p>
-        <label class="visually-hidden" for="niche-filter">Filter by industry</label>
-        <select class="select" id="niche-filter"></select>
+        <p class="muted">Organic views, followers and patients from doctors and clinics like yours, plus results across other industries.</p>
       </div>
 
       <ul class="case-grid" id="case-grid"></ul>
@@ -997,22 +952,38 @@ a.case-link:hover svg { color: var(--sky); }
     });
   });
 
-
   /* ── Proof: client cases ──
-     Most views first. Every url was checked live. A link with an empty url
+     Order: doctors, dentists and aesthetics first, then health-adjacent
+     (sleep, weight loss), then other industries; most views first within
+     each group. Every url was checked live. A link with an empty url
      renders as plain text, not a button. "img" = profile photo saved in
      /pre-call-info/assets/proof/; without one the card shows initials. */
   var IMG = '/pre-call-info/assets/proof/';
   var CASES = [
     { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
-    { name: 'Nayra Del Duca', niche: 'Accountant', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
-      detail: 'And 600K+ followers in under 6 months',
-      links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
+    { name: 'Dentist account', niche: 'Dentist', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
+    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
+      links: [
+        { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
+        { p: 'TikTok', label: '@dr.luizmarcelo', url: 'https://www.tiktok.com/@dr.luizmarcelo' }] },
+    { name: 'Dr. Rafif Tayara', niche: 'Doctors', img: 'doctortayara.webp', stat: '1M', label: 'views',
+      detail: 'Based in Dubai',
+      links: [{ p: 'Instagram', label: '@doctortayara', url: 'https://www.instagram.com/doctortayara/reels/' }] },
+    { name: 'Dr. Dorival', niche: 'Doctors', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
+      detail: 'In under 2 months, with comments from people asking to book consultations',
+      links: [{ p: 'Instagram', label: '@drdorivalriccijr', url: 'https://www.instagram.com/drdorivalriccijr/reels/' }] },
+    { name: 'Doctor example', niche: 'Doctors', img: 'herberthferreira4.webp',
+      detail: 'An example video from the doctors niche',
+      links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
     { name: 'Sleep coach account', niche: 'Sleep coach', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
     { name: 'Weight loss account', niche: 'Weight loss', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
       links: [{ p: 'TikTok', label: 'Top video', url: 'https://www.tiktok.com/@natassiadsouza/video/7400405778957389063' }] },
+    { name: 'Nayra Del Duca', niche: 'Accountant', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
+      detail: 'And 600K+ followers in under 6 months',
+      links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
     { name: 'Travel account', niche: 'Travel', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
       links: [{ p: 'Facebook', label: 'Profile', url: 'https://www.facebook.com/rohit.khubchandani' }] },
     { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
@@ -1032,26 +1003,11 @@ a.case-link:hover svg { color: var(--sky); }
         { p: 'Instagram', label: '@joaobransales', url: 'https://www.instagram.com/joaobransales/reels/' },
         { p: 'TikTok', label: '@joaobransales', url: 'https://www.tiktok.com/@joaobransales' },
         { p: 'YouTube', label: '@pneusbransales', url: 'https://www.youtube.com/@pneusbransales/shorts' }] },
-    { name: 'Dentist account', niche: 'Dentist', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
-      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
     { name: 'Real estate account', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
       detail: "And hundreds of 'I want this' comments",
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZIfIS6hjFK/' }] },
-    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
-      links: [
-        { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
-        { p: 'TikTok', label: '@dr.luizmarcelo', url: 'https://www.tiktok.com/@dr.luizmarcelo' }] },
     { name: 'Billionaires Mansions', niche: 'Luxury real estate', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
       links: [{ p: 'TikTok', label: '@billionairemansiondubai', url: 'https://www.tiktok.com/@billionairemansiondubai' }] },
-    { name: 'Dr. Rafif Tayara', niche: 'Doctors', img: 'doctortayara.webp', stat: '1M', label: 'views',
-      detail: 'Based in Dubai',
-      links: [{ p: 'Instagram', label: '@doctortayara', url: 'https://www.instagram.com/doctortayara/reels/' }] },
-    { name: 'Doctor example', niche: 'Doctors', img: 'herberthferreira4.webp',
-      detail: 'An example video from the doctors niche',
-      links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
-    { name: 'Dr. Dorival', niche: 'Doctors', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
-      detail: 'In under 2 months, with comments from people asking to book consultations',
-      links: [{ p: 'Instagram', label: '@drdorivalriccijr', url: 'https://www.instagram.com/drdorivalriccijr/reels/' }] },
     { name: 'Marinna Real Estate', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
       detail: 'From the video audience, with under 10 videos posted',
       links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
@@ -1080,7 +1036,7 @@ a.case-link:hover svg { color: var(--sky); }
             escHtml(c.name + ' on ' + l.p + ' (opens in a new tab)') + '">' + inner + ARROW + '</a>'
         : '<span class="case-platform">' + inner + '</span>';
     }).join('');
-    return '<li class="case" data-niche="' + escHtml(c.niche) + '">' +
+    return '<li class="case">' +
       '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
         '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
         '<div class="case-niche">' + escHtml(c.niche) + '</div></div></div>' +
@@ -1089,26 +1045,6 @@ a.case-link:hover svg { color: var(--sky); }
       '<div class="case-links">' + links + '</div></li>';
   }).join('');
 
-  var filter = document.getElementById('niche-filter');
-  var count  = document.getElementById('proof-count');
-  var counts = {};
-  CASES.forEach(function (c) { counts[c.niche] = (counts[c.niche] || 0) + 1; });
-  filter.innerHTML = '<option value="">All industries (' + CASES.length + ')</option>' +
-    Object.keys(counts).sort().map(function (n) {
-      return '<option value="' + escHtml(n) + '">' + escHtml(n) + ' (' + counts[n] + ')</option>';
-    }).join('');
-
-  function applyFilter() {
-    var niche = filter.value, matches = 0;
-    Array.prototype.forEach.call(grid.children, function (li) {
-      var match = !niche || li.getAttribute('data-niche') === niche;
-      li.hidden = !match;
-      if (match) matches++;
-    });
-    count.textContent = matches + (matches === 1 ? ' case' : ' cases') + ' · most views first';
-  }
-  filter.addEventListener('change', applyFilter);
-  applyFilter();
 })();
 </script>
 
