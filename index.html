@@ -4,842 +4,735 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>You're Booked — Spreed Viral Audit</title>
+<meta name="theme-color" content="#000000" />
+<title>You're booked — Adamax Studios viral audit</title>
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+/* ============================================================
+   Adamax Studios brand tokens (Brand Kit v1.0)
+   ============================================================ */
 :root {
-  --bg:      #09090B;
-  --bg2:     #111113;
-  --card:    #1A1A1C;
-  --border:  rgba(255,255,255,0.07);
-  --pink:    #f43dbe;
-  --green:   #22C55E;
-  --blue:    #3B82F6;
-  --text:    #F4F4F5;
-  --muted:   #71717A;
-  --faint:   #3F3F46;
-  --nav-h:   69px;
+  /* Brand colours */
+  --azure:    #006BE5;  /* the only button blue, always white text */
+  --sky:      #009BFC;  /* rules, accents, links on dark */
+  --cobalt:   #024AA1;
+  --navy:     #02244E;
+  --midnight: #00142C;
+  --glow:     #03CCFF;  /* thin lit edges only, never a fill */
+
+  /* Dark theme */
+  --ground:    #000000;
+  --surface:   #030D1A;
+  --raised:    #0A172E;
+  --hairline:  #172F52;
+  --ink:       #FFFFFF;
+  --ink-muted: #9AA8BD;
+  --ink-faint: #56657C;
+
+  /* Type */
+  --display: 'Krona One', 'Arial Black', sans-serif;
+  --text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing scale: 4 / 8 / 16 / 24 / 40 / 64 */
+  --s1: 4px;  --s2: 8px;  --s3: 16px;
+  --s4: 24px; --s5: 40px; --s6: 64px;
+
+  /* Corners: slightly softened, never round */
+  --r-tag: 4px; --r-card: 8px; --r-panel: 16px;
+
+  --page:  720px;
+  --nav-h: 77px;
+  --hex: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
 
-html, body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 15px;
+  line-height: 24px;
   -webkit-font-smoothing: antialiased;
 }
 
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: var(--sky); }
+
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+
+.container {
+  max-width: calc(var(--page) + 2 * var(--s4));
+  margin: 0 auto;
+  padding: 0 var(--s4);
+}
+
+/* ── Type ── */
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.display-lg { font-size: clamp(28px, 7vw, 40px); line-height: 1.1; }
+.display-md { font-size: clamp(20px, 5.2vw, 24px); line-height: 1.2; }
+
+.eyebrow {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+/* Leading blue rule, as on the brand kit section labels */
+.eyebrow--rule { display: flex; align-items: center; gap: var(--s3); }
+.eyebrow--rule::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--sky);
+  flex-shrink: 0;
+}
+
+/* A pair of thin rules flanking one short label (used once, in the hero) */
+.eyebrow--flanked {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.eyebrow--flanked::before,
+.eyebrow--flanked::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+}
+.eyebrow--flanked::before { background: linear-gradient(90deg, transparent, var(--sky)); }
+.eyebrow--flanked::after  { background: linear-gradient(90deg, var(--sky), transparent); }
+
+.lead  { font-size: 18px; line-height: 28px; color: var(--ink-muted); }
+.muted { color: var(--ink-muted); }
+.caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
 
 /* ── Nav ── */
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
+.site-nav {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--ground);
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  justify-content: center;
+  padding: 6px var(--s4);
 }
 
-.logo { height: 28px; width: auto; }
+.site-nav img { width: 192px; }
 
 /* ── Sections ── */
 .section {
-  width: 100%;
-  padding: 72px 24px;
-  background: var(--bg);
+  padding: var(--s6) 0;
+  border-top: 1px solid var(--hairline);
   scroll-margin-top: var(--nav-h);
 }
 
-.inner {
-  max-width: 700px;
-  margin: 0 auto;
-}
+.section-head { margin-bottom: var(--s5); }
+.section-head .display { margin: var(--s3) 0 var(--s2); }
+.section-head p { max-width: 560px; }
 
-/* ── Hero ── */
+/* ── Hero (title card: centred) ── */
 .hero {
+  padding: var(--s6) 0;
   text-align: center;
-  padding: 64px 24px 56px;
-  background: var(--bg);
 }
 
-.check-circle {
+.badge {
   width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 2px solid var(--green);
+  height: 72px;
+  margin: 0 auto var(--s4);
+}
+
+.badge svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.badge .tick {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw 0.6s 0.3s ease-out forwards;
+}
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.hero h1 { margin: var(--s3) 0; }
+
+.hero .lead { max-width: 500px; margin: 0 auto; }
+
+.confirm-label { margin: var(--s5) 0 var(--s3); }
+
+/* ── Buttons ── */
+.btn-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 28px;
-  color: var(--green);
-  position: relative;
-  animation: checkPulse 2s ease-in-out infinite;
-}
-
-/* Ripple rings */
-.check-circle::before,
-.check-circle::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid var(--green);
-  opacity: 0;
-  animation: ripple 2s ease-out infinite;
-}
-
-.check-circle::after { animation-delay: 0.7s; }
-
-@keyframes checkPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-  50%      { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
-}
-
-@keyframes ripple {
-  0%   { transform: scale(1);   opacity: 0.5; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-
-.check-circle svg { width: 28px; height: 28px; }
-
-.hero h1 {
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--text);
-  margin-bottom: 16px;
-}
-
-.hero h1 span { font-weight: 300; }
-
-.hero-sub {
-  font-size: 15px;
-  color: var(--muted);
-  max-width: 480px;
-  margin: 0 auto 12px;
-}
-
-.hero-confirm-label {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 20px 0 16px;
-}
-
-/* ── Confirm buttons ── */
-.confirm-btns {
-  display: flex;
-  gap: 16px;
+  gap: var(--s3);
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 40px;
-  scroll-margin-top: calc(var(--nav-h) + 24px);
+  scroll-margin-top: calc(var(--nav-h) + var(--s4));
 }
 
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes rotateBorder { to { --angle: 360deg; } }
-
-@keyframes shimmer {
-  0%   { left: -100%; }
-  60%  { left: 160%; }
-  100% { left: 160%; }
-}
-
-/* Animated conic-gradient border wrapper */
-.confirm-border {
-  --accent: var(--blue);
-  border-radius: 10px;
-  padding: 2px;
-  background: conic-gradient(
-    from var(--angle, 0deg),
-    transparent 20%,
-    rgba(255,255,255,0.9) 40%,
-    var(--accent) 50%,
-    rgba(255,255,255,0.9) 60%,
-    transparent 80%
-  );
-  animation: rotateBorder 2.5s linear infinite;
-}
-
-.confirm-border--green { --accent: var(--green); }
-
-.btn-confirm {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  padding: 14px 26px;
-  border-radius: 8px;
-  color: #fff;
-  font-family: inherit;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.03em;
+  gap: var(--s2);
+  min-height: 52px;
+  padding: 0 var(--s4);
+  border-radius: var(--r-card);
+  font: 700 15px/1 var(--text);
+  letter-spacing: 0.01em;
+  color: var(--ink);
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
 }
 
-.btn-confirm svg { flex-shrink: 0; }
+.btn svg { flex-shrink: 0; }
 
-.btn-confirm--blue  { background: var(--blue);  box-shadow: 0 4px 20px rgba(59,130,246,0.4); }
-.btn-confirm--green { background: var(--green); box-shadow: 0 4px 20px rgba(34,197,94,0.4); }
+.btn--primary { background: var(--azure); }
+.btn--primary:hover { background: #1677EA; }
 
-/* Shimmer sweep */
-.btn-confirm::before {
+.btn--secondary {
+  background: transparent;
+  border: 1px solid var(--sky);
+}
+.btn--secondary:hover { background: var(--midnight); }
+
+/* Light sweep at the brand's 60° angle */
+.btn--primary::after {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
-  width: 55%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 2.5s ease-in-out infinite;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-30deg);
+  animation: sweep 4s ease-in-out 1s infinite;
   pointer-events: none;
 }
 
-.btn-confirm:hover  { transform: translateY(-2px); }
-.btn-confirm--blue:hover  { box-shadow: 0 8px 28px rgba(59,130,246,0.55); }
-.btn-confirm--green:hover { box-shadow: 0 8px 28px rgba(34,197,94,0.55); }
-.btn-confirm:active { transform: translateY(0); }
-
-.btn-confirm:focus-visible,
-.btn-pink:focus-visible,
-.step-card:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
+@keyframes sweep {
+  0%   { left: -60%; }
+  30%  { left: 130%; }
+  100% { left: 130%; }
 }
 
-/* ── Step cards (overview) ── */
-.steps-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: center;
-  margin-bottom: 16px;
-}
+/* ── Step list (hero) ── */
+.steps-label { margin: var(--s5) 0 var(--s3); }
 
-.step-cards {
+.steps {
+  list-style: none;
+  max-width: 520px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.step-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 18px;
+  gap: var(--s2);
   text-align: left;
-  text-decoration: none;
-  transition: border-color 0.16s ease, transform 0.16s ease;
 }
 
-.step-card:hover { border-color: rgba(244,61,190,0.4); transform: translateY(-1px); }
+.step-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4) var(--s3) var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.16s ease, background-color 0.16s ease;
+}
 
-.step-card--optional { border-color: rgba(244,61,190,0.15); }
+.step-link:hover { border-color: var(--cobalt); background: var(--raised); }
 
 .step-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--pink);
-  color: #fff;
-  font-weight: 800;
-  font-size: 13px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-tag);
+  border: 1px solid var(--hairline);
+  background: var(--ground);
+  color: var(--sky);
+  font: 700 13px/1 var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
-.step-num--optional {
-  background: rgba(244,61,190,0.15);
-  color: var(--pink);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-}
+.step-body { flex: 1; min-width: 0; }
 
-.step-card-title {
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--text);
-  margin-bottom: 3px;
-}
+.step-title { display: block; font-weight: 700; font-size: 15px; line-height: 22px; }
 
-.step-card-title small {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--muted);
-}
-
-.step-card-sub {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* ── Avatars ── */
-.avatars-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 28px;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  /* Pink ring via box-shadow so it doesn't affect layout */
-  box-shadow: 0 0 0 2.5px var(--pink), 0 0 0 4.5px var(--bg);
-  background: var(--card);
-  overflow: hidden;
-  margin-left: -12px;
-  flex-shrink: 0;
-}
-
-.avatar:first-child { margin-left: 0; }
-
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-.avatar-count {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  margin-left: 14px;
-  text-align: left;
-  line-height: 1.4;
-}
-
-.avatar-count span { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
-
-/* ── Step detail sections ── */
-.step-eyebrow {
+.step-title small {
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--pink);
-  margin-bottom: 14px;
+  color: var(--ink-faint);
+  margin-left: var(--s1);
+}
+
+.step-sub { display: block; font-size: 13px; line-height: 18px; color: var(--ink-muted); margin-top: 2px; }
+
+.step-arrow { color: var(--ink-faint); flex-shrink: 0; transition: color 0.16s ease, transform 0.16s ease; }
+.step-link:hover .step-arrow { color: var(--sky); transform: translateY(2px); }
+
+/* ── Client avatars (hexagon crops) ── */
+.clients {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: var(--s3);
+  margin-top: var(--s5);
 }
 
-.step-eyebrow::before { content: '●'; font-size: 8px; }
+.hexes { display: flex; gap: var(--s1); }
 
-.step-headline {
-  font-size: clamp(28px, 3.5vw, 42px);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--text);
-  margin-bottom: 12px;
+.hex {
+  width: 40px;
+  height: 46px;
+  padding: 1.5px;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--sky), var(--navy));
 }
 
-.step-headline em,
-.video-title em {
-  font-style: normal;
-  color: var(--pink);
-}
-
-.step-desc {
-  font-size: 15px;
-  color: var(--muted);
-  max-width: 520px;
-  margin-bottom: 36px;
-  line-height: 1.6;
-}
-
-/* ── Card / checklist box ── */
-.checklist-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px 28px;
-}
-
-.checklist-box--media { padding: 24px; }
-
-.video-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.video-divider { height: 1px; background: var(--border); }
-
-.video-title {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-  color: var(--text);
-  margin-bottom: 14px;
-}
-
-/* ── Video embed ── */
-.video-wrap {
-  padding: 3px;
-  border-radius: 14px;
-  background: var(--pink);
-  box-shadow: 0 0 32px rgba(244,61,190,0.3), 0 0 64px rgba(244,61,190,0.12);
-}
-
-.video-inner {
-  border-radius: 11px;
-  overflow: hidden;
-  background: #000;
-}
-
-.video-inner vturb-smartplayer {
-  display: block;
+.hex img {
   width: 100%;
-  margin: 0 auto;
+  height: 100%;
+  object-fit: cover;
+  clip-path: var(--hex);
 }
+
+.clients-count { text-align: left; font-weight: 700; font-size: 15px; line-height: 20px; }
+.clients-count span { display: block; font-size: 13px; font-weight: 500; color: var(--ink-muted); }
+
+/* ── Video frames ── */
+.video-frame {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  background: var(--ground);
+  overflow: hidden;
+}
+
+/* Lit top edge */
+.video-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-frame vturb-smartplayer { display: block; width: 100%; margin: 0 auto; }
+
+.video-list { list-style: none; display: flex; flex-direction: column; }
+
+.video-item + .video-item {
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--hairline);
+}
+
+.video-item h3 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: var(--s3);
+}
+
+.video-item h3 .num { color: var(--sky); margin-right: var(--s2); }
 
 /* ── Checklist ── */
-.checklist-item {
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  padding: var(--s1) var(--s4);
+}
+
+.checklist { list-style: none; }
+
+.checklist > li {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--border);
+  gap: var(--s3);
+  padding: var(--s3) 0;
 }
 
-.checklist-item:last-child { border-bottom: none; }
+.checklist > li + li { border-top: 1px solid var(--hairline); }
 
-.check-icon {
-  color: var(--green);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+.checklist .tick-icon { color: var(--sky); flex-shrink: 0; margin-top: 3px; }
 
-.check-icon svg { width: 18px; height: 18px; display: block; }
+.checklist strong { font-weight: 700; }
 
-.checklist-item-text {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.5;
-}
+.checklist a { color: var(--sky); text-underline-offset: 3px; }
 
-.checklist-item-text strong { font-weight: 600; }
-
-.checklist-item-text a { color: var(--pink); text-decoration: underline; text-underline-offset: 2px; }
-
-.sub-list {
+.numbers {
   list-style: none;
-  margin-top: 10px;
+  margin-top: var(--s3);
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: var(--s2);
 }
 
-.sub-list li {
+.numbers li {
+  position: relative;
+  padding-left: var(--s4);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+
+/* Small triangle bullets, as in the brand kit */
+.numbers li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 9px;
+  height: 8px;
+  background: var(--sky);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* ── Results panel ── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+  padding: var(--s5);
+}
+
+.panel .display { margin: var(--s3) 0 var(--s2); }
+.panel p { max-width: 460px; }
+.panel .btn { margin-top: var(--s4); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: var(--s5);
+  border-top: 1px solid var(--hairline);
+}
+
+.stat { padding-top: var(--s4); }
+.stat + .stat { padding-left: var(--s4); border-left: 1px solid var(--hairline); }
+.stat b { display: block; font: 400 clamp(18px, 4.6vw, 24px)/1.2 var(--display); }
+.stat span { display: block; margin-top: var(--s1); font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+/* ── End card: lockup centred on black, one angled accent ── */
+.end-card {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--hairline);
+  padding: 96px var(--s4);
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.sub-list li::before {
-  content: '→';
-  color: var(--pink);
-  flex-shrink: 0;
-  font-weight: 700;
-}
-
-/* ── Cases CTA ── */
-.cta-box { text-align: center; padding: 32px 28px; }
-
-.kicker {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-
-.cta-title {
-  font-size: clamp(20px, 2.8vw, 26px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-
-.cta-sub {
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 400px;
-  margin: 0 auto 28px;
-}
-
-.btn-pink {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 9px;
-  padding: 14px 28px;
-  border-radius: 10px;
-  background: var(--pink);
-  color: #fff;
-  font-family: inherit;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  box-shadow: 0 4px 24px rgba(244,61,190,0.35);
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-
-.btn-pink:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(244,61,190,0.5); }
-.btn-pink:active { transform: translateY(0); }
-
-/* ── Social proof ── */
-.proof { text-align: center; }
-
-.proof-headline {
-  font-size: clamp(22px, 2.8vw, 32px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-
-.proof-sub {
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 360px;
-  margin: 0 auto 24px;
-}
-
-.trust-pill {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7px;
-  padding: 5px 14px;
-  border-radius: 100px;
-  border: 1px solid rgba(34,197,94,0.3);
-  background: rgba(34,197,94,0.07);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--green);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.trust-pill .stars { letter-spacing: 1px; }
-.trust-pill .score { font-weight: 700; color: var(--text); }
-.trust-pill .dot   { color: rgba(255,255,255,0.2); }
-
-/* ── Footer ── */
-footer {
-  padding: 32px 24px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  gap: var(--s4);
   text-align: center;
 }
 
-.footer-inner { max-width: 680px; margin: 0 auto; }
+.end-card img { width: min(480px, 100%); min-width: 320px; position: relative; z-index: 1; }
 
-.footer-logo { height: 22px; width: auto; opacity: 0.5; margin: 0 auto 16px; }
+.end-card p { position: relative; z-index: 1; }
 
-.copyright { font-size: 11px; color: var(--faint); margin-bottom: 8px; }
+.angle-accent {
+  --band: 120px;
+  --edge: 48px;
+  position: absolute;
+  right: calc(var(--band) * 0.5);
+  bottom: 0;
+  height: 100%;
+  width: calc(var(--band) + var(--edge));
+  pointer-events: none;
+}
 
-.disclaimer {
-  font-size: 10px;
-  color: var(--faint);
-  line-height: 1.6;
-  max-width: 620px;
+.angle-accent::before,
+.angle-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: skewX(-30deg);
+}
+
+.angle-accent::before { left: 0; width: var(--band); background: var(--midnight); }
+.angle-accent::after  { left: var(--band); width: var(--edge); background: linear-gradient(0deg, var(--azure), var(--sky)); }
+
+/* ── Footer ── */
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  padding: var(--s5) 0;
+  text-align: center;
+}
+
+.site-footer .caption { margin-bottom: var(--s2); }
+
+.legal {
+  font-size: 11px;
+  line-height: 17px;
+  color: var(--ink-faint);
+  max-width: 640px;
   margin: 0 auto;
 }
 
 /* ── Responsive ── */
-@media (max-width: 480px) {
-  .confirm-btns { flex-direction: column; align-items: center; }
-  .confirm-border { width: 100%; max-width: 320px; }
-  .btn-confirm { width: 100%; }
-  .section { padding: 52px 20px; }
-  .checklist-box { padding: 20px; }
-  .checklist-box--media { padding: 14px; }
+@media (max-width: 560px) {
+  :root { --nav-h: 71px; }
+  .site-nav img { width: 176px; }
+  .section, .hero { padding: 48px 0; }
+  .container { padding: 0 20px; }
+  .lead { font-size: 16px; line-height: 26px; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
+  .card { padding: var(--s1) var(--s3); }
+  .panel { padding: var(--s4); }
+  .panel .btn { width: 100%; }
+  .stat + .stat { padding-left: var(--s3); }
+  .stat b { font-size: 17px; }
+  .end-card { padding: 64px 20px; }
+  .end-card img { min-width: 0; width: 320px; }
+  .angle-accent { --band: 64px; --edge: 24px; right: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .badge .tick { stroke-dashoffset: 0; }
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav>
-  <img
-    src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png"
-    alt="Spreed"
-    class="logo"
-  />
-</nav>
+<header class="site-nav">
+  <img src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" />
+</header>
 
 <main>
 
-<!-- Hero -->
-<header class="hero">
-  <div class="check-circle" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </div>
-
-  <h1><strong>You're Booked.</strong> <span>Your Viral<br>Audit Call is scheduled.</span></h1>
-  <p class="hero-sub">Check your email for the calendar invite — it has your exact date, time, and Zoom link.</p>
-
-  <p class="hero-confirm-label">To confirm you'll attend, tap one of the buttons below and hit send:</p>
-
-  <div class="confirm-btns" id="confirm">
-    <div class="confirm-border">
-      <a id="confirm-sms" href="#" class="btn-confirm btn-confirm--blue">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        Confirm via Text
-      </a>
-    </div>
-    <div class="confirm-border confirm-border--green">
-      <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener" class="btn-confirm btn-confirm--green">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-        Confirm via WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <p class="steps-label">Then do these two things before your call:</p>
-  <div class="step-cards">
-    <a href="#step1" class="step-card">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-card-title">Watch the pre-call video below</div>
-        <div class="step-card-sub">4 minutes. Shows you exactly what we'll cover and what you'll walk away with.</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 64 72">
+          <defs>
+            <linearGradient id="facet" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#02244E" />
+              <stop offset="0.55" stop-color="#006BE5" />
+              <stop offset="1" stop-color="#009BFC" />
+            </linearGradient>
+          </defs>
+          <polygon points="32,1.5 62.5,19 62.5,53 32,70.5 1.5,53 1.5,19" fill="#030D1A" stroke="url(#facet)" stroke-width="2" stroke-linejoin="round" />
+          <polyline class="tick" points="20,37 28.5,45.5 44.5,28.5" fill="none" stroke="#009BFC" stroke-width="2.5" stroke-linecap="square" />
+        </svg>
       </div>
-    </a>
-    <a href="#step2" class="step-card">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-card-title">Gather your numbers before we meet</div>
-        <div class="step-card-sub">5 quick metrics that let us skip the fluff and move fast on the call.</div>
-      </div>
-    </a>
-    <a href="#step3" class="step-card step-card--optional">
-      <div class="step-num step-num--optional">OPT</div>
-      <div>
-        <div class="step-card-title">Watch 5 deeper-dive videos <small>(optional)</small></div>
-        <div class="step-card-sub">How our process works, why AI, success rate, and more — answered before the call.</div>
-      </div>
-    </a>
-  </div>
 
-  <div class="avatars-row">
-    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683eca9eeca240118bed7cc3.jpeg" alt="Client" width="48" height="48"></div>
-    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc09eca2403cdbed7de4.jpeg" alt="Client" width="48" height="48"></div>
-    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec03833fad9e25db.jpeg" alt="Client" width="48" height="48"></div>
-    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec0383d4089e25dc.jpeg" alt="Client" width="48" height="48"></div>
-    <div class="avatar"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc4639883b17e466db5f.jpeg" alt="Client" width="48" height="48"></div>
-    <div class="avatar-count">
-      1,200+ Clients
-      <span>Successfully Served</span>
+      <p class="eyebrow eyebrow--flanked">Booking confirmed</p>
+      <h1 class="display display-lg">You're booked</h1>
+      <p class="lead">Your viral audit call is scheduled. The calendar invite in your email has the date, time and Zoom link.</p>
+
+      <p class="confirm-label muted">Confirm you'll attend: tap a button and hit send.</p>
+
+      <div class="btn-row" id="confirm">
+        <a id="confirm-sms" href="#" class="btn btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Confirm by text
+        </a>
+        <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener" class="btn btn--secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Confirm on WhatsApp
+        </a>
+      </div>
+
+      <p class="steps-label eyebrow">Then, before your call</p>
+      <ol class="steps">
+        <li>
+          <a href="#step1" class="step-link">
+            <span class="step-num">01</span>
+            <span class="step-body">
+              <span class="step-title">Watch the pre-call video</span>
+              <span class="step-sub">4 minutes. What we'll cover and what you'll walk away with.</span>
+            </span>
+            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#step2" class="step-link">
+            <span class="step-num">02</span>
+            <span class="step-body">
+              <span class="step-title">Gather five numbers</span>
+              <span class="step-sub">So we can skip the basics and move fast on the call.</span>
+            </span>
+            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#step3" class="step-link">
+            <span class="step-num">03</span>
+            <span class="step-body">
+              <span class="step-title">Watch the deep dives <small>Optional</small></span>
+              <span class="step-sub">Five short videos: our process, why AI, success rate and more.</span>
+            </span>
+            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        </li>
+      </ol>
+
+      <div class="clients">
+        <div class="hexes">
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683eca9eeca240118bed7cc3.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc09eca2403cdbed7de4.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec03833fad9e25db.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ed03dec0383d4089e25dc.jpeg" alt="" width="40" height="46"></div>
+          <div class="hex"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/683ecc4639883b17e466db5f.jpeg" alt="" width="40" height="46"></div>
+        </div>
+        <p class="clients-count">1,200+ clients<span>served by Adamax Studios</span></p>
+      </div>
     </div>
-  </div>
-</header>
+  </section>
 
-<!-- Step 1 -->
-<section class="section" id="step1">
-  <div class="inner">
-    <div class="step-eyebrow">Step 1 — Watch First</div>
-    <h2 class="step-headline">Watch This <em>Before Your Call</em></h2>
-    <p class="step-desc">This short video explains what we'll do together, what you'll walk away with, and how to get the most out of your Viral Audit session.</p>
+  <!-- Step 1 -->
+  <section class="section" id="step1" aria-labelledby="step1-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--rule">Step 01 · Watch first</p>
+        <h2 class="display display-md" id="step1-title">Watch this before your call</h2>
+        <p class="muted">What we'll do together, what you'll walk away with, and how to get the most from your viral audit.</p>
+      </div>
 
-    <div class="checklist-box checklist-box--media">
-      <div class="video-wrap">
-        <div class="video-inner">
-          <vturb-smartplayer id="vid-69f34d52c10edec7d51f0117" data-load="eager"></vturb-smartplayer>
+      <div class="video-frame">
+        <vturb-smartplayer id="vid-69f34d52c10edec7d51f0117" data-load="eager"></vturb-smartplayer>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="section" id="step2" aria-labelledby="step2-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--rule">Step 02 · Before we meet</p>
+        <h2 class="display display-md" id="step2-title">Show up prepared</h2>
+        <p class="muted">The more of this you have ready, the faster we move and the more specific your strategy will be.</p>
+      </div>
+
+      <div class="card">
+        <ul class="checklist">
+          <li>
+            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <div><strong>Add the call to your calendar</strong> from the email invite we sent.</div>
+          </li>
+          <li>
+            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <div><strong>Confirm you're coming</strong> with one of the <a href="#confirm">buttons at the top</a>, if you haven't yet.</div>
+          </li>
+          <li>
+            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <div>
+              <strong>Have these five numbers ready:</strong>
+              <ul class="numbers">
+                <li>Follower count on your main platform (Instagram, TikTok or YouTube)</li>
+                <li>Average views per post over the last 30 days</li>
+                <li>New patients or clients you get from social media each month</li>
+                <li>Current monthly revenue from your practice or clinic</li>
+                <li>Your revenue goal for the next 90 days</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="section" id="step3" aria-labelledby="step3-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--rule">Step 03 · Optional</p>
+        <h2 class="display display-md" id="step3-title">Go deeper before the call</h2>
+        <p class="muted">Five short videos that answer the questions clients ask most before their viral audit. Watch the ones that matter to you.</p>
+      </div>
+
+      <ol class="video-list">
+        <li class="video-item">
+          <h3><span class="num">01</span>How does our process work?</h3>
+          <div class="video-frame"><vturb-smartplayer id="vid-69f3518f67b3f7b15624d9ae"></vturb-smartplayer></div>
+        </li>
+        <li class="video-item">
+          <h3><span class="num">02</span>Why choose Adamax over every other option?</h3>
+          <div class="video-frame"><vturb-smartplayer id="vid-69f351598dfd6d0e7b1f3b5b"></vturb-smartplayer></div>
+        </li>
+        <li class="video-item">
+          <h3><span class="num">03</span>Why is AI now mandatory for content?</h3>
+          <div class="video-frame"><vturb-smartplayer id="vid-69f350d67dfa1bb6cfc64153"></vturb-smartplayer></div>
+        </li>
+        <li class="video-item">
+          <h3><span class="num">04</span>Will this work in any industry?</h3>
+          <div class="video-frame"><vturb-smartplayer id="vid-69f350b5c2504d7d6caad94b"></vturb-smartplayer></div>
+        </li>
+        <li class="video-item">
+          <h3><span class="num">05</span>What's our success rate?</h3>
+          <div class="video-frame"><vturb-smartplayer id="vid-69f35129e1d248316d31e346"></vturb-smartplayer></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section" aria-labelledby="results-title">
+    <div class="container">
+      <div class="panel">
+        <p class="eyebrow eyebrow--rule">While you wait</p>
+        <h2 class="display display-md" id="results-title">See client results</h2>
+        <p class="muted">You're in good company. Over 1,200 clients have been through this exact process. See their view counts, follower growth and full case studies.</p>
+        <a href="https://goviral.spreed.ai/cases" target="_blank" rel="noopener" class="btn btn--primary">
+          Browse client results
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <div class="stats">
+          <div class="stat"><b>4.9/5</b><span>Client rating</span></div>
+          <div class="stat"><b>1,200+</b><span>Clients served</span></div>
+          <div class="stat"><b>9B+</b><span>Views generated</span></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Step 2 -->
-<section class="section" id="step2">
-  <div class="inner">
-    <div class="step-eyebrow">Step 2 — Before We Meet</div>
-    <h2 class="step-headline">How to Show Up <em>Prepared</em></h2>
-    <p class="step-desc">The more of this you have ready, the faster we can move and the more specific your viral strategy will be.</p>
-
-    <div class="checklist-box">
-
-      <div class="checklist-item">
-        <span class="check-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="checklist-item-text">
-          <strong>Add the call to your calendar</strong> from the email invite we just sent.
-        </div>
-      </div>
-
-      <div class="checklist-item">
-        <span class="check-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="checklist-item-text">
-          <strong>If you haven't yet</strong>, tap one of the <a href="#confirm">confirmation buttons</a> at the top of this page so we know you're coming.
-        </div>
-      </div>
-
-      <div class="checklist-item">
-        <span class="check-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="checklist-item-text">
-          <strong>Get these 5 numbers</strong> so we can move fast on the call:
-          <ul class="sub-list">
-            <li>Your current follower count on your main platform (Instagram, TikTok, or YouTube)</li>
-            <li>Your average views per post over the last 30 days</li>
-            <li>How many new patients or clients you currently get from social media per month</li>
-            <li>Your current monthly revenue from your practice or clinic</li>
-            <li>Your revenue goal for the next 90 days</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Step 3 -->
-<section class="section" id="step3">
-  <div class="inner">
-    <div class="step-eyebrow">Step 3 — Optional</div>
-    <h2 class="step-headline">Go <em>Deeper</em> Before the Call</h2>
-    <p class="step-desc">Five short videos that answer the most common questions clients have before their Viral Audit. Watch whichever ones feel most relevant to you.</p>
-
-    <div class="checklist-box checklist-box--media video-list">
-
-      <div>
-        <h3 class="video-title">How Does Our <em>Process</em> Work?</h3>
-        <div class="video-wrap"><div class="video-inner">
-          <vturb-smartplayer id="vid-69f3518f67b3f7b15624d9ae"></vturb-smartplayer>
-        </div></div>
-      </div>
-
-      <div class="video-divider" aria-hidden="true"></div>
-
-      <div>
-        <h3 class="video-title">Why Choose <em>Spreed</em> Over Every Other Option?</h3>
-        <div class="video-wrap"><div class="video-inner">
-          <vturb-smartplayer id="vid-69f351598dfd6d0e7b1f3b5b"></vturb-smartplayer>
-        </div></div>
-      </div>
-
-      <div class="video-divider" aria-hidden="true"></div>
-
-      <div>
-        <h3 class="video-title">Why Is <em>AI</em> Now Mandatory for Content?</h3>
-        <div class="video-wrap"><div class="video-inner">
-          <vturb-smartplayer id="vid-69f350d67dfa1bb6cfc64153"></vturb-smartplayer>
-        </div></div>
-      </div>
-
-      <div class="video-divider" aria-hidden="true"></div>
-
-      <div>
-        <h3 class="video-title">Will This Work <em>In Any Industry?</em></h3>
-        <div class="video-wrap"><div class="video-inner">
-          <vturb-smartplayer id="vid-69f350b5c2504d7d6caad94b"></vturb-smartplayer>
-        </div></div>
-      </div>
-
-      <div class="video-divider" aria-hidden="true"></div>
-
-      <div>
-        <h3 class="video-title">What's Our <em>Success Rate?</em></h3>
-        <div class="video-wrap"><div class="video-inner">
-          <vturb-smartplayer id="vid-69f35129e1d248316d31e346"></vturb-smartplayer>
-        </div></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Cases CTA -->
-<section class="section">
-  <div class="inner">
-    <div class="checklist-box cta-box">
-      <p class="kicker">While you wait for your call</p>
-      <h2 class="cta-title">See What Clients Like You Have Achieved</h2>
-      <p class="cta-sub">Real results from 1,200+ clients — view counts, follower growth, and in-depth case studies.</p>
-      <a href="https://goviral.spreed.ai/cases" target="_blank" rel="noopener" class="btn-pink">
-        Browse All Client Results
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Social proof -->
-<section class="section proof">
-  <div class="inner">
-    <h2 class="proof-headline">You're in good company.</h2>
-    <p class="proof-sub">Over 1,200 clients have gone through this exact process. We look forward to doing the same for you.</p>
-
-    <div class="trust-pill">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="score">4.9/5</span>
-      <span class="dot" aria-hidden="true">·</span>
-      Trusted by 1,200+ clients &amp; 9B+ views generated
-    </div>
-  </div>
-</section>
+  <!-- End card -->
+  <section class="end-card" aria-label="Adamax Studios">
+    <div class="angle-accent" aria-hidden="true"></div>
+    <img src="assets/adamax-metallic-lockup-on-dark.webp" alt="Adamax Studios" width="960" height="320" loading="lazy" />
+    <p class="eyebrow">See you on the call</p>
+  </section>
 
 </main>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" alt="Spreed" class="footer-logo" loading="lazy">
-    <p class="copyright">Copyright © 2026 Spreed FZE. All Rights Reserved.</p>
-    <p class="disclaimer">
-      This website is operated and maintained by Spreed FZE. Use of this website is governed by its Terms of Service and Privacy Policy. Spreed provides AI-powered content creation and distribution services for medical professionals. We do not guarantee specific business, revenue, or marketing results. Any case studies, client outcomes, or examples presented on this website are illustrative only, are not typical, and should not be interpreted as a promise or guarantee of future performance. Results vary based on numerous factors including market conditions, offer strength, content quality, niche, individual effort, and execution. All content on this website is the intellectual property of Spreed FZE and may not be copied, reproduced, or distributed without prior written permission. This website is not part of, endorsed by, or affiliated with Facebook, Meta, Instagram, TikTok, YouTube, or Google. All third-party trademarks are the property of their respective owners.
+<footer class="site-footer">
+  <div class="container">
+    <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+    <p class="legal">
+      This website is operated and maintained by Adamax Studios. Use of this website is governed by its Terms of Service and Privacy Policy. Adamax Studios provides AI-powered content creation and distribution services for medical professionals. We do not guarantee specific business, revenue, or marketing results. Any case studies, client outcomes, or examples presented on this website are illustrative only, are not typical, and should not be interpreted as a promise or guarantee of future performance. Results vary based on numerous factors including market conditions, offer strength, content quality, niche, individual effort, and execution. All content on this website is the intellectual property of Adamax Studios and may not be copied, reproduced, or distributed without prior written permission. This website is not part of, endorsed by, or affiliated with Facebook, Meta, Instagram, TikTok, YouTube, or Google. All third-party trademarks are the property of their respective owners.
     </p>
   </div>
 </footer>
@@ -851,9 +744,14 @@ footer {
      Phone in international format, e.g. +971501234567
      ───────────────────────────────────────────── */
   var CONFIRM_PHONE   = '+971XXXXXXXXX';
-  var CONFIRM_MESSAGE = "Hi, I'm confirming my Viral Audit call with Spreed 📅";
+  var CONFIRM_MESSAGE = "Hi, I'm confirming my viral audit call with Adamax Studios.";
 
   var VTURB_ACCOUNT = '1200be6e-6fcb-4724-87ac-03a7f7bc2d31';
+
+  /* ── Footer year ── */
+  document.querySelectorAll('.js-year').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
 
   /* ── Confirmation links ── */
   var phone  = CONFIRM_PHONE.replace(/[^\d+]/g, '');
@@ -885,9 +783,8 @@ footer {
     document.head.appendChild(s);
   }
 
-  var players = document.querySelectorAll('vturb-smartplayer');
   var lazy = [];
-  players.forEach(function (el) {
+  document.querySelectorAll('vturb-smartplayer').forEach(function (el) {
     if (el.dataset.load === 'eager') loadPlayer(el); else lazy.push(el);
   });
 
