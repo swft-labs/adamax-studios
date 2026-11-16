@@ -7,7 +7,8 @@ A single landing page, styled to the Adamax Studios Brand Kit v1.0:
   - logo files resized for the web from the brand kit originals (table below),
   - `fonts/`: Krona One and Manrope (latin subset, woff2, SIL Open Font License), preloaded,
   - `results/`: the 7 results-carousel images,
-  - `proof/`: the 50 proof-grid images.
+  - `proof/`: the 50 proof-grid images,
+  - `testimonials/`: the 3 client videos (720p) shown under the case studies.
 
 Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`) and `pre-call-info/` (`/pre-call-info`, the page people see after booking a call).
 
@@ -31,7 +32,9 @@ Every `<img>` is in the HTML with `width`/`height` (so space is reserved before 
 
 - **18 proof screenshots:** every "Spreed" / "Spreed AI" mention, truncated names ("Talha Ashraf Sp…") and the Spreed chat avatar are covered with flat `#737373` bars, the same grey as the screenshots' existing redactions.
 
-All 18 were re-checked with OCR and no "Spreed" text remains.
+- **3 client videos** (`testimonials/`): on-screen captions, the studio sign and app logos (feather icon included) and "@spreed.ai.global" are pixelated while on screen. **The audio is unchanged, so speakers still say "Spreed" out loud.**
+
+All of these were re-checked with OCR (every image, and every video at 10 fps) and no "Spreed" text remains.
 
 ## Deploy
 
@@ -62,6 +65,7 @@ The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts 
 - **Carousel images:** the `<img class="carousel-item">` tags inside `#carouselTrack`. Each needs its `results/` WebP widths, `width`/`height` and `alt`.
 - **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
 - **VSL:** the Wistia player stays hidden behind a blurred thumbnail until Wistia's `api-ready` event (12s fallback). Wistia's own layout pass would otherwise count as layout shift.
+- **Client videos:** the three `.clip` tiles under the case studies. They're vertical (9:16) crops of 16:9 files, autoplay muted while in view, and show a "Play with sound" button; on phones they're a swipeable row.
 - **Case studies:** the four `.case` blocks. Each has a headline, one line (who, specialty, timeframe) and three stat chips; wrap the number in a chip in `<strong>` to colour it.
 - **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`). Its colours and theme are set in the ROASForm dashboard.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
