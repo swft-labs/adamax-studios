@@ -66,5 +66,5 @@ The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts 
 - **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
 - **VSL:** the Wistia player stays hidden behind a blurred thumbnail until Wistia's `api-ready` event (12s fallback). Wistia's own layout pass would otherwise count as layout shift.
 - **Client stories:** the three `.story` cards (text beside a video). Each has a headline, one line and three stat chips. Wrap the number in a chip in `<strong>` to colour it. Videos autoplay muted while in view and show a "Play with sound" button.
-- **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`). Its colours and theme are set in the ROASForm dashboard.
+- **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`), inline at 600px with `fullScreen: true`: once a visitor answers the first question it takes over the screen, and its × returns them to the same spot on the page with their progress kept. Its colours and theme are set in the ROASForm dashboard.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
