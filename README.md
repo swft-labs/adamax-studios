@@ -25,7 +25,7 @@ CSS and JS are inline; images load from `assets/` (relative paths).
 
 - **Static host (Vercel etc.):** upload the folder as-is.
 - **GoHighLevel custom code:** upload the `assets/` files (including `assets/testimonials/`) to GHL media first, then replace each `assets/…` path in the HTML with its GHL media URL.
-- `og:image` must be an absolute URL for social previews. Change `assets/og-image.png` to the full URL once the domain is known.
+- **Live:** https://viral.adamaxstudios.com (Vercel project `adamax-viral-audit`). The canonical URL and `og:image` point at this domain, so update them if it changes.
 
 ## Preview locally
 
