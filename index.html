@@ -3,812 +3,803 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spreed — Viral Audit</title>
-  <meta name="description" content="We'll get you 1 million+ real views or your money back. Watch the 4-minute training and book a free 45-minute Viral Audit call with the Spreed team." />
-  <meta name="theme-color" content="#09090B" />
+  <title>Adamax Studios — Viral Audit</title>
+  <meta name="description" content="1 million+ real views or your money back. Watch the 4-minute training and book a free 45-minute viral audit call with the Adamax Studios team." />
+  <meta name="theme-color" content="#000000" />
 
   <!-- Social sharing -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="We'll Get You 1 Million+ Real Views — Or Your Money Back" />
-  <meta property="og:description" content="Trusted by 1,200+ doctors &amp; 9B+ views generated. Book a free 45-minute Viral Audit call." />
-  <meta property="og:image" content="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" />
+  <meta property="og:site_name" content="Adamax Studios" />
+  <meta property="og:title" content="1 million+ real views, or your money back" />
+  <meta property="og:description" content="Trusted by 1,200+ doctors, with 9B+ views generated. Book a free 45-minute viral audit call." />
+  <meta property="og:image" content="assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin />
   <link rel="preconnect" href="https://scripts.converteai.net" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://my.roasform.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* ============================================================
+       Adamax Studios brand tokens (Brand Kit v1.0)
+       ============================================================ */
     :root {
-      --bg:       #09090B;
-      --card:     #272729;
-      --pink:     #f43dbe;
-      --pink-dim: #d130a3;
-      --text:     #F4F4F5;
-      --muted:    #71717A;
-      --border:   rgba(244, 61, 190, 0.15);
-      --carousel-h: 358px;
-      --carousel-gap: 16px;
+      /* Brand colours */
+      --azure:    #006BE5;  /* the only button blue */
+      --sky:      #009BFC;  /* rules, accents, links on dark */
+      --cobalt:   #024AA1;
+      --navy:     #02244E;
+      --midnight: #00142C;
+      --glow:     #03CCFF;  /* thin lit edges only, never a fill */
+      --silver:   #D8EAF3;
+
+      /* Dark theme */
+      --ground:    #000000;
+      --surface:   #030D1A;
+      --raised:    #0A172E;
+      --hairline:  #172F52;
+      --ink:       #FFFFFF;
+      --ink-muted: #9AA8BD;
+
+      /* Type */
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+      /* Spacing scale: 4 / 8 / 16 / 24 / 40 / 64 */
+      --s1: 4px;  --s2: 8px;  --s3: 16px;
+      --s4: 24px; --s5: 40px; --s6: 64px;
+
+      /* Corners: slightly softened, never round */
+      --r-tag: 4px; --r-card: 8px; --r-panel: 16px;
+
+      --page: 1040px;
+      --gutter: 24px;
+      --carousel-h: 300px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: var(--text);
+      font-size: 15px;
+      line-height: 24px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── Radial glow top-center ── */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      max-width: 100vw;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(244, 61, 190, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    img { display: block; max-width: 100%; }
 
-    /* ── Layout shell ── */
-    .shell {
+    .container {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      max-width: 860px;
+      width: 100%;
+      max-width: calc(var(--page) + var(--gutter) * 2);
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 var(--gutter);
     }
 
-    /* ── Nav ── */
-    nav {
-      flex-shrink: 0;
+    /* ── Angled accent: facets in the right margin, like the brand kit cover ── */
+    .facets {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: calc((100vw - var(--page)) / 2 - var(--s5));
+      height: 900px;
+      pointer-events: none;
+      display: none;
+    }
+
+    .facets i {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* 60° cuts: each slab is a parallelogram leaning at the mark's angle */
+    .facets i:nth-child(1) { background: var(--midnight); clip-path: polygon(10% 0, 100% 0, 100% 100%, 100% 100%); }
+    .facets i:nth-child(2) { background: var(--navy);     clip-path: polygon(45% 0, 100% 0, 100% 75%); }
+    .facets i:nth-child(3) { background: linear-gradient(160deg, var(--cobalt), var(--azure)); clip-path: polygon(75% 0, 100% 0, 100% 42%); }
+    .facets i:nth-child(4) { background: linear-gradient(200deg, var(--sky), var(--azure)); clip-path: polygon(100% 62%, 100% 100%, 82% 100%); }
+
+    @media (min-width: 1300px) { .facets { display: block; } }
+
+    /* ── Typography ── */
+    .eyebrow {
       display: flex;
       align-items: center;
-      padding: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .logo {
-      height: 32px;
-      width: auto;
-      display: block;
-    }
-
-    /* ── Main ── */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 36px 0 40px;
-    }
-
-    /* ── Badge ── */
-    .badge {
-      display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 4px 7px;
-      padding: 5px 12px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: rgba(244, 61, 190, 0.06);
-      font-size: 11px;
+      gap: var(--s3);
+      font-family: var(--text);
       font-weight: 600;
-      color: var(--pink);
-      letter-spacing: 0.05em;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 18px;
-      flex-shrink: 0;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.05s forwards;
+      color: var(--sky);
+      margin-bottom: var(--s3);
     }
 
-    .stars {
-      color: var(--pink);
-      font-size: 11px;
-      letter-spacing: 1px;
+    .eyebrow::before {
+      content: '';
+      flex: 0 0 40px;
+      height: 1px;
+      background: var(--sky);
     }
 
-    .rating {
-      font-weight: 700;
-      color: var(--text);
+    h1, h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: var(--ink);
     }
 
-    .divider {
-      color: rgba(255,255,255,0.2);
-    }
-
-    /* ── Headline ── */
     h1 {
-      font-weight: 800;
-      font-size: clamp(22px, 3.6vw, 44px);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      text-align: center;
-      color: var(--text);
-      max-width: 740px;
-      margin-bottom: 14px;
-      flex-shrink: 0;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.15s forwards;
+      font-size: clamp(22px, 4.2vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
     }
 
-    h1 em {
-      font-style: normal;
-      color: var(--pink);
-    }
-
+    h1 .accent { color: var(--sky); }
     .nowrap { white-space: nowrap; }
 
-    /* ── Subheadline ── */
-    .sub {
-      font-size: clamp(13px, 1.5vw, 16px);
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--muted);
-      text-align: center;
-      max-width: 580px;
-      margin-bottom: 20px;
-      flex-shrink: 0;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.25s forwards;
+    h2 {
+      font-size: clamp(18px, 2.4vw, 24px);
+      line-height: 1.2;
     }
 
-    /* ── Video ── */
-    .video-wrap {
-      width: 100%;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.35s forwards;
-      /* pink border surround */
-      padding: 3px;
-      border-radius: 16px;
-      background: var(--pink);
-      box-shadow:
-        0 0 28px rgba(244, 61, 190, 0.35),
-        0 0 60px rgba(244, 61, 190, 0.15);
+    .lead {
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--ink-muted);
+      max-width: 60ch;
     }
 
-    .video-inner-wrap {
-      border-radius: 13px;
-      overflow: hidden;
-      width: 100%;
-      background: var(--bg);
+    .caption {
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 500;
+      color: var(--ink-muted);
     }
 
-    .video-wrap vturb-smartplayer {
-      display: block;
-      width: 100%;
-      border-radius: 0;
-    }
+    .section-head { margin-bottom: var(--s5); }
+    .section-head h2 + .lead { margin-top: var(--s2); }
 
-    /* ── CTA ── */
-    .cta-wrap {
-      width: 100%;
-      flex-shrink: 0;
-      margin-top: 12px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.5s forwards;
-    }
-
-    /* Repeat CTAs further down the page: no entrance animation, centred + narrower */
-    .cta-wrap--section {
-      max-width: 520px;
-      margin: 16px auto 0;
-      opacity: 1;
-      animation: none;
-    }
-
-    .cta-wrap--bottom { margin-top: 40px; }
-
-    /* Rotating border light wrapper */
-    .cta-border {
+    /* ── Nav ── */
+    .site-nav {
+      background: var(--ground);
+      border-bottom: 1px solid var(--hairline);
       position: relative;
-      border-radius: 12px;
-      padding: 2px;
-      background: conic-gradient(
-        from var(--angle, 0deg),
-        transparent 20%,
-        rgba(255,255,255,0.9) 40%,
-        var(--pink) 50%,
-        rgba(255,255,255,0.9) 60%,
-        transparent 80%
-      );
-      animation: rotateBorder 2.5s linear infinite;
+      z-index: 2;
     }
 
-    @property --angle {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
+    .site-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s3);
+      padding-top: var(--s3);
+      padding-bottom: var(--s3);
     }
 
-    @keyframes rotateBorder {
-      to { --angle: 360deg; }
+    /* Lockup on dark. The PNG carries ~10% black clear space on each side, so the
+       drawn logo is 80% of the file width: 184px file = 147px logo, above the
+       140px brand minimum. The negative margin lines the artwork up with the text. */
+    .lockup {
+      --lockup-w: 184px;
+      width: var(--lockup-w);
+      max-width: none;
+      height: auto;
+      margin-left: calc(var(--lockup-w) * -0.102);
     }
 
-    .cta-btn {
-      display: block;
-      width: 100%;
-      padding: 16px 32px;
-      border-radius: 10px;
-      background: var(--pink);
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: clamp(14px, 1.5vw, 17px);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-align: center;
+    /* ── Buttons ── */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s2);
+      padding: 16px 24px;
+      border-radius: var(--r-card);
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 20px;
       text-decoration: none;
-      border: none;
       cursor: pointer;
-      transition: transform 0.16s ease, box-shadow 0.16s ease;
-      box-shadow: 0 4px 24px rgba(244, 61, 190, 0.35);
-      position: relative;
       overflow: hidden;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
     }
 
-    /* shimmer sweep */
-    .cta-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 55%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-      transform: skewX(-20deg);
-      animation: shimmer 2.5s ease-in-out infinite;
-    }
+    .btn svg { flex: 0 0 auto; transition: transform 0.16s ease; }
+    .btn:hover svg { transform: translateX(3px); }
 
-    @keyframes shimmer {
-      0%   { left: -100%; }
-      60%  { left: 160%; }
-      100% { left: 160%; }
-    }
-
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 36px rgba(244, 61, 190, 0.5);
-    }
-
-    .cta-btn:active { transform: translateY(0); }
-
-    .cta-btn:focus-visible {
-      outline: 2px solid #fff;
+    .btn:focus-visible {
+      outline: 2px solid var(--sky);
       outline-offset: 3px;
     }
 
-    /* ── Trust line ── */
-    .trust {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-      flex-shrink: 0;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.6s forwards;
+    .btn-primary {
+      background: var(--azure);
+      color: #fff;
+      border: 1px solid var(--azure);
     }
 
-    .cta-wrap--section .trust {
-      opacity: 1;
-      animation: none;
+    .btn-primary:hover { background: #0A78F0; border-color: #0A78F0; }
+
+    /* Light sweep across the button, cut at the mark's 60° angle */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-30deg);
+      animation: sweep 4s ease-in-out 1.2s infinite;
+      pointer-events: none;
     }
 
-    /* ── Footer ── */
-    footer {
-      flex-shrink: 0;
-      padding: 32px 0 24px;
-      margin-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.04);
-      text-align: center;
+    @keyframes sweep {
+      0%   { left: -60%; }
+      35%  { left: 130%; }
+      100% { left: 130%; }
     }
 
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 5px;
+    .btn-secondary {
+      background: transparent;
+      color: var(--sky);
+      border: 1px solid var(--azure);
+      padding: 10px 16px;
+      font-size: 14px;
     }
 
-    .footer-copy a {
-      color: var(--muted);
-      text-decoration: underline;
-      text-underline-offset: 2px;
+    .btn-secondary:hover { background: var(--midnight); color: var(--ink); }
+
+    .btn-block { width: 100%; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: var(--s5) 0 var(--s6);
     }
 
-    .footer-copy a:hover { color: var(--text); }
+    .hero-title { margin-bottom: var(--s5); }
 
-    .footer-disc {
-      font-size: 10px;
-      color: #3F3F46;
-      max-width: 620px;
-      margin: 0 auto;
-      line-height: 1.5;
+    .hero-grid {
+      display: grid;
+      gap: var(--s4);
+      grid-template-areas:
+        "intro"
+        "video"
+        "cta"
+        "stats";
     }
 
-    /* ── Form section ── */
-    .form-section {
-      width: 100%;
-      padding: 16px 0 32px;
-      scroll-margin-top: 16px;
+    .hero-intro { grid-area: intro; }
+    .hero-video { grid-area: video; }
+    .hero-cta   { grid-area: cta; }
+    .hero-stats { grid-area: stats; }
+
+    .hero-cta .caption { margin-top: var(--s2); }
+
+    @media (min-width: 900px) {
+      .hero { padding: var(--s6) 0; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) 300px;
+        grid-template-rows: auto auto 1fr;
+        column-gap: var(--s5);
+        row-gap: var(--s4);
+        grid-template-areas:
+          "video intro"
+          "video cta"
+          "video stats";
+        align-items: start;
+      }
+      .hero-intro .lead { font-size: 16px; line-height: 26px; }
     }
 
-    .form-wrap {
-      border-radius: 13px;
+    /* Video frame: hairline with one lit top edge */
+    .frame {
+      position: relative;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      background: var(--surface);
       overflow: hidden;
-      background: #ffffff;
-      /* Reserve space immediately so GHL resize doesn't cause layout jump */
-      min-height: 1152px;
-      contain: layout;
     }
 
-    .form-wrap iframe {
-      display: block;
-      width: 100%;
-      height: 1152px;
-      border: none;
+    .frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      z-index: 3;
+      pointer-events: none;
     }
 
-    /* ── Proof carousel ── */
-    .proof-section {
-      width: 100%;
-      padding: 32px 0 8px;
-      border-top: 1px solid rgba(255,255,255,0.05);
+    .frame vturb-smartplayer { display: block; width: 100%; }
+
+    /* Stats: tag-style list separated by hairlines */
+    .stats {
+      list-style: none;
+      border-top: 1px solid var(--hairline);
     }
 
-    .proof-label {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-
-    .logo-slider {
-      width: 100%;
-      overflow: hidden;
-      /* keep the row's height reserved before the images are injected */
-      min-height: calc(var(--carousel-h) + 20px);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    }
-
-    .logo-track {
+    .stats li {
       display: flex;
-      align-items: center;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--s3);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .stats strong {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      color: var(--ink);
+    }
+
+    .stats span {
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: right;
+    }
+
+    /* ── Sections ── */
+    .section {
+      padding: var(--s6) 0;
+      border-top: 1px solid var(--hairline);
+    }
+
+    /* ── Results carousel ── */
+    .carousel {
+      overflow: hidden;
+      min-height: calc(var(--carousel-h) + 2px);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+
+    .carousel-track {
+      display: flex;
       width: max-content;
-      padding: 10px 0;
-      animation: scrollCarousel 40s linear infinite;
+      animation: marquee 48s linear infinite;
       will-change: transform;
     }
 
-    .logo-slider:hover .logo-track,
-    .logo-slider.is-offscreen .logo-track {
-      animation-play-state: paused;
-    }
+    .carousel:hover .carousel-track,
+    .carousel.is-offscreen .carousel-track { animation-play-state: paused; }
 
-    .logo-item {
+    .carousel-item {
       height: var(--carousel-h);
       width: auto;
-      object-fit: contain;
       flex: 0 0 auto;
-      display: block;
-      /* margin (not flex gap) so the duplicated set is exactly 50% wide -> seamless loop */
-      margin-right: var(--carousel-gap);
-      border-radius: 12px;
-      border: 2px solid var(--pink);
+      /* margin (not gap) keeps the duplicated set exactly 50% wide, so the loop is seamless */
+      margin-right: var(--s3);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
+      background: var(--surface);
     }
 
-    @keyframes scrollCarousel {
+    @keyframes marquee {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
 
-    /* ── Testimonials section ── */
-    .testimonials-section {
-      width: 100%;
-      padding: 48px 0 16px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+    /* ── Qualify form ── */
+    .form-section { scroll-margin-top: var(--s3); }
 
-    .testimonials-label {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .testimonials-sub {
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 40px;
-    }
-
-    .testimonial-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      padding: 32px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .testimonial-card:last-of-type {
-      border-bottom: none;
-    }
-
-    .testimonial-text h3 {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 14px;
-    }
-
-    .testimonial-text h3 em {
-      font-style: normal;
-      color: var(--pink);
-    }
-
-    .testimonial-text p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .testimonial-video-wrap {
-      padding: 3px;
-      border-radius: 14px;
-      background: var(--pink);
-      box-shadow:
-        0 0 24px rgba(244, 61, 190, 0.3),
-        0 0 50px rgba(244, 61, 190, 0.12);
-    }
-
-    .testimonial-video-inner {
-      border-radius: 11px;
+    .form-panel {
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
       overflow: hidden;
-      background: #000;
+      background: var(--surface);
+    }
+
+    /* ── Testimonials ── */
+    .stories { display: grid; gap: var(--s5); }
+
+    .story {
+      display: grid;
+      gap: var(--s4);
+      padding: var(--s4);
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-panel);
+      align-items: center;
+    }
+
+    @media (min-width: 760px) {
+      .story { grid-template-columns: 1fr 1fr; gap: var(--s5); padding: var(--s5); }
+    }
+
+    .story h3 {
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      color: var(--ink);
+      margin-bottom: var(--s3);
+    }
+
+    .story h3 em { font-style: normal; color: var(--sky); }
+
+    .story p { color: var(--ink-muted); }
+
+    .story-media {
       position: relative;
-      aspect-ratio: 16/9;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      background: var(--ground);
     }
 
-    .testimonial-video-inner video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* "Tap for sound" hint shown until the visitor unmutes */
-    .unmute-overlay {
+    /* "Play with sound" tag, shown until the visitor unmutes */
+    .unmute {
       position: absolute;
       inset: 0;
       z-index: 2;
       display: flex;
       align-items: flex-start;
       justify-content: flex-end;
-      padding: 10px;
+      padding: 12px;
       border: none;
       background: transparent;
       cursor: pointer;
       font: inherit;
     }
 
-    .unmute-overlay span {
+    .unmute span {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: var(--s2);
       padding: 6px 10px;
-      border-radius: 100px;
-      background: rgba(9, 9, 11, 0.75);
-      color: #fff;
+      border-radius: var(--r-tag);
+      border: 1px solid var(--hairline);
+      background: rgba(0, 0, 0, 0.8);
+      color: var(--ink);
+      font-weight: 600;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      line-height: 16px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      backdrop-filter: blur(4px);
     }
 
-    .unmute-overlay:focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: -4px;
-    }
+    .unmute:hover span { border-color: var(--sky); }
+    .unmute:focus-visible { outline: 2px solid var(--sky); outline-offset: -4px; }
 
-    /* ── Proof grid section ── */
-    .proof-grid-section {
-      width: 100%;
-      padding: 40px 0 32px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+    .stories-cta { margin-top: var(--s5); }
 
-    .proof-grid-label {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
+    /* ── Proof grid ── */
+    .proof-grid { columns: 2; column-gap: 12px; }
 
-    .proof-grid-sub {
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
+    @media (min-width: 760px) { .proof-grid { columns: 3; } }
 
-    .proof-grid {
-      columns: 3;
-      column-gap: 12px;
-    }
-
-    .proof-grid-item {
+    .proof-item {
       break-inside: avoid;
       margin-bottom: 12px;
-      border-radius: 10px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-card);
       overflow: hidden;
-      border: 1.5px solid rgba(244, 61, 190, 0.3);
-      display: block;
-      width: 100%;
-      background: var(--card);
+      background: var(--surface);
     }
 
-    .proof-grid-item img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .proof-item img { width: 100%; height: auto; }
+
+    /* ── End card: lockup centred on black, one angled accent ── */
+    .end-card {
+      position: relative;
+      overflow: hidden;
+      padding: var(--s6) 0 calc(var(--s6) + var(--s5));
+      border-top: 1px solid var(--hairline);
+      text-align: center;
     }
 
-    @media (max-width: 640px) {
-      .testimonial-card {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .proof-grid { columns: 2; }
-      .testimonials-label { font-size: 18px; }
-      .testimonial-text h3 { font-size: 18px; }
+    .end-card .container { display: flex; flex-direction: column; align-items: center; }
+
+    /* Metallic lockup: hero treatment on pure black. Its drawn logo is 80% of the
+       file width, so 420px keeps the artwork above the 320px brand minimum.
+       Narrower screens get the flat lockup instead (see <picture>). */
+    .end-card picture { display: block; width: min(100%, 420px); margin-bottom: var(--s5); }
+    .end-card .metallic { width: 100%; height: auto; }
+
+    @media (max-width: 469px) {
+      .end-card picture { width: min(100%, 320px); }
     }
 
-    /* ── Animations ── */
+    .end-card h2 { margin-bottom: var(--s4); }
+    .end-card .caption { margin-top: var(--s3); }
+
+    .end-card::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 220px;
+      height: 190px;
+      background: linear-gradient(200deg, var(--sky), var(--azure) 55%, var(--cobalt));
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 560px) {
+      .end-card::after { width: 110px; height: 95px; }
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--hairline);
+      padding: var(--s5) 0;
+    }
+
+    .site-footer .container {
+      display: grid;
+      gap: var(--s3);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s3);
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s4); }
+
+    .footer-links a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover { color: var(--sky); }
+
+    .legal {
+      font-size: 12px;
+      line-height: 18px;
+      color: #5D6B80;
+      max-width: 75ch;
+    }
+
+    /* ── Entrance: a short fade, no bounce ── */
+    .reveal {
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+
+    .reveal.d1 { animation-delay: 0.05s; }
+    .reveal.d2 { animation-delay: 0.15s; }
+    .reveal.d3 { animation-delay: 0.25s; }
+    .reveal.d4 { animation-delay: 0.35s; }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
     }
 
-    /* ── Laptop: tighten everything to fit in ~900px viewport ── */
-    @media (min-width: 768px) {
-      :root { --carousel-h: 228px; }
-      nav { padding: 10px 0; }
-      .logo { height: 26px; }
-      main { padding: 16px 0 16px; }
-      .badge { margin-bottom: 10px; padding: 4px 10px; font-size: 10px; }
-      h1 { font-size: 32px; margin-bottom: 8px; }
-      .sub { font-size: 13px; margin-bottom: 12px; }
-      .video-wrap { margin-bottom: 12px; }
-      .cta-wrap { margin-top: 8px; }
-      .cta-btn { padding: 13px 32px; font-size: 14px; }
-      .trust { margin-top: 5px; font-size: 11px; }
-      .proof-section { padding: 16px 0 4px; }
-      .proof-label { font-size: 16px; margin-bottom: 12px; }
-      footer { padding: 12px 0 10px; margin-top: 6px; }
-      .footer-copy { font-size: 10px; }
-      .footer-disc { font-size: 9px; }
+    /* ── Responsive ── */
+    @media (min-width: 760px) {
+      :root { --gutter: 40px; --carousel-h: 240px; }
+      .lockup { --lockup-w: 196px; }
     }
 
-    /* ── Mobile adjustments ── */
     @media (max-width: 480px) {
-      .shell { padding: 0 16px; }
-      nav { padding: 14px 0; }
-      .logo { height: 26px; }
-      .badge { margin-bottom: 14px; font-size: 10px; letter-spacing: 0.03em; }
-      .badge .divider { display: none; }
-      h1 { margin-bottom: 10px; }
-      .sub { margin-bottom: 14px; }
-      .video-wrap { margin-bottom: 12px; }
-      .cta-btn { padding: 14px 24px; }
+      :root { --gutter: 20px; }
+      .lead { font-size: 16px; line-height: 26px; }
+      .site-nav .btn-secondary { display: none; }
     }
 
-    /* ── Respect reduced-motion preferences ── */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .badge, h1, .sub, .video-wrap, .cta-wrap, .trust {
-        opacity: 1;
-        animation: none;
-      }
-      .cta-border, .cta-btn::before { animation: none; }
-      .cta-border { background: rgba(255,255,255,0.6); }
-      .logo-slider { overflow-x: auto; }
-      .logo-track { animation: none; }
+      .reveal { opacity: 1; animation: none; }
+      .btn-primary::after { animation: none; display: none; }
+      .carousel { overflow-x: auto; }
+      .carousel-track { animation: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="shell">
+  <!-- Nav -->
+  <header class="site-nav">
+    <div class="container">
+      <a href="./" aria-label="Adamax Studios home">
+        <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" />
+      </a>
+      <a href="#qualify" class="btn btn-secondary" data-scroll-to="qualify">See if you qualify</a>
+    </div>
+  </header>
 
-    <!-- Nav -->
-    <nav>
-      <img
-        src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png"
-        alt="Spreed"
-        class="logo"
-        fetchpriority="high"
-      />
-    </nav>
+  <main>
 
-    <!-- Main -->
-    <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="facets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-      <div class="badge">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="rating">4.9/5</span>
-        <span class="divider" aria-hidden="true">·</span>
-        <span>Trusted by 1,200+ doctors &amp; 9B+ views generated</span>
-      </div>
-
-      <h1>We'll Get You <em>1 Million+</em> <span class="nowrap">Real Views</span><br><span class="nowrap">Or Your Money Back</span></h1>
-
-      <p class="sub">Watch the 4-minute video training below.</p>
-
-      <!-- Video (vturb / ConverteAI smartplayer) -->
-      <div class="video-wrap">
-        <div class="video-inner-wrap">
-          <vturb-smartplayer id="vid-69f349e0c4812a9b1a751036" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/1200be6e-6fcb-4724-87ac-03a7f7bc2d31/players/69f349e0c4812a9b1a751036/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+      <div class="container">
+        <div class="hero-title">
+          <p class="eyebrow reveal d1">Free viral audit</p>
+          <h1 class="reveal d2"><span class="accent">1 million+</span> <span class="nowrap">real views.</span><br>Or your money back.</h1>
         </div>
-      </div>
 
-      <!-- CTA -->
-      <div class="cta-wrap">
-        <div class="cta-border">
-          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
-        </div>
-        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
-      </div>
-
-    </main>
-
-    <!-- Proof carousel (images injected after window load so they don't compete with the VSL) -->
-    <section class="proof-section" aria-label="Doctor results">
-      <p class="proof-label">A Few Of Our 1,200+ Doctor Results</p>
-      <div class="logo-slider" id="logoSlider">
-        <div class="logo-track" id="logoTrack"></div>
-      </div>
-    </section>
-
-    <!-- Qualify Form (GoHighLevel inline form) -->
-    <section class="form-section" id="qualify" aria-label="See if you qualify">
-      <div class="form-wrap">
-        <iframe
-          src="https://api.leadconnectorhq.com/widget/form/Gsa0YAtp6rVAKB0jeEOv"
-          style="width:100%;height:1152px;border:none;display:block;"
-          id="inline-Gsa0YAtp6rVAKB0jeEOv"
-          data-layout="{'id':'INLINE'}"
-          data-trigger-type="alwaysShow"
-          data-trigger-value=""
-          data-activation-type="alwaysActivated"
-          data-activation-value=""
-          data-deactivation-type="neverDeactivate"
-          data-deactivation-value=""
-          data-form-name="Form 14"
-          data-height="1152"
-          data-layout-iframe-id="inline-Gsa0YAtp6rVAKB0jeEOv"
-          data-form-id="Gsa0YAtp6rVAKB0jeEOv"
-          title="Form 14">
-        </iframe>
-        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials-section" aria-label="Client testimonials">
-      <p class="testimonials-label">Real Clients. Real Results.</p>
-      <p class="testimonials-sub">Doctors and professionals who went viral with Spreed's AI system.</p>
-
-      <!-- Julie -->
-      <div class="testimonial-card">
-        <div class="testimonial-text">
-          <h3><em>36M+</em> Organic Views Driving Ideal Clients</h3>
-          <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted — including highly aligned discovery calls from her target audience. She shifted from paid ads and collaborations that didn't convert to content that builds trust, relationships, and real inbound demand tied directly to her mission.</p>
-        </div>
-        <div class="testimonial-video-wrap">
-          <div class="testimonial-video-inner">
-            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's testimonial"></video>
+        <div class="hero-grid">
+          <div class="hero-intro reveal d3">
+            <p class="lead">Watch the 4-minute training, then see if you qualify for a free viral audit call with our team.</p>
           </div>
-        </div>
-      </div>
 
-      <!-- Rohit -->
-      <div class="testimonial-card">
-        <div class="testimonial-text">
-          <h3>From 300 Views to <em>2.0M+</em> in One Day</h3>
-          <p>After being stuck at 200–300 views, Rohit published just two videos with Spreed and his first surpassed 2 million organic views — driving high engagement, saves, shares, and inbound conversations within days. By combining his expertise with Spreed's AI-powered content system, Rohit removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
-        </div>
-        <div class="testimonial-video-wrap">
-          <div class="testimonial-video-inner">
-            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's testimonial"></video>
+          <!-- VSL (vturb / ConverteAI smartplayer) -->
+          <div class="hero-video reveal d3">
+            <div class="frame">
+              <vturb-smartplayer id="vid-69f349e0c4812a9b1a751036" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/1200be6e-6fcb-4724-87ac-03a7f7bc2d31/players/69f349e0c4812a9b1a751036/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Mahreen -->
-      <div class="testimonial-card">
-        <div class="testimonial-text">
-          <h3>From 800 Views to <em>12M Views/Month</em> (350k+ Followers)</h3>
-          <p>Today, Mahreen runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony, and Apture. She grew from 500 followers to 350K+ using Spreed — and now generates over 12 million organic views every single month.</p>
-        </div>
-        <div class="testimonial-video-wrap">
-          <div class="testimonial-video-inner">
-            <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's testimonial"></video>
+          <div class="hero-cta reveal d4">
+            <a href="#qualify" class="btn btn-primary btn-block" data-scroll-to="qualify">
+              See if you qualify
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+            </a>
+            <p class="caption">Free 45-minute viral audit call with our team.</p>
           </div>
-        </div>
-      </div>
 
-      <!-- CTA after testimonials -->
-      <div class="cta-wrap cta-wrap--section">
-        <div class="cta-border">
-          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
+          <ul class="stats hero-stats reveal d4">
+            <li><strong>4.9/5</strong><span>Client rating</span></li>
+            <li><strong>1,200+</strong><span>Doctors</span></li>
+            <li><strong>9B+</strong><span>Views generated</span></li>
+          </ul>
         </div>
-        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
       </div>
     </section>
 
-    <!-- Proof Grid (rendered from the list in the script below) -->
-    <section class="proof-grid-section" aria-label="More results">
-      <p class="proof-grid-label">More Results From Spreed Users</p>
-      <p class="proof-grid-sub">1,200+ doctors. Real numbers. No ads.</p>
-      <div class="proof-grid" id="proofGrid">
-        <noscript>
-          <div class="proof-grid-item"><img src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faa9b0e12ab6e16d65f32.png" alt="Spreed client result"></div>
-        </noscript>
-      </div>
-
-      <!-- Bottom CTA -->
-      <div class="cta-wrap cta-wrap--section cta-wrap--bottom">
-        <div class="cta-border">
-          <a href="#qualify" class="cta-btn" data-scroll-to="qualify">SEE IF YOU QUALIFY</a>
+    <!-- Results carousel (images injected after window load so they don't compete with the VSL) -->
+    <section class="section" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Results</p>
+          <h2 id="results-title">Doctor results</h2>
+          <p class="lead">A few of the 1,200+ doctors we've worked with.</p>
         </div>
-        <p class="trust">FREE 45-MIN VIRAL AUDIT CALL WITH OUR TEAM</p>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <p class="footer-copy">Copyright © <span id="year">2026</span> Spreed FZE. All Rights Reserved. &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></p>
-      <p class="footer-disc">This website is not a part of the Facebook website or Facebook Inc. Additionally, this website is NOT endorsed by Facebook in any way. Facebook is a trademark of Facebook, Inc.</p>
-    </footer>
+    <!-- Qualify form (GoHighLevel inline form) -->
+    <section class="section form-section" id="qualify" aria-labelledby="qualify-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Apply</p>
+          <h2 id="qualify-title">See if you qualify</h2>
+          <p class="lead">Answer a few quick questions to book your free 45-minute viral audit call.</p>
+        </div>
+        <!-- ROASForm (form ID 924236-f7060d-0db987) -->
+        <div class="form-panel">
+          <div id="roasform-924236-f7060d-0db987" style="width: 100%; height: 600px"></div>
+          <script>
+          (function(w,d,o){w.ROASForm=w.ROASForm||{q:[]};w.ROASForm.q.push(o);if(!w.ROASForm._l){w.ROASForm._l=1;var s=d.createElement('script');s.src='https://my.roasform.com/roasform-embed.js';s.async=true;d.head.appendChild(s)}})(window,document,{formId:'924236-f7060d-0db987',mode:'inline',inheritBackground:false,container:'#roasform-924236-f7060d-0db987'});
+          </script>
+        </div>
+      </div>
+    </section>
 
-  </div>
+    <!-- Client stories -->
+    <section class="section" aria-labelledby="stories-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Client stories</p>
+          <h2 id="stories-title">Real clients. Real results.</h2>
+          <p class="lead">Doctors and professionals who went viral with the Adamax Studios AI content system.</p>
+        </div>
+
+        <div class="stories">
+          <article class="story">
+            <div>
+              <h3><em>36M+</em> organic views driving ideal clients</h3>
+              <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted, including highly aligned discovery calls from her target audience. She moved away from paid ads and collaborations that didn't convert, towards content that builds trust, relationships and real inbound demand tied directly to her mission.</p>
+            </div>
+            <div class="story-media">
+              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 300 views to <em>2M+</em> in one day</h3>
+              <p>After being stuck at 200–300 views, Rohit published just two videos with Adamax and the first passed 2 million organic views, driving engagement, saves, shares and inbound conversations within days. Pairing his expertise with our AI-powered content system removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
+            </div>
+            <div class="story-media">
+              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
+            </div>
+          </article>
+
+          <article class="story">
+            <div>
+              <h3>From 800 views to <em>12M views a month</em></h3>
+              <p>Mahreen now runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony and Apture. She grew from 500 followers to 350K+ with Adamax, and now generates over 12 million organic views every month.</p>
+            </div>
+            <div class="story-media">
+              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
+            </div>
+          </article>
+        </div>
+
+        <div class="stories-cta">
+          <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
+            See if you qualify
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof grid (rendered from the list in the script below) -->
+    <section class="section" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">More results</p>
+          <h2 id="proof-title">Real numbers. No ads.</h2>
+          <p class="lead">Organic results from Adamax Studios clients.</p>
+        </div>
+        <div class="proof-grid" id="proofGrid"></div>
+      </div>
+    </section>
+
+    <!-- End card -->
+    <section class="end-card" aria-labelledby="end-title">
+      <div class="container">
+        <!-- Metallic lockup only where its artwork can render ≥320px wide; flat lockup below that -->
+        <picture>
+          <source media="(min-width: 470px)" srcset="assets/adamax-metallic-lockup-on-dark.webp" />
+          <img class="metallic" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="1080" height="360" loading="lazy" />
+        </picture>
+        <h2 id="end-title">Book your viral audit</h2>
+        <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
+          See if you qualify
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </a>
+        <p class="caption">Free 45-minute call. 1 million+ real views, or your money back.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="#">Terms and conditions</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
 
   <script>
-  // Always start at top — prevents GHL from landing on the #qualify anchor.
+  // Always start at the top, so GHL never lands visitors on the #qualify anchor.
   if (history.replaceState && location.hash) {
     history.replaceState(null, '', location.pathname + location.search);
   }
@@ -821,9 +812,11 @@
     var CDN = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.js-year').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
 
-    /* ── CTA buttons: smooth-scroll to the form without touching the URL hash ── */
+    /* ── CTAs: smooth-scroll to the form without adding a #hash to the URL ── */
     document.addEventListener('click', function (e) {
       var link = e.target.closest('[data-scroll-to]');
       if (!link) return;
@@ -833,43 +826,47 @@
       target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
 
-    /* ── Proof carousel ── */
+    /* ── Results carousel ── */
     var carouselImages = [
       '69df93e380b446d0fbafb024', '69df93e32b7a6ecd79c9509f', '69df93e3db7c222f7150d194',
       '69df93e327c94c7e4e59e77c', '69df93e306cfeed5500fbe2f', '69df93e3acdf45d673debf39',
       '69df93e32b7a6ecd79c9509e', '69df93e3190683601a5d6d6f'
     ];
 
-    var slider = document.getElementById('logoSlider');
-    var track = document.getElementById('logoTrack');
+    var carousel = document.getElementById('carousel');
+    var track = document.getElementById('carouselTrack');
 
     function buildCarousel() {
       if (track.childElementCount) return;
       var frag = document.createDocumentFragment();
-      // Duplicate the set so translateX(-50%) loops seamlessly.
+      // Two copies of the set, so translateX(-50%) loops seamlessly.
       carouselImages.concat(carouselImages).forEach(function (id, i) {
         var img = document.createElement('img');
         img.src = CDN + id + '.png';
-        img.className = 'logo-item';
-        img.alt = i < carouselImages.length ? 'Doctor result' : '';
-        if (i >= carouselImages.length) img.setAttribute('aria-hidden', 'true');
+        img.className = 'carousel-item';
         img.decoding = 'async';
+        if (i < carouselImages.length) {
+          img.alt = 'Doctor result';
+        } else {
+          img.alt = '';
+          img.setAttribute('aria-hidden', 'true');
+        }
         frag.appendChild(img);
       });
       track.appendChild(frag);
     }
 
-    if (document.readyState === 'complete') {
-      setTimeout(buildCarousel, 800);
-    } else {
-      window.addEventListener('load', function () { setTimeout(buildCarousel, 800); }, { once: true });
+    function afterLoad(fn) {
+      if (document.readyState === 'complete') setTimeout(fn, 800);
+      else window.addEventListener('load', function () { setTimeout(fn, 800); }, { once: true });
     }
+    afterLoad(buildCarousel);
 
-    // Pause the carousel animation while it's off-screen (saves battery / main thread).
     if ('IntersectionObserver' in window) {
+      // Pause the marquee while it's off-screen.
       new IntersectionObserver(function (entries) {
-        slider.classList.toggle('is-offscreen', !entries[0].isIntersecting);
-      }).observe(slider);
+        carousel.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+      }).observe(carousel);
     }
 
     /* ── Proof grid ── */
@@ -897,19 +894,18 @@
     var gridFrag = document.createDocumentFragment();
     proofImages.forEach(function (id) {
       var item = document.createElement('div');
-      item.className = 'proof-grid-item';
+      item.className = 'proof-item';
       var img = document.createElement('img');
       img.src = CDN + id + '.png';
-      img.alt = 'Spreed client result';
+      img.alt = 'Client result';
       img.loading = 'lazy';
       img.decoding = 'async';
       item.appendChild(img);
       gridFrag.appendChild(item);
     });
-    grid.textContent = '';
     grid.appendChild(gridFrag);
 
-    /* ── Testimonial videos ── */
+    /* ── Client story videos ── */
     var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
 
     function pauseOthers(current) {
@@ -917,8 +913,8 @@
     }
 
     if ('IntersectionObserver' in window && !reduceMotion) {
-      // Muted autoplay while in view. Once a visitor has unmuted a video we
-      // stop auto-resuming it, so sound never starts without them asking.
+      // Muted autoplay while in view. Once a visitor unmutes a video it is no
+      // longer auto-resumed, so sound never starts without them asking.
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           var v = entry.target;
@@ -932,26 +928,28 @@
       videos.forEach(function (v) { observer.observe(v); });
     }
 
-    videos.forEach(function (v) {
-      // The overlay intercepts the first click so the browser's native
-      // play/pause toggle doesn't immediately cancel our restart.
-      // Once removed, native controls work normally.
-      var overlay = document.createElement('button');
-      overlay.type = 'button';
-      overlay.className = 'unmute-overlay';
-      overlay.setAttribute('aria-label', 'Play with sound from the beginning');
-      overlay.innerHTML = '<span><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.47 4.47 0 0 0 2.5-4z"/></svg>Tap for sound</span>';
-      v.parentElement.appendChild(overlay);
+    var SPEAKER = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5"/></svg>';
 
-      overlay.addEventListener('click', function () {
+    videos.forEach(function (v) {
+      // The button intercepts the first click so the browser's native
+      // play/pause toggle doesn't cancel our restart. Once removed,
+      // the native controls work normally.
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'unmute';
+      btn.setAttribute('aria-label', 'Play with sound from the beginning');
+      btn.innerHTML = '<span>' + SPEAKER + 'Play with sound</span>';
+      v.parentElement.appendChild(btn);
+
+      btn.addEventListener('click', function () {
         pauseOthers(v);
         v.muted = false;
         v.currentTime = 0;
         v.play().catch(function () {});
-        overlay.remove();
+        btn.remove();
       });
 
-      // If a visitor starts one video via native controls, stop the rest.
+      // Starting one with sound via the native controls stops the rest.
       v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); });
     });
   })();

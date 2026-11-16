@@ -3,110 +3,142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Your Viral Audit — Spreed</title>
-  <meta name="description" content="Pick a time for your free 45-minute Viral Audit call with the Spreed team." />
-  <meta name="theme-color" content="#09090B" />
+  <title>Book your viral audit — Adamax Studios</title>
+  <meta name="description" content="Pick a time for your free 45-minute viral audit call with the Adamax Studios team." />
+  <meta name="theme-color" content="#000000" />
   <!-- Post-qualify step: keep it out of search results -->
   <meta name="robots" content="noindex, nofollow" />
 
-  <link rel="icon" href="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://api.leadconnectorhq.com" />
   <link rel="preconnect" href="https://link.msgsndr.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* ============================================================
+       Adamax Studios brand tokens (Brand Kit v1.0)
+       ============================================================ */
     :root {
-      --bg:     #09090B;
-      --pink:   #f43dbe;
-      --text:   #F4F4F5;
-      --muted:  #71717A;
-      --border: rgba(255,255,255,0.05);
+      --azure:    #006BE5;
+      --sky:      #009BFC;
+      --cobalt:   #024AA1;
+      --navy:     #02244E;
+      --midnight: #00142C;
+      --glow:     #03CCFF;
+
+      --ground:    #000000;
+      --surface:   #030D1A;
+      --raised:    #0A172E;
+      --hairline:  #172F52;
+      --ink:       #FFFFFF;
+      --ink-muted: #9AA8BD;
+
+      --display: 'Krona One', 'Arial Black', sans-serif;
+      --text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+      --s1: 4px;  --s2: 8px;  --s3: 16px;
+      --s4: 24px; --s5: 40px; --s6: 64px;
+
+      --r-tag: 4px; --r-card: 8px; --r-panel: 16px;
+
+      --page: 1040px;
+      --gutter: 24px;
     }
 
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { min-height: 100vh; }
+
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: var(--text);
+      font-size: 15px;
+      line-height: 24px;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    /* ── Radial glow top-center ── */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      max-width: 100vw;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(244, 61, 190, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Layout shell: footer sticks to the bottom on short pages ── */
-    .shell {
-      position: relative;
-      z-index: 1;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: 100%;
+      max-width: calc(var(--page) + var(--gutter) * 2);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
     }
 
     /* ── Nav ── */
-    nav {
-      flex-shrink: 0;
+    .site-nav { border-bottom: 1px solid var(--hairline); }
+
+    .site-nav .container {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 14px 24px;
-      border-bottom: 1px solid var(--border);
+      padding-top: var(--s3);
+      padding-bottom: var(--s3);
     }
 
-    .logo {
-      height: 28px;
-      width: auto;
-      display: block;
+    /* Lockup on dark. The PNG carries ~10% black clear space on each side, so the
+       drawn logo is 80% of the file width: 184px file = 147px logo, above the
+       140px brand minimum. The negative margin lines the artwork up with the text. */
+    .lockup {
+      --lockup-w: 184px;
+      width: var(--lockup-w);
+      max-width: none;
+      height: auto;
+      margin-left: calc(var(--lockup-w) * -0.102);
     }
 
     main { flex: 1; }
 
-    /* ── Headline ── */
-    .headline {
-      text-align: center;
-      padding: 20px 24px 16px;
+    /* ── Heading ── */
+    .page-head { padding: var(--s5) 0 var(--s4); }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: var(--s3);
     }
 
-    .headline h1 {
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 800;
-      letter-spacing: -0.5px;
+    .eyebrow::before {
+      content: '';
+      flex: 0 0 40px;
+      height: 1px;
+      background: var(--sky);
     }
 
-    .subline {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 8px;
+    h1 {
+      font-family: var(--display);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: clamp(24px, 4.2vw, 40px);
+      line-height: 1.12;
+    }
+
+    .lead {
+      margin-top: var(--s2);
+      font-size: 16px;
+      line-height: 26px;
+      color: var(--ink-muted);
+      max-width: 60ch;
     }
 
     /* ── Calendar ── */
     .calendar-wrap {
       position: relative;
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto 32px;
-      padding: 0 16px;
+      margin-bottom: var(--s6);
     }
 
     /* Reserve space while the widget loads so the footer doesn't jump */
@@ -119,115 +151,137 @@
       overflow: hidden;
     }
 
-    /* Loading spinner, shown behind the iframe until it fires `load` */
+    /* Loader: a light sweep along a hairline (no spinner — the brand avoids spins) */
     .cal-loader {
       position: absolute;
       top: 120px;
       left: 50%;
       transform: translateX(-50%);
+      width: 200px;
       display: none;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      font-size: 12px;
-      color: var(--muted);
+      gap: var(--s3);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-muted);
       pointer-events: none;
     }
 
     .calendar-wrap.is-loading .cal-loader { display: flex; }
 
-    .cal-spinner {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid rgba(244, 61, 190, 0.15);
-      border-top-color: var(--pink);
-      animation: spin 0.8s linear infinite;
+    .cal-bar {
+      position: relative;
+      width: 100%;
+      height: 1px;
+      background: var(--hairline);
+      overflow: hidden;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .cal-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      animation: sweep 1.4s ease-in-out infinite;
+    }
+
+    @keyframes sweep { to { left: 100%; } }
 
     .cal-fallback {
-      text-align: center;
       font-size: 13px;
-      color: var(--muted);
-      padding: 24px 0;
+      color: var(--ink-muted);
+      padding: var(--s4) 0 0;
     }
 
-    .cal-fallback a { color: var(--pink); }
+    .cal-fallback a { color: var(--sky); text-underline-offset: 2px; }
+    .cal-fallback a:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 
     .calendar-wrap.is-loading .cal-fallback { visibility: hidden; }
 
     /* ── Footer ── */
-    footer {
-      flex-shrink: 0;
-      padding: 32px 24px 24px;
-      margin-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.04);
-      text-align: center;
+    .site-footer {
+      border-top: 1px solid var(--hairline);
+      padding: var(--s5) 0;
     }
 
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 5px;
+    .site-footer .container { display: grid; gap: var(--s3); }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s3);
     }
 
-    .footer-copy a {
-      color: var(--muted);
-      text-decoration: underline;
-      text-underline-offset: 2px;
+    .footer-links a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 13px;
     }
 
-    .footer-copy a:hover { color: var(--text); }
+    .footer-links a:hover { color: var(--sky); }
 
-    .footer-disc {
-      font-size: 10px;
-      color: #3F3F46;
-      max-width: 620px;
-      margin: 0 auto;
-      line-height: 1.5;
+    .caption {
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 500;
+      color: var(--ink-muted);
     }
 
-    @media (min-width: 768px) {
-      .headline { padding: 40px 24px 24px; }
+    .legal {
+      font-size: 12px;
+      line-height: 18px;
+      color: #5D6B80;
+      max-width: 75ch;
+    }
+
+    @media (min-width: 760px) {
+      :root { --gutter: 40px; }
+      .page-head { padding: var(--s6) 0 var(--s5); }
+      .lockup { --lockup-w: 196px; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 20px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .cal-spinner { animation: none; }
+      .cal-bar::after { animation: none; left: 30%; }
     }
   </style>
 </head>
 <body>
 
-  <div class="shell">
+  <header class="site-nav">
+    <div class="container">
+      <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" fetchpriority="high" />
+    </div>
+  </header>
 
-    <nav>
-      <img
-        src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/68149b9e5d4a836e57035050.png"
-        alt="Spreed"
-        class="logo"
-        fetchpriority="high"
-      />
-    </nav>
-
-    <main>
-      <div class="headline">
-        <h1>Just Pick a Time</h1>
-        <p class="subline">The calendar may take a few seconds to load.</p>
+  <main>
+    <div class="container">
+      <div class="page-head">
+        <p class="eyebrow">Viral audit call</p>
+        <h1>Pick a time</h1>
+        <p class="lead">Free, 45 minutes, with our team. The calendar can take a few seconds to load.</p>
       </div>
 
       <!-- GoHighLevel booking widget (calendar ID escdhM2THRdejLTLUISY) -->
       <div class="calendar-wrap" id="cal-wrap">
         <div class="cal-loader" aria-hidden="true">
-          <div class="cal-spinner"></div>
-          <span>Loading calendar…</span>
+          <div class="cal-bar"></div>
+          <span>Loading calendar</span>
         </div>
 
         <!-- src is set by the script below so URL params are applied before the first load -->
         <iframe
           id="5nqm3sCjLltcj0nkUb5f_1776283917459"
-          title="Book your Viral Audit call"
+          title="Book your viral audit call"
           scrolling="no"
           style="width:100%;border:none;overflow:hidden;display:block;">
         </iframe>
@@ -277,7 +331,7 @@
             // brief delay lets form_embed.js apply the real height first
             setTimeout(loaded, 300);
           });
-          setTimeout(loaded, 15000); // never leave the spinner up forever
+          setTimeout(loaded, 15000); // never leave the loader up forever
 
           var url = qs ? BASE + '?' + qs : BASE;
           iframe.src = url;
@@ -289,23 +343,31 @@
         <noscript>
           <iframe
             src="https://api.leadconnectorhq.com/widget/booking/escdhM2THRdejLTLUISY"
-            title="Book your Viral Audit call"
+            title="Book your viral audit call"
             style="width:100%;height:900px;border:none;display:block;">
           </iframe>
         </noscript>
-
       </div>
-    </main>
+    </div>
+  </main>
 
-    <footer>
-      <p class="footer-copy">Copyright &copy; <span id="year">2026</span> Spreed FZE. All Rights Reserved. &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></p>
-      <p class="footer-disc">This website is not a part of the Facebook website or Facebook Inc. Additionally, this website is NOT endorsed by Facebook in any way. Facebook is a trademark of Facebook, Inc.</p>
-    </footer>
-
-  </div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <img class="lockup" src="assets/adamax-lockup-on-dark.webp" alt="Adamax Studios" width="480" height="160" loading="lazy" />
+        <nav class="footer-links" aria-label="Legal">
+          <a href="#">Terms and conditions</a>
+        </nav>
+      </div>
+      <p class="caption">&copy; <span class="js-year">2026</span> Adamax Studios. All rights reserved.</p>
+      <p class="legal">This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.js-year').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
   </script>
 
 </body>
