@@ -3,7 +3,12 @@
 A single landing page, styled to the Adamax Studios Brand Kit v1.0:
 
 - **`index.html`**: the page. VSL → "See if you qualify" CTA → results carousel → ROAS qualify form → client stories → proof grid → end card.
-- **`assets/`**: logo files resized for the web from the brand kit originals.
+- **`assets/`**: everything the page loads, self-hosted (no GHL CDN or Google Fonts):
+  - logo files resized for the web from the brand kit originals (table below),
+  - `fonts/`: Krona One and Manrope (latin subset, woff2, SIL Open Font License), preloaded,
+  - `results/`: the 7 results-carousel images,
+  - `proof/`: the 50 proof-grid images,
+  - `testimonials/`: the 3 client story videos.
 
 Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`) and `pre-call-info/` (`/pre-call-info`, the page people see after booking a call).
 
@@ -14,19 +19,28 @@ Other pages on the same site live in their own folders, each with a README: `cli
 | `favicon.png`, `apple-touch-icon.png` | mark on dark | browser tab / home screen |
 | `og-image.png` | lockup on dark, on a 1200×630 black canvas | social share preview |
 
-`assets/testimonials/` holds copies of the client proof with the old "Spreed" name covered up:
+### Images
 
-- **18 proof screenshots** (`.webp`): every "Spreed" / "Spreed AI" mention, truncated names ("Talha Ashraf Sp…") and the Spreed chat avatar are covered with flat `#737373` bars, the same grey as the screenshots' existing redactions. The page loads these via the `REDACTED` list; the other 32 proof images and the carousel had no Spreed mentions and still load from the GHL CDN.
-- **3 client story videos** (`.mp4`): on-screen captions, the studio sign and app logos (feather icon included) and "@spreed.ai.global" are pixelated while they're on screen. **The audio is unchanged, so speakers still say "Spreed" out loud.**
+All carousel and proof images are WebP at quality 80, in several widths so phones don't download desktop-sized files:
 
-All 21 files were re-checked with OCR (every image, and every video at 10 fps) and no "Spreed" text remains.
+- `results/<id>-{300,480,720,900,1080}.webp`: shown 240px tall on desktop and 300px on mobile (`sizes="(min-width: 760px) 240px, 300px"`).
+- `proof/<id>-{360,540,720,<original>}.webp`: masonry grid, 3 columns from 760px and 2 below; `sizes` mirrors that layout.
+
+Every `<img>` is in the HTML with `width`/`height` (so space is reserved before it loads), descriptive `alt` text, `loading="lazy"` and `decoding="async"`. The exception is the header logo, which is above the fold (`fetchpriority="high"`, not lazy). The carousel is a single set of images looped by script, with no duplicate copies.
+
+### Old "Spreed" branding covered up
+
+- **18 proof screenshots:** every "Spreed" / "Spreed AI" mention, truncated names ("Talha Ashraf Sp…") and the Spreed chat avatar are covered with flat `#737373` bars, the same grey as the screenshots' existing redactions.
+- **3 client story videos** (720p): on-screen captions, the studio sign and app logos (feather icon included) and "@spreed.ai.global" are pixelated while they're on screen. **The audio is unchanged, so speakers still say "Spreed" out loud.**
+
+All of these were re-checked with OCR (every image, and every video at 10 fps) and no "Spreed" text remains.
 
 ## Deploy
 
 CSS and JS are inline; images load from `assets/` (relative paths).
 
 - **Static host (Vercel etc.):** upload the folder as-is.
-- **GoHighLevel custom code:** upload the `assets/` files (including `assets/testimonials/`) to GHL media first, then replace each `assets/…` path in the HTML with its GHL media URL.
+- **GoHighLevel custom code:** upload everything under `assets/` to GHL media first, then replace each `assets/…` path in the HTML with its GHL media URL.
 - **Live:** https://viral.adamaxstudios.com (Vercel project `adamax-viral-audit`). The canonical URL and `og:image` point at this domain, so update them if it changes.
 
 ## Preview locally
@@ -47,8 +61,9 @@ The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts 
 
 ## Editing content
 
-- **Carousel images:** `carouselImages` array (GHL media IDs) in the main `<script>`.
-- **Proof grid images:** `proofImages` array in the same script.
+- **Carousel images:** the `<img class="carousel-item">` tags inside `#carouselTrack`. Each needs its `results/` WebP widths, `width`/`height` and `alt`.
+- **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
+- **VSL:** the Wistia player stays hidden behind a blurred thumbnail until Wistia's `api-ready` event (12s fallback). Wistia's own layout pass would otherwise count as layout shift.
 - **Client stories:** the three `.story` blocks in the HTML.
 - **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`). Its colours and theme are set in the ROASForm dashboard.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
