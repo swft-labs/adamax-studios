@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/pre-call-info", "destination": "https://adamax-pre-call.vercel.app/pre-call-info" },
+    { "source": "/pre-call-info/:path*", "destination": "https://adamax-pre-call.vercel.app/pre-call-info/:path*" }
+  ]
+}
