@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/pre-call-info/", "destination": "/pre-call-info", "permanent": false }
+  ]
+}
