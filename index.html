@@ -717,7 +717,7 @@
               <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted, including highly aligned discovery calls from her target audience. She moved away from paid ads and collaborations that didn't convert, towards content that builds trust, relationships and real inbound demand tied directly to her mission.</p>
             </div>
             <div class="story-media">
-              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
+              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
             </div>
           </article>
 
@@ -727,7 +727,7 @@
               <p>After being stuck at 200–300 views, Rohit published just two videos with Adamax and the first passed 2 million organic views, driving engagement, saves, shares and inbound conversations within days. Pairing his expertise with our AI-powered content system removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
             </div>
             <div class="story-media">
-              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
+              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
             </div>
           </article>
 
@@ -737,7 +737,7 @@
               <p>Mahreen now runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony and Apture. She grew from 500 followers to 350K+ with Adamax, and now generates over 12 million organic views every month.</p>
             </div>
             <div class="story-media">
-              <video src="https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
+              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
             </div>
           </article>
         </div>
@@ -808,6 +808,21 @@
   <script>
   (function () {
     var CDN = 'https://assets.cdn.filesafe.space/Oq3n5Qe73HQ6VYTaQwu4/media/';
+
+    // Screenshots with the old brand name covered up are served locally.
+    var REDACTED = [
+      '696faa9b0e12ab6e16d65f32', '696faa9b0e12abae96d65f31', '696faa9b15885e14a5f6fec1',
+      '696faa9b193b56731c7be105', '696faa9b4a64643e83c6e431', '696faa9b4a646454f9c6e433',
+      '696faa9b4a6464b67dc6e42e', '696faa9b4a6464c326c6e430', '696faa9b4a6464ce7ac6e42d',
+      '696faa9b7b1aed22ad237b5e', '696faa9b7b1aed8e82237b5d', '696faa9b7b1aeda491237b56',
+      '696faa9bd4fb9005fe818dce', '696faa9bd4fb905e9d818dcf', '696faa9bd4fb906b16818dcd',
+      '696faa9bd4fb909ec6818dc6', '696faa9beb392b4659fed3e1', '696faa9beb392b8803fed3dd'
+    ];
+
+    function proofSrc(id) {
+      return REDACTED.indexOf(id) !== -1 ? 'assets/testimonials/' + id + '.webp' : CDN + id + '.png';
+    }
+
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('.js-year').forEach(function (el) {
@@ -894,7 +909,7 @@
       var item = document.createElement('div');
       item.className = 'proof-item';
       var img = document.createElement('img');
-      img.src = CDN + id + '.png';
+      img.src = proofSrc(id);
       img.alt = 'Client result';
       img.loading = 'lazy';
       img.decoding = 'async';

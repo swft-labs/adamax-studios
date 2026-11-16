@@ -12,12 +12,19 @@ A single landing page, styled to the Adamax Studios Brand Kit v1.0:
 | `favicon.png`, `apple-touch-icon.png` | mark on dark | browser tab / home screen |
 | `og-image.png` | lockup on dark, on a 1200×630 black canvas | social share preview |
 
+`assets/testimonials/` holds copies of the client proof with the old "Spreed" name covered up:
+
+- **18 proof screenshots** (`.webp`): every "Spreed" / "Spreed AI" mention, truncated names ("Talha Ashraf Sp…") and the Spreed chat avatar are covered with flat `#737373` bars, the same grey as the screenshots' existing redactions. The page loads these via the `REDACTED` list; the other 32 proof images and the carousel had no Spreed mentions and still load from the GHL CDN.
+- **3 client story videos** (`.mp4`): on-screen captions, the studio sign and app logos (feather icon included) and "@spreed.ai.global" are pixelated while they're on screen. **The audio is unchanged, so speakers still say "Spreed" out loud.**
+
+All 21 files were re-checked with OCR (every image, and every video at 10 fps) and no "Spreed" text remains.
+
 ## Deploy
 
 CSS and JS are inline; images load from `assets/` (relative paths).
 
 - **Static host (Vercel etc.):** upload the folder as-is.
-- **GoHighLevel custom code:** upload the `assets/` files to GHL media first, then replace each `assets/…` path in the HTML with its GHL media URL.
+- **GoHighLevel custom code:** upload the `assets/` files (including `assets/testimonials/`) to GHL media first, then replace each `assets/…` path in the HTML with its GHL media URL.
 - `og:image` must be an absolute URL for social previews. Change `assets/og-image.png` to the full URL once the domain is known.
 
 ## Preview locally
