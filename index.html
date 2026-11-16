@@ -146,6 +146,16 @@ a { color: var(--sky); }
 .display em { font-style: normal; color: var(--sky); }
 .nowrap { white-space: nowrap; }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container.container--wide { max-width: calc(960px + 2 * var(--s4)); }
 
 .section--flush { border-top: 0; padding-top: var(--s5); }
@@ -438,6 +448,140 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
+/* ── Proof: client cases ── */
+.proof-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s3);
+}
+
+.proof-count { font-size: 13px; color: var(--ink-muted); }
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 220px;
+  height: 44px;
+  padding: 0 40px 0 var(--s3);
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239AA8BD' stroke-width='1.5' stroke-linecap='square'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-tag);
+  color: var(--ink);
+  font: 600 14px/1 var(--text);
+  cursor: pointer;
+}
+.select:hover { border-color: var(--cobalt); }
+
+.case-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+.case {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  transition: border-color 0.16s ease;
+}
+.case:hover { border-color: var(--cobalt); }
+.case[hidden] { display: none; }
+
+.case-head { display: flex; align-items: center; gap: var(--s3); }
+
+.case-avatar {
+  width: 52px;
+  height: 60px;
+  padding: 2px;
+  flex-shrink: 0;
+  clip-path: var(--hex);
+  background: linear-gradient(160deg, var(--sky), var(--navy));
+}
+
+.case-avatar img,
+.case-avatar span {
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+}
+
+.case-avatar span {
+  background: linear-gradient(160deg, var(--cobalt), var(--midnight));
+  color: var(--ink);
+  font: 400 15px/1 var(--display);
+}
+
+.case-id { flex: 1; min-width: 0; }
+.case-name { font-weight: 700; font-size: 15px; line-height: 20px; }
+.case-niche { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+
+.case-stat {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.case-stat b {
+  display: block;
+  font: 400 28px/1.1 var(--display);
+  letter-spacing: 0;
+  color: var(--sky);
+  margin-bottom: 2px;
+}
+
+.case-detail { font-size: 14px; line-height: 21px; color: var(--ink); margin-top: calc(-1 * var(--s2)); }
+.case-detail--lead { margin-top: 0; }
+
+.case-links { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: auto; }
+
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-tag);
+  background: var(--ground);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+.case-link span { color: var(--ink-muted); font-weight: 500; }
+a.case-link:hover { border-color: var(--sky); }
+a.case-link:hover svg { color: var(--sky); }
+.case-link svg { color: var(--ink-faint); }
+.case-platform { font-size: 13px; font-weight: 600; color: var(--ink-faint); align-self: center; }
+.case-platform span { color: var(--ink-faint); font-weight: 500; }
+.case-platform span::before { content: '· '; }
+
+.proof-more { display: flex; justify-content: center; margin-top: var(--s4); }
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+}
+.btn--ghost:hover { border-color: var(--sky); }
+
+@media (max-width: 900px) {
+  .case-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ── Results panel ── */
 .panel {
   background: var(--surface);
@@ -539,6 +683,10 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   .panel .btn { width: 100%; }
   .stat + .stat { padding-left: var(--s3); }
   .stat b { font-size: 17px; }
+  .case-grid { grid-template-columns: 1fr; gap: var(--s2); }
+  .case { padding: var(--s3); }
+  .proof-bar { flex-direction: column-reverse; align-items: stretch; }
+  .select { width: 100%; }
   .end-card { padding: 64px 20px; }
   .end-card img { min-width: 0; width: 320px; }
   .angle-accent { --band: 64px; --edge: 24px; right: 0; }
@@ -681,6 +829,28 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
           <li>Current monthly revenue from your practice or clinic</li>
           <li>Your revenue goal for the next 90 days</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section" id="proof" aria-labelledby="proof-title">
+    <div class="container container--wide">
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="proof-title"><em>Real results</em> from real clients</h2>
+        <p class="muted">Organic views, followers and sales from accounts like yours. Filter by industry to find your niche.</p>
+      </div>
+
+      <div class="proof-bar">
+        <p class="proof-count" id="proof-count" aria-live="polite"></p>
+        <label class="visually-hidden" for="niche-filter">Filter by industry</label>
+        <select class="select" id="niche-filter"></select>
+      </div>
+
+      <ul class="case-grid" id="case-grid"></ul>
+
+      <div class="proof-more">
+        <button type="button" class="btn btn--ghost" id="proof-more" hidden>Show all cases</button>
       </div>
     </div>
   </section>
@@ -831,6 +1001,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.cal')) closeAll();
   });
+
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     cals.forEach(function (c) {
@@ -838,6 +1009,125 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
     });
   });
 
+
+  /* ── Proof: client cases ──
+     Most views first. Every url was checked live. A link with an empty url
+     renders as plain text, not a button. "img" = profile photo saved in
+     /pre-call-info/assets/proof/; without one the card shows initials. */
+  var IMG = '/pre-call-info/assets/proof/';
+  var CASES = [
+    { name: 'Aesthetics account', niche: 'Aesthetics and dermatology', img: 'doctorhasia.webp', stat: '100M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/C-X6yCePcbV/' }] },
+    { name: 'Nayra Del Duca', niche: 'Accountant', img: 'nayradelduca.webp', stat: '100M+', label: 'views',
+      detail: 'And 600K+ followers in under 6 months',
+      links: [{ p: 'Instagram', label: '@nayradelduca', url: 'https://www.instagram.com/nayradelduca/' }] },
+    { name: 'Sleep coach account', niche: 'Sleep coach', img: 'nurture2sleep.webp', stat: '60M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DKNHn9oNnR6/' }] },
+    { name: 'Weight loss account', niche: 'Weight loss', img: 'natassiadsouza.webp', stat: '25M+', label: 'views',
+      links: [{ p: 'TikTok', label: 'Top video', url: 'https://www.tiktok.com/@natassiadsouza/video/7400405778957389063' }] },
+    { name: 'Travel account', niche: 'Travel', img: 'rohit-khubchandani.webp', stat: '20M+', label: 'views',
+      links: [{ p: 'Facebook', label: 'Profile', url: 'https://www.facebook.com/rohit.khubchandani' }] },
+    { name: 'Stargen Diamonds USA', niche: 'Diamonds and jewelry', img: 'stargendiamondsusa.webp', stat: '12M+', label: 'views',
+      detail: 'And 60K+ new followers from one clip',
+      links: [{ p: 'Facebook', label: 'Reels', url: 'https://www.facebook.com/stargendiamondsusa/reels/' }] },
+    { name: 'Numo Investimentos', niche: 'Real estate', img: 'numoinvestimentos.webp', stat: '10M', label: 'views',
+      detail: 'In 3 months, with 10K+ new followers and 4 properties sold',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DMNmHxXOK2S/' }] },
+    { name: 'Real estate account', niche: 'Real estate', img: 'thomasenglert-official.webp', stat: '5M+', label: 'views',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZvFQ_dsyLs/' }] },
+    { name: 'DOXA', niche: 'Business and marketing', img: 'doxascale.webp', stat: '4M+', label: 'views',
+      detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbdjPDYuVeI/' }] },
+    { name: 'Pneus Bransales', niche: 'Tyres and automotive', img: 'joaobransales.webp', stat: '4M', label: 'views',
+      detail: 'For owner João Gonsales',
+      links: [
+        { p: 'Instagram', label: '@joaobransales', url: 'https://www.instagram.com/joaobransales/reels/' },
+        { p: 'TikTok', label: '@joaobransales', url: 'https://www.tiktok.com/@joaobransales' },
+        { p: 'YouTube', label: '@pneusbransales', url: 'https://www.youtube.com/@pneusbransales/shorts' }] },
+    { name: 'Dentist account', niche: 'Dentist', img: 'doctortayara.webp', stat: '2M+', label: 'views', detail: 'In under 30 days',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DbLX4E5gkCR/' }] },
+    { name: 'Real estate account', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '2M+', label: 'views',
+      detail: "And hundreds of 'I want this' comments",
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DZIfIS6hjFK/' }] },
+    { name: 'Dr. Luiz Marcelo', niche: 'Doctors', img: 'dr-luizmarcelo.webp', stat: '1.8M', label: 'views',
+      links: [
+        { p: 'Instagram', label: '@dr.luizmarcelo', url: 'https://www.instagram.com/dr.luizmarcelo/reels/' },
+        { p: 'TikTok', label: '@dr.luizmarcelo', url: 'https://www.tiktok.com/@dr.luizmarcelo' }] },
+    { name: 'Billionaires Mansions', niche: 'Luxury real estate', img: 'billionairemansiondubai.webp', stat: '1.7M', label: 'views',
+      links: [{ p: 'TikTok', label: '@billionairemansiondubai', url: 'https://www.tiktok.com/@billionairemansiondubai' }] },
+    { name: 'Dr. Rafif Tayara', niche: 'Doctors', img: 'doctortayara.webp', stat: '1M', label: 'views',
+      detail: 'Based in Dubai',
+      links: [{ p: 'Instagram', label: '@doctortayara', url: 'https://www.instagram.com/doctortayara/reels/' }] },
+    { name: 'Doctor example', niche: 'Doctors', img: 'herberthferreira4.webp',
+      detail: 'An example video from the doctors niche',
+      links: [{ p: 'TikTok', label: 'Watch video', url: 'https://www.tiktok.com/@herberthferreira4/video/7574509920213617941' }] },
+    { name: 'Dr. Dorival', niche: 'Doctors', img: 'drdorivalriccijr.webp', stat: '10K+', label: 'new followers',
+      detail: 'In under 2 months, with comments from people asking to book consultations',
+      links: [{ p: 'Instagram', label: '@drdorivalriccijr', url: 'https://www.instagram.com/drdorivalriccijr/reels/' }] },
+    { name: 'Marinna Real Estate', niche: 'Real estate', img: 'marianalimabroker.webp', stat: '7', label: 'contracts closed',
+      detail: 'From the video audience, with under 10 videos posted',
+      links: [{ p: 'Instagram', label: 'Top reel', url: 'https://www.instagram.com/reel/DV1N1JUkx15/' }] }
+  ];
+  var INITIAL = 6;
+
+  function escHtml(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function initials(name) {
+    return name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2)
+      .map(function (w) { return w[0]; }).join('').toUpperCase();
+  }
+  var ARROW = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+
+  var grid = document.getElementById('case-grid');
+  grid.innerHTML = CASES.map(function (c) {
+    var avatar = c.img
+      ? '<img src="' + IMG + c.img + '" alt="" width="52" height="60" loading="lazy">'
+      : '<span>' + escHtml(initials(c.name)) + '</span>';
+    var links = c.links.map(function (l) {
+      var inner = escHtml(l.p) + ' <span>' + escHtml(l.label) + '</span>';
+      return l.url
+        ? '<a class="case-link" href="' + escHtml(l.url) + '" target="_blank" rel="noopener" aria-label="' +
+            escHtml(c.name + ' on ' + l.p + ' (opens in a new tab)') + '">' + inner + ARROW + '</a>'
+        : '<span class="case-platform">' + inner + '</span>';
+    }).join('');
+    return '<li class="case" data-niche="' + escHtml(c.niche) + '">' +
+      '<div class="case-head"><div class="case-avatar" aria-hidden="true">' + avatar + '</div>' +
+        '<div class="case-id"><div class="case-name">' + escHtml(c.name) + '</div>' +
+        '<div class="case-niche">' + escHtml(c.niche) + '</div></div></div>' +
+      (c.stat ? '<div class="case-stat"><b>' + escHtml(c.stat) + '</b> ' + escHtml(c.label) + '</div>' : '') +
+      (c.detail ? '<p class="case-detail' + (c.stat ? '' : ' case-detail--lead') + '">' + escHtml(c.detail) + '</p>' : '') +
+      '<div class="case-links">' + links + '</div></li>';
+  }).join('');
+
+  var filter = document.getElementById('niche-filter');
+  var more   = document.getElementById('proof-more');
+  var count  = document.getElementById('proof-count');
+  var counts = {};
+  CASES.forEach(function (c) { counts[c.niche] = (counts[c.niche] || 0) + 1; });
+  filter.innerHTML = '<option value="">All industries (' + CASES.length + ')</option>' +
+    Object.keys(counts).sort().map(function (n) {
+      return '<option value="' + escHtml(n) + '">' + escHtml(n) + ' (' + counts[n] + ')</option>';
+    }).join('');
+
+  var expanded = false;
+  function applyFilter() {
+    var niche = filter.value, matches = 0;
+    Array.prototype.forEach.call(grid.children, function (li) {
+      var match = !niche || li.getAttribute('data-niche') === niche;
+      if (match) matches++;
+      var show = match && (niche || expanded || matches <= INITIAL);
+      li.hidden = !show;
+    });
+    more.hidden = !!niche || expanded || matches <= INITIAL;
+    more.textContent = 'Show all ' + matches + ' cases';
+    count.textContent = matches + (matches === 1 ? ' case' : ' cases') + ' · most views first';
+  }
+  filter.addEventListener('change', applyFilter);
+  more.addEventListener('click', function () { expanded = true; applyFilter(); });
+  applyFilter();
 })();
 </script>
 
