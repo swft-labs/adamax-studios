@@ -213,7 +213,56 @@ a { color: var(--sky); }
   background: transparent;
   border: 1px solid var(--sky);
 }
-.btn--secondary:hover { background: var(--midnight); }
+.btn--secondary:hover,
+.btn--secondary[aria-expanded="true"] { background: var(--midnight); }
+
+button.btn { cursor: pointer; }
+
+/* ── Add to calendar menu ── */
+.cal { position: relative; }
+
+.cal-menu {
+  position: absolute;
+  top: calc(100% + var(--s2));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 280px;
+  padding: var(--s1);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  text-align: left;
+}
+
+.cal-menu[hidden] { display: none; }
+
+.cal-links { display: flex; flex-direction: column; }
+.cal-links[hidden] { display: none; }
+
+.cal-links a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border-radius: var(--r-tag);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.cal-links a + a { border-top: 1px solid var(--hairline); }
+.cal-links a:hover { background: var(--raised); }
+
+.cal-fallback {
+  padding: var(--s2) var(--s3);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--ink-muted);
+}
+
+.cal-fallback strong { color: var(--ink); font-weight: 600; }
 
 /* Light sweep at the brand's 60° angle */
 .btn--primary::after {
@@ -506,6 +555,7 @@ a { color: var(--sky); }
   .lead { font-size: 16px; line-height: 26px; }
   .btn-row { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; }
+  .cal-menu { left: 0; right: 0; width: auto; transform: none; }
   .card { padding: var(--s1) var(--s3); }
   .panel { padding: var(--s4); }
   .panel .btn { width: 100%; }
@@ -552,17 +602,27 @@ a { color: var(--sky); }
       <h1 class="display display-lg">You're booked</h1>
       <p class="lead">Your viral audit call is scheduled. The calendar invite in your email has the date, time and Zoom link.</p>
 
-      <p class="confirm-label muted">Confirm you'll attend: tap a button and hit send.</p>
+      <p class="confirm-label muted">Confirm you'll attend by text, then add the call to your calendar.</p>
 
       <div class="btn-row" id="confirm">
         <a id="confirm-sms" href="#" class="btn btn--primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           Confirm by text
         </a>
-        <a id="confirm-whatsapp" href="#" target="_blank" rel="noopener" class="btn btn--secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          Confirm on WhatsApp
-        </a>
+        <div class="cal">
+          <button type="button" id="cal-toggle" class="btn btn--secondary" aria-expanded="false" aria-controls="cal-menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
+            Add to calendar
+          </button>
+          <div class="cal-menu" id="cal-menu" hidden>
+            <div class="cal-links">
+              <a id="cal-google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+              <a id="cal-ics" href="#" download="adamax-viral-audit.ics">Apple or Outlook (.ics)</a>
+              <a id="cal-outlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+            </div>
+            <p class="cal-fallback" hidden>Open the calendar invite in your email and tap <strong>Add to calendar</strong>. It has your exact date, time and Zoom link.</p>
+          </div>
+        </div>
       </div>
 
       <p class="steps-label eyebrow">Then, before your call</p>
@@ -640,11 +700,11 @@ a { color: var(--sky); }
         <ul class="checklist">
           <li>
             <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            <div><strong>Add the call to your calendar</strong> from the email invite we sent.</div>
+            <div><strong>Add the call to your calendar</strong> with the <a href="#confirm">button at the top</a>, or from the email invite we sent.</div>
           </li>
           <li>
             <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            <div><strong>Confirm you're coming</strong> with one of the <a href="#confirm">buttons at the top</a>, if you haven't yet.</div>
+            <div><strong>Confirm you're coming</strong> by text with the <a href="#confirm">button at the top</a>, if you haven't yet.</div>
           </li>
           <li>
             <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
@@ -740,11 +800,14 @@ a { color: var(--sky); }
 <script>
 (function () {
   /* ─────────────────────────────────────────────
-     CONFIG — edit these two values only.
+     CONFIG
      Phone in international format, e.g. +971501234567
      ───────────────────────────────────────────── */
   var CONFIRM_PHONE   = '+971XXXXXXXXX';
   var CONFIRM_MESSAGE = "Hi, I'm confirming my viral audit call with Adamax Studios.";
+  var CALL_MINUTES    = 45;
+  var CALL_TITLE      = 'Viral audit call · Adamax Studios';
+  var CALL_DETAILS    = 'Your free viral audit call with Adamax Studios. Join with the Zoom link in your confirmation email.';
 
   var VTURB_ACCOUNT = '1200be6e-6fcb-4724-87ac-03a7f7bc2d31';
 
@@ -755,7 +818,6 @@ a { color: var(--sky); }
 
   /* ── Confirmation links ── */
   var phone  = CONFIRM_PHONE.replace(/[^\d+]/g, '');
-  var digits = phone.replace(/\D/g, '');
   var body   = encodeURIComponent(CONFIRM_MESSAGE);
   // iOS Messages expects "&body=", everyone else follows RFC 5724 "?body=".
   var isIOS  = /iP(hone|ad|od)/.test(navigator.userAgent) ||
@@ -763,12 +825,84 @@ a { color: var(--sky); }
 
   document.getElementById('confirm-sms').href =
     'sms:' + phone + (isIOS ? '&' : '?') + 'body=' + body;
-  document.getElementById('confirm-whatsapp').href =
-    'https://wa.me/' + digits + '?text=' + body;
-
   if (/x/i.test(CONFIRM_PHONE)) {
     console.warn('[pre-call] CONFIRM_PHONE is still a placeholder — set your real number.');
   }
+
+  /* ── Add to calendar ──
+     The call time comes from the page URL, e.g.
+       ?start=2026-11-20T15:00:00%2B04:00   (ISO 8601 with offset, or a Unix timestamp)
+       &duration=45                         (minutes, optional)
+       &join=https://zoom.us/j/...          (meeting link, optional)
+     Without a start time the menu points people to their email invite. */
+  var params   = new URLSearchParams(location.search);
+  var rawStart = params.get('start') || params.get('start_time');
+  var startAt  = null;
+  if (rawStart) {
+    startAt = /^\d+$/.test(rawStart)
+      ? new Date(rawStart.length > 10 ? +rawStart : rawStart * 1000)
+      : new Date(rawStart);
+    if (isNaN(startAt)) startAt = null;
+  }
+
+  var calToggle = document.getElementById('cal-toggle');
+  var calMenu   = document.getElementById('cal-menu');
+
+  if (startAt) {
+    var minutes = parseInt(params.get('duration'), 10) || CALL_MINUTES;
+    var endAt   = new Date(startAt.getTime() + minutes * 60000);
+    var join    = params.get('join') || '';
+    var details = CALL_DETAILS + (join ? '\n\nJoin: ' + join : '');
+    var stamp   = function (d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
+    var q       = encodeURIComponent;
+    var icsText = function (t) { return t.replace(/[\\,;]/g, '\\$&').replace(/\n/g, '\\n'); };
+
+    document.getElementById('cal-google').href =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + q(CALL_TITLE) +
+      '&dates=' + stamp(startAt) + '/' + stamp(endAt) +
+      '&details=' + q(details) +
+      (join ? '&location=' + q(join) : '');
+
+    document.getElementById('cal-outlook').href =
+      'https://outlook.live.com/calendar/0/action/compose?rru=addevent' +
+      '&subject=' + q(CALL_TITLE) +
+      '&startdt=' + q(startAt.toISOString()) +
+      '&enddt=' + q(endAt.toISOString()) +
+      '&body=' + q(details) +
+      (join ? '&location=' + q(join) : '');
+
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Adamax Studios//Viral audit//EN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + stamp(startAt) + '-viral-audit@adamaxstudios',
+      'DTSTAMP:' + stamp(new Date()),
+      'DTSTART:' + stamp(startAt),
+      'DTEND:' + stamp(endAt),
+      'SUMMARY:' + icsText(CALL_TITLE),
+      'DESCRIPTION:' + icsText(details),
+      join ? 'LOCATION:' + icsText(join) : '',
+      'BEGIN:VALARM', 'TRIGGER:-PT15M', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText(CALL_TITLE), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].filter(Boolean).join('\r\n');
+    document.getElementById('cal-ics').href = 'data:text/calendar;charset=utf-8,' + q(ics);
+  } else {
+    calMenu.querySelector('.cal-links').hidden = true;
+    calMenu.querySelector('.cal-fallback').hidden = false;
+  }
+
+  function setMenu(open) {
+    calMenu.hidden = !open;
+    calToggle.setAttribute('aria-expanded', String(open));
+  }
+  calToggle.addEventListener('click', function () { setMenu(calMenu.hidden); });
+  calMenu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('click', function (e) {
+    if (!calMenu.hidden && !e.target.closest('.cal')) setMenu(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !calMenu.hidden) { setMenu(false); calToggle.focus(); }
+  });
 
   /* ── vturb players ──
      Step 1 loads immediately; the five optional videos load as they
