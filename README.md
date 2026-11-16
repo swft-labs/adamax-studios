@@ -33,7 +33,7 @@ CSS and JS are inline; images load from `assets/` (relative paths).
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-The vturb player shows "Video not found" outside its whitelisted domains. That's expected locally.
+The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts playback to certain domains, it may not play locally.
 
 ## Brand rules applied
 
