@@ -488,28 +488,7 @@
       background: var(--surface);
     }
 
-    /* ── Case studies: headline, one line, three stat chips ── */
-    .cases { display: grid; gap: var(--s4); }
-
-    @media (min-width: 760px) { .cases { grid-template-columns: 1fr 1fr; } }
-
-    .case {
-      padding: var(--s4);
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-panel);
-    }
-
-    @media (min-width: 760px) { .case { padding: var(--s5); } }
-
-    .case h3 {
-      font-family: var(--text);
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 28px;
-      color: var(--ink);
-    }
-
+    /* One-line description and stat chips (used in the client story cards) */
     .case-who {
       margin-top: var(--s2);
       font-size: 14px;
@@ -575,8 +554,6 @@
     }
 
     .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .cases-label { margin-top: var(--s6); }
 
     /* "Play with sound" tag, shown until the visitor unmutes */
     .unmute {
@@ -888,49 +865,6 @@
             <div class="story-media">
               <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
             </div>
-          </article>
-        </div>
-
-        <p class="eyebrow cases-label">More case studies</p>
-        <div class="cases">
-          <article class="case">
-            <h3>From underbooked to a second clinic.</h3>
-            <p class="case-who">Hassia, aesthetic doctor, 5 months</p>
-            <ul class="chips">
-              <li><strong>310M+</strong> views</li>
-              <li>Fees up <strong>47%</strong></li>
-              <li><strong>Second clinic</strong> opened</li>
-            </ul>
-          </article>
-
-          <article class="case">
-            <h3>From 2,000 followers to a $2.1M product line.</h3>
-            <p class="case-who">Ryuza, integrative medicine, 8 months</p>
-            <ul class="chips">
-              <li><strong>650K</strong> followers</li>
-              <li><strong>375M</strong> views</li>
-              <li><strong>$2.1M</strong> in new revenue</li>
-            </ul>
-          </article>
-
-          <article class="case">
-            <h3>60% of new patients come from social.</h3>
-            <p class="case-who">Dr. Diaz, 3 months</p>
-            <ul class="chips">
-              <li><strong>201K</strong> followers</li>
-              <li><strong>80M</strong> views</li>
-              <li><strong>Fully booked</strong></li>
-            </ul>
-          </article>
-
-          <article class="case">
-            <h3>Booked 3 months in advance.</h3>
-            <p class="case-who">Dr. Nathalie, endocrinologist, 12 months</p>
-            <ul class="chips">
-              <li><strong>2.3M</strong> followers</li>
-              <li>Fees up <strong>40%</strong></li>
-              <li><strong>$74K</strong> ebook week</li>
-            </ul>
           </article>
         </div>
 
