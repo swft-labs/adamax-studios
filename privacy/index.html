@@ -57,10 +57,9 @@
     .back:hover { text-decoration: underline; }
 
     .site-footer { border-top: 1px solid var(--hairline); padding: var(--s5) 0; }
-    .site-footer .container { display: grid; gap: var(--s3); }
-    .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3); }
-    .footer-row .lockup { margin-left: calc(var(--lockup-w) * -0.102); }
-    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+    .site-footer .container { display: grid; gap: var(--s3); justify-items: center; text-align: center; }
+    .footer-row { display: flex; flex-direction: column; align-items: center; gap: var(--s4); }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s4); }
     .footer-links a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
     .footer-links a:hover, .footer-links a[aria-current] { color: var(--sky); }
     .caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
