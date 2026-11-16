@@ -267,44 +267,78 @@
 
     .btn-block { width: 100%; }
 
-    /* ── Hero ── */
+    /* ── Hero: one centred, stacked column (proof → headline → video → CTA) ── */
     .hero {
       padding: var(--s5) 0 var(--s6);
+      text-align: center;
     }
 
-    .hero-title { margin-bottom: var(--s5); }
-
-    .hero-grid {
-      display: grid;
-      gap: var(--s4);
-      grid-template-areas:
-        "intro"
-        "video"
-        "cta"
-        "stats";
+    .hero-stack {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .hero-intro { grid-area: intro; }
-    .hero-video { grid-area: video; }
-    .hero-cta   { grid-area: cta; }
-    .hero-stats { grid-area: stats; }
+    /* Proof tag: 4px corners (the brand avoids pills) */
+    .proof-tag {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 4px 10px;
+      padding: 6px 12px;
+      margin-bottom: var(--s4);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-tag);
+      background: var(--surface);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
 
-    .hero-cta .caption { margin-top: var(--s2); }
+    .proof-tag .stars { color: var(--sky); letter-spacing: 2px; }
+    .proof-tag strong { color: var(--ink); font-weight: 700; }
+    .proof-tag .sep { width: 1px; height: 12px; background: var(--hairline); }
 
-    @media (min-width: 900px) {
-      .hero { padding: var(--s6) 0; }
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr) 300px;
-        grid-template-rows: auto auto 1fr;
-        column-gap: var(--s5);
-        row-gap: var(--s4);
-        grid-template-areas:
-          "video intro"
-          "video cta"
-          "video stats";
-        align-items: start;
-      }
-      .hero-intro .lead { font-size: 16px; line-height: 26px; }
+    .hero h1 { margin-bottom: var(--s3); }
+
+    .hero .lead { margin: 0 auto var(--s4); }
+
+    .hero-video { width: 100%; margin-bottom: var(--s4); }
+
+    .hero-cta { width: 100%; }
+
+    .trust {
+      margin-top: var(--s3);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* Laptop: tighten so headline, video and CTA fit in a ~900px-tall viewport */
+    @media (min-width: 768px) {
+      .hero { padding: var(--s4) 0 var(--s6); }
+      .hero-stack { max-width: 800px; }
+      .proof-tag { margin-bottom: var(--s3); }
+      .hero h1 { font-size: 34px; margin-bottom: 12px; }
+      .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); }
+      .hero-video { margin-bottom: var(--s3); }
+      .hero .btn { padding: 14px 24px; }
+      .trust { margin-top: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .proof-tag { font-size: 10px; letter-spacing: 0.1em; }
+      .proof-tag .sep { display: none; }
+      .trust { font-size: 10px; letter-spacing: 0.12em; }
     }
 
     /* Video frame: hairline with one lit top edge */
@@ -329,38 +363,6 @@
     }
 
     .frame vturb-smartplayer { display: block; width: 100%; }
-
-    /* Stats: tag-style list separated by hairlines */
-    .stats {
-      list-style: none;
-      border-top: 1px solid var(--hairline);
-    }
-
-    .stats li {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--s3);
-      padding: 12px 0;
-      border-bottom: 1px solid var(--hairline);
-    }
-
-    .stats strong {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 24px;
-      color: var(--ink);
-    }
-
-    .stats span {
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      text-align: right;
-    }
 
     /* ── Sections ── */
     .section {
@@ -637,15 +639,17 @@
       <div class="facets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <div class="container">
-        <div class="hero-title">
-          <p class="eyebrow reveal d1">Free viral audit</p>
-          <h1 class="reveal d2"><span class="accent">1 million+</span> <span class="nowrap">real views.</span><br>Or your money back.</h1>
-        </div>
+        <div class="hero-stack">
+          <p class="proof-tag reveal d1">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <strong>4.9/5</strong>
+            <span class="sep" aria-hidden="true"></span>
+            <span>Trusted by 1,200+ doctors &amp; 9B+ views generated</span>
+          </p>
 
-        <div class="hero-grid">
-          <div class="hero-intro reveal d3">
-            <p class="lead">Watch the 4-minute training, then see if you qualify for a free viral audit call with our team.</p>
-          </div>
+          <h1 class="reveal d2"><span class="accent">1 million+</span> <span class="nowrap">real views.</span><br>Or your money back.</h1>
+
+          <p class="lead reveal d3">Watch the 4-minute video training below.</p>
 
           <!-- VSL (vturb / ConverteAI smartplayer) -->
           <div class="hero-video reveal d3">
@@ -659,14 +663,8 @@
               See if you qualify
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
             </a>
-            <p class="caption">Free 45-minute viral audit call with our team.</p>
+            <p class="trust">Free 45-min viral audit call with our team</p>
           </div>
-
-          <ul class="stats hero-stats reveal d4">
-            <li><strong>4.9/5</strong><span>Client rating</span></li>
-            <li><strong>1,200+</strong><span>Doctors</span></li>
-            <li><strong>9B+</strong><span>Views generated</span></li>
-          </ul>
         </div>
       </div>
     </section>
