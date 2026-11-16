@@ -109,22 +109,6 @@ a { color: var(--sky); }
   flex-shrink: 0;
 }
 
-/* A pair of thin rules flanking one short label (used once, in the hero) */
-.eyebrow--flanked {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s3);
-}
-.eyebrow--flanked::before,
-.eyebrow--flanked::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-}
-.eyebrow--flanked::before { background: linear-gradient(90deg, transparent, var(--sky)); }
-.eyebrow--flanked::after  { background: linear-gradient(90deg, var(--sky), transparent); }
-
-.lead  { font-size: 18px; line-height: 28px; color: var(--ink-muted); }
 .muted { color: var(--ink-muted); }
 .caption { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink-muted); }
 
@@ -153,9 +137,22 @@ a { color: var(--sky); }
 .section-head .display { margin: var(--s3) 0 var(--s2); }
 .section-head p { max-width: 560px; }
 
+/* Centred step headings: "STEP 1: WATCH THIS BEFORE YOUR CALL" */
+.section-head--center { text-align: center; }
+.section-head--center .display { margin-top: 0; }
+.section-head--center p { margin: 0 auto; }
+
+.display-step { font-size: clamp(22px, 3.6vw, 32px); line-height: 1.2; }
+.display em { font-style: normal; color: var(--sky); }
+.nowrap { white-space: nowrap; }
+
+.container.container--wide { max-width: calc(960px + 2 * var(--s4)); }
+
+.section--flush { border-top: 0; padding-top: var(--s5); }
+
 /* ── Hero (title card: centred) ── */
 .hero {
-  padding: var(--s6) 0;
+  padding: var(--s6) 0 var(--s5);
   text-align: center;
 }
 
@@ -175,21 +172,9 @@ a { color: var(--sky); }
 
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
-.hero h1 { margin: var(--s3) 0; }
-
-.hero .lead { max-width: 500px; margin: 0 auto; }
-
-.confirm-label { margin: var(--s5) 0 var(--s3); }
+.hero h1 { max-width: 880px; margin: 0 auto; }
 
 /* ── Buttons ── */
-.btn-row {
-  display: flex;
-  gap: var(--s3);
-  justify-content: center;
-  flex-wrap: wrap;
-  scroll-margin-top: calc(var(--nav-h) + var(--s4));
-}
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -197,6 +182,7 @@ a { color: var(--sky); }
   gap: var(--s2);
   min-height: 52px;
   padding: 0 var(--s4);
+  border: 0;
   border-radius: var(--r-card);
   font: 700 15px/1 var(--text);
   letter-spacing: 0.01em;
@@ -210,14 +196,8 @@ a { color: var(--sky); }
 .btn svg { flex-shrink: 0; }
 
 .btn--primary { background: var(--azure); }
-.btn--primary:hover { background: #1677EA; }
-
-.btn--secondary {
-  background: transparent;
-  border: 1px solid var(--sky);
-}
-.btn--secondary:hover,
-.btn--secondary[aria-expanded="true"] { background: var(--midnight); }
+.btn--primary:hover,
+.btn--primary[aria-expanded="true"] { background: #1677EA; }
 
 button.btn { cursor: pointer; }
 
@@ -227,10 +207,9 @@ button.btn { cursor: pointer; }
 .cal-menu {
   position: absolute;
   top: calc(100% + var(--s2));
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 20;
-  width: 280px;
   padding: var(--s1);
   background: var(--surface);
   border: 1px solid var(--hairline);
@@ -287,41 +266,44 @@ button.btn { cursor: pointer; }
   100% { left: 130%; }
 }
 
-/* ── Step list (hero) ── */
-.steps-label { margin: var(--s5) 0 var(--s3); }
-
-.steps {
+/* ── Step cards (hero) ── */
+.step-cards {
   list-style: none;
-  max-width: 520px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--s2);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin-top: var(--s5);
   text-align: left;
 }
 
-.step-link {
+.step-cards > li { display: flex; }
+
+.step-card {
+  flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--s3);
-  padding: var(--s3) var(--s4) var(--s3) var(--s3);
+  padding: var(--s4);
   background: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: var(--r-card);
   color: var(--ink);
+  font: inherit;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
   transition: border-color 0.16s ease, background-color 0.16s ease;
 }
 
-.step-link:hover { border-color: var(--cobalt); background: var(--raised); }
+.step-card:hover,
+.step-card[aria-expanded="true"] { border-color: var(--cobalt); background: var(--raised); }
 
 .step-num {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: var(--r-tag);
-  border: 1px solid var(--hairline);
-  background: var(--ground);
-  color: var(--sky);
+  background: var(--azure);
+  color: var(--ink);
   font: 700 13px/1 var(--text);
   display: flex;
   align-items: center;
@@ -331,21 +313,11 @@ button.btn { cursor: pointer; }
 
 .step-body { flex: 1; min-width: 0; }
 
-.step-title { display: block; font-weight: 700; font-size: 15px; line-height: 22px; }
+.step-title { display: block; font-weight: 700; font-size: 16px; line-height: 22px; }
 
-.step-title small {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-left: var(--s1);
-}
+.step-sub { display: block; font-size: 14px; line-height: 20px; color: var(--ink-muted); margin-top: var(--s1); }
 
-.step-sub { display: block; font-size: 13px; line-height: 18px; color: var(--ink-muted); margin-top: 2px; }
-
-.step-arrow { color: var(--ink-faint); flex-shrink: 0; transition: color 0.16s ease, transform 0.16s ease; }
-.step-link:hover .step-arrow { color: var(--sky); transform: translateY(2px); }
+.step-icon { color: var(--sky); flex-shrink: 0; margin-top: 2px; }
 
 /* ── Client avatars (hexagon crops) ── */
 .clients {
@@ -396,6 +368,13 @@ button.btn { cursor: pointer; }
   pointer-events: none;
 }
 
+.video-panel {
+  padding: var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-panel);
+}
+
 .video-frame vturb-smartplayer,
 .video-frame wistia-player { display: block; width: 100%; margin: 0 auto; }
 
@@ -432,25 +411,10 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   padding: var(--s1) var(--s4);
 }
 
-.checklist { list-style: none; }
-
-.checklist > li {
-  display: flex;
-  gap: var(--s3);
-  padding: var(--s3) 0;
-}
-
-.checklist > li + li { border-top: 1px solid var(--hairline); }
-
-.checklist .tick-icon { color: var(--sky); flex-shrink: 0; margin-top: 3px; }
-
-.checklist strong { font-weight: 700; }
-
-.checklist a { color: var(--sky); text-underline-offset: 3px; }
+.numbers-card { padding: var(--s4); }
 
 .numbers {
   list-style: none;
-  margin-top: var(--s3);
   display: flex;
   flex-direction: column;
   gap: var(--s2);
@@ -563,11 +527,14 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   :root { --nav-h: 71px; }
   .site-nav img { width: 176px; }
   .section, .hero { padding: 48px 0; }
+  .hero { padding-bottom: var(--s5); }
+  .section--flush { padding-top: var(--s4); }
   .container { padding: 0 20px; }
-  .lead { font-size: 16px; line-height: 26px; }
-  .btn-row { flex-direction: column; align-items: stretch; }
+  .step-cards { grid-template-columns: 1fr; gap: var(--s2); }
+  .step-card { padding: var(--s3); }
+  .video-panel { padding: var(--s2); border-radius: var(--r-card); }
+  .numbers-card { padding: var(--s3); }
   .btn { width: 100%; }
-  .cal-menu { left: 0; right: 0; width: auto; transform: none; }
   .card { padding: var(--s1) var(--s3); }
   .panel { padding: var(--s4); }
   .panel .btn { width: 100%; }
@@ -595,7 +562,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container">
+    <div class="container container--wide">
       <div class="badge" aria-hidden="true">
         <svg viewBox="0 0 64 72">
           <defs>
@@ -610,21 +577,26 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
         </svg>
       </div>
 
-      <p class="eyebrow eyebrow--flanked">Booking confirmed</p>
-      <h1 class="display display-lg">You're booked</h1>
-      <p class="lead">Your viral audit call is scheduled. The calendar invite in your email has the date, time and Zoom link.</p>
+      <h1 class="display display-lg">You're <em>booked</em>. <span class="nowrap">3 steps</span> before your call.</h1>
 
-      <p class="confirm-label muted">Confirm you'll attend by text, then add the call to your calendar.</p>
-
-      <div class="btn-row" id="confirm">
-        <a id="confirm-sms" href="#" class="btn btn--primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Confirm by text
-        </a>
-        <div class="cal">
-          <button type="button" id="cal-toggle" class="btn btn--secondary" aria-expanded="false" aria-controls="cal-menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
-            Add to calendar
+      <ol class="step-cards">
+        <li>
+          <a href="#watch" class="step-card">
+            <span class="step-num">1</span>
+            <span class="step-body">
+              <span class="step-title">Watch the video below</span>
+              <span class="step-sub">4 minutes on what we'll cover and what you'll walk away with.</span>
+            </span>
+          </a>
+        </li>
+        <li class="cal" id="calendar">
+          <button type="button" id="cal-toggle" class="step-card" aria-expanded="false" aria-controls="cal-menu">
+            <span class="step-num">2</span>
+            <span class="step-body">
+              <span class="step-title">Add the call to your calendar</span>
+              <span class="step-sub">One tap: Google, Apple or Outlook.</span>
+            </span>
+            <svg class="step-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.75 5.25h16.5v15H3.75zM3.75 9.75h16.5M8.25 3v4.5M15.75 3v4.5"/></svg>
           </button>
           <div class="cal-menu" id="cal-menu" hidden>
             <div class="cal-links">
@@ -634,39 +606,14 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
             </div>
             <p class="cal-fallback" hidden>Open the calendar invite in your email and tap <strong>Add to calendar</strong>. It has your exact date, time and Zoom link.</p>
           </div>
-        </div>
-      </div>
-
-      <p class="steps-label eyebrow">Then, before your call</p>
-      <ol class="steps">
-        <li>
-          <a href="#step1" class="step-link">
-            <span class="step-num">01</span>
-            <span class="step-body">
-              <span class="step-title">Watch the pre-call video</span>
-              <span class="step-sub">4 minutes. What we'll cover and what you'll walk away with.</span>
-            </span>
-            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-          </a>
         </li>
         <li>
-          <a href="#step2" class="step-link">
-            <span class="step-num">02</span>
+          <a href="#numbers" class="step-card">
+            <span class="step-num">3</span>
             <span class="step-body">
-              <span class="step-title">Gather five numbers</span>
+              <span class="step-title">Have five numbers ready</span>
               <span class="step-sub">So we can skip the basics and move fast on the call.</span>
             </span>
-            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#step3" class="step-link">
-            <span class="step-num">03</span>
-            <span class="step-body">
-              <span class="step-title">Watch the deep dives <small>Optional</small></span>
-              <span class="step-sub">Five short videos: our process, why AI, success rate and more.</span>
-            </span>
-            <svg class="step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
           </a>
         </li>
       </ol>
@@ -685,63 +632,46 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   </section>
 
   <!-- Step 1 -->
-  <section class="section" id="step1" aria-labelledby="step1-title">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow eyebrow--rule">Step 01 · Watch first</p>
-        <h2 class="display display-md" id="step1-title">Watch this before your call</h2>
+  <section class="section section--flush" id="watch" aria-labelledby="watch-title">
+    <div class="container container--wide">
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="watch-title">Step 1: <em>Watch this</em> before your call</h2>
         <p class="muted">What we'll do together, what you'll walk away with, and how to get the most from your viral audit.</p>
       </div>
 
-      <div class="video-frame">
-        <wistia-player media-id="8ak013qk1x" aspect="1.7777777777777777"></wistia-player>
+      <div class="video-panel">
+        <div class="video-frame">
+          <wistia-player media-id="8ak013qk1x" aspect="1.7777777777777777"></wistia-player>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Step 2 -->
-  <section class="section" id="step2" aria-labelledby="step2-title">
+  <!-- Step 3 (step 2 is the calendar card in the hero) -->
+  <section class="section" id="numbers" aria-labelledby="numbers-title">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow eyebrow--rule">Step 02 · Before we meet</p>
-        <h2 class="display display-md" id="step2-title">Show up prepared</h2>
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="numbers-title">Step 3: <em>Have these</em> numbers ready</h2>
         <p class="muted">The more of this you have ready, the faster we move and the more specific your strategy will be.</p>
       </div>
 
-      <div class="card">
-        <ul class="checklist">
-          <li>
-            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            <div><strong>Add the call to your calendar</strong> with the <a href="#confirm">button at the top</a>, or from the email invite we sent.</div>
-          </li>
-          <li>
-            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            <div><strong>Confirm you're coming</strong> by text with the <a href="#confirm">button at the top</a>, if you haven't yet.</div>
-          </li>
-          <li>
-            <svg class="tick-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            <div>
-              <strong>Have these five numbers ready:</strong>
-              <ul class="numbers">
-                <li>Follower count on your main platform (Instagram, TikTok or YouTube)</li>
-                <li>Average views per post over the last 30 days</li>
-                <li>New patients or clients you get from social media each month</li>
-                <li>Current monthly revenue from your practice or clinic</li>
-                <li>Your revenue goal for the next 90 days</li>
-              </ul>
-            </div>
-          </li>
+      <div class="card numbers-card">
+        <ul class="numbers">
+          <li>Follower count on your main platform (Instagram, TikTok or YouTube)</li>
+          <li>Average views per post over the last 30 days</li>
+          <li>New patients or clients you get from social media each month</li>
+          <li>Current monthly revenue from your practice or clinic</li>
+          <li>Your revenue goal for the next 90 days</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- Step 3 -->
-  <section class="section" id="step3" aria-labelledby="step3-title">
+  <!-- Optional deep dives -->
+  <section class="section" id="deep-dives" aria-labelledby="deep-dives-title">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow eyebrow--rule">Step 03 · Optional</p>
-        <h2 class="display display-md" id="step3-title">Go deeper before the call</h2>
+      <div class="section-head section-head--center">
+        <h2 class="display display-step" id="deep-dives-title">Optional: <em>Go deeper</em> before the call</h2>
         <p class="muted">Five short videos that answer the questions clients ask most before their viral audit. Watch the ones that matter to you.</p>
       </div>
 
@@ -811,12 +741,7 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
 
 <script>
 (function () {
-  /* ─────────────────────────────────────────────
-     CONFIG
-     Phone in international format, e.g. +971501234567
-     ───────────────────────────────────────────── */
-  var CONFIRM_PHONE   = '+971XXXXXXXXX';
-  var CONFIRM_MESSAGE = "Hi, I'm confirming my viral audit call with Adamax Studios.";
+  /* ── CONFIG ── */
   var CALL_MINUTES    = 45;
   var CALL_TITLE      = 'Viral audit call · Adamax Studios';
   var CALL_DETAILS    = 'Your free viral audit call with Adamax Studios. Join with the Zoom link in your confirmation email.';
@@ -827,19 +752,6 @@ wistia-player[media-id='8ak013qk1x']:not(:defined) {
   document.querySelectorAll('.js-year').forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
-
-  /* ── Confirmation links ── */
-  var phone  = CONFIRM_PHONE.replace(/[^\d+]/g, '');
-  var body   = encodeURIComponent(CONFIRM_MESSAGE);
-  // iOS Messages expects "&body=", everyone else follows RFC 5724 "?body=".
-  var isIOS  = /iP(hone|ad|od)/.test(navigator.userAgent) ||
-               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-  document.getElementById('confirm-sms').href =
-    'sms:' + phone + (isIOS ? '&' : '?') + 'body=' + body;
-  if (/x/i.test(CONFIRM_PHONE)) {
-    console.warn('[pre-call] CONFIRM_PHONE is still a placeholder — set your real number.');
-  }
 
   /* ── Add to calendar ──
      The call time comes from the page URL, e.g.
