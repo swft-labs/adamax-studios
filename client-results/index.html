@@ -14,8 +14,8 @@
 <meta property="og:url" content="https://viral.adamaxstudios.com/client-results" />
 <meta property="og:image" content="https://viral.adamaxstudios.com/client-results/assets/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" type="image/png" href="assets/favicon.png" />
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="/client-results/assets/favicon.png" />
+<link rel="apple-touch-icon" href="/client-results/assets/apple-touch-icon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -632,7 +632,7 @@ html, body { margin: 0; background: #000; }
   <header class="adx-nav">
     <div class="adx-container">
       <a href="./" aria-label="Adamax Studios home">
-        <img class="adx-lockup" src="assets/adamax-lockup-on-dark.webp" width="720" height="240" alt="Adamax Studios" fetchpriority="high" />
+        <img class="adx-lockup" src="/client-results/assets/adamax-lockup-on-dark.webp" width="720" height="240" alt="Adamax Studios" fetchpriority="high" />
       </a>
       <a class="adx-btn adx-btn--secondary" data-cta hidden>Book a call</a>
     </div>
@@ -676,7 +676,7 @@ html, body { margin: 0; background: #000; }
               <p>Julie's growth had stalled at 6,000 followers, and paid ads and collaborations weren't converting. With Adamax she moved to content that builds trust and inbound demand tied to her mission. She is now at 22,000+ followers and 36 million+ organic views, with discovery calls from exactly the audience she wanted.</p>
             </div>
             <div class="adx-media">
-              <video src="assets/video/696fb1780e12ab354fd7d11e.mp4#t=0.1"
+              <video src="/client-results/assets/video/696fb1780e12ab354fd7d11e.mp4#t=0.1"
                      controls muted loop playsinline preload="metadata" aria-label="Julie's case study video"></video>
             </div>
           </article>
@@ -692,7 +692,7 @@ html, body { margin: 0; background: #000; }
               <p>Rohit was stuck at 200 to 300 views a video. He published two videos with Adamax, and the first passed 2 million organic views, bringing saves, shares and inbound conversations within days. Adamax took on production, which turned his expertise into a content engine that scales.</p>
             </div>
             <div class="adx-media">
-              <video src="assets/video/696fb0e941fb815fe4ce2816.mp4#t=0.1"
+              <video src="/client-results/assets/video/696fb0e941fb815fe4ce2816.mp4#t=0.1"
                      controls muted loop playsinline preload="metadata" aria-label="Rohit's case study video"></video>
             </div>
           </article>
@@ -708,7 +708,7 @@ html, body { margin: 0; background: #000; }
               <p>Mahreen grew from 500 followers to 350K+ with Adamax and now averages more than 12 million organic views every month. She runs a fast-growing coaching business and podcast, with brand partnerships including TikTok, Amazon, Lipton, Sony and Apture.</p>
             </div>
             <div class="adx-media">
-              <video src="assets/video/696faf1e193b567ee57ccd79.mp4#t=0.1"
+              <video src="/client-results/assets/video/696faf1e193b567ee57ccd79.mp4#t=0.1"
                      controls muted loop playsinline preload="metadata" aria-label="Mahreen's case study video"></video>
             </div>
           </article>
@@ -756,8 +756,8 @@ html, body { margin: 0; background: #000; }
       <div class="adx-container">
         <!-- Metallic lockup is a hero treatment: only where it renders ≥320px drawn width, on pure black -->
         <picture>
-          <source media="(min-width: 480px)" srcset="assets/adamax-metallic-lockup-on-dark.webp" />
-          <img class="adx-end-lockup" src="assets/adamax-lockup-on-dark.webp" width="1200" height="400" alt="Adamax Studios" loading="lazy" />
+          <source media="(min-width: 480px)" srcset="/client-results/assets/adamax-metallic-lockup-on-dark.webp" />
+          <img class="adx-end-lockup" src="/client-results/assets/adamax-lockup-on-dark.webp" width="1200" height="400" alt="Adamax Studios" loading="lazy" />
         </picture>
         <p class="adx-lead">1,200+ clients. 9B+ organic views. No ads.</p>
         <a class="adx-btn adx-btn--primary" data-cta hidden>
@@ -884,7 +884,7 @@ html, body { margin: 0; background: #000; }
 
   function original(id) { return MEDIA + id + '.png'; }
   function sized(id, width) {
-    if (isCovered[id]) return 'assets/proof/' + id + (width <= 480 ? '-480' : '') + '.webp';
+    if (isCovered[id]) return '/client-results/assets/proof/' + id + (width <= 480 ? '-480' : '') + '.webp';
     return 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_' + width + '/u_' + original(id);
   }
   function srcsetFor(id, widths) {
