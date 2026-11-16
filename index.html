@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adamax Studios — Viral Audit</title>
-  <meta name="description" content="3 million+ real views or your money back. Watch the short training video and book a free 45-minute viral audit call with the Adamax Studios team." />
+  <meta name="description" content="Done-for-you organic content for doctors. 1M+ real views in 90 days, or every dollar back. Book a 45-minute strategy call and leave with your 90-day plan either way." />
   <meta name="theme-color" content="#000000" />
 
   <!-- Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Adamax Studios" />
-  <meta property="og:title" content="3 million+ real views, or your money back" />
-  <meta property="og:description" content="Trusted by 1,200+ doctors, with 9B+ views generated. Book a free 45-minute viral audit call." />
+  <meta property="og:title" content="Done-for-you organic content. 1M+ real views in 90 days, or every dollar back." />
+  <meta property="og:description" content="The content system behind 1,200+ doctors and 9B+ organic views." />
   <meta property="og:url" content="https://viral.adamaxstudios.com/" />
   <meta property="og:image" content="https://viral.adamaxstudios.com/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -176,6 +176,22 @@
     }
 
     h1 .accent { color: var(--sky); }
+
+    /* First sentence of the headline, set as a kicker line above the promise */
+    .h1-kicker {
+      display: block;
+      margin-bottom: 12px;
+      font-family: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 18px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sky);
+    }
+
+    .br-wide { display: none; }
+    @media (min-width: 768px) { .br-wide { display: inline; } }
     .nowrap { white-space: nowrap; }
 
     h2 {
@@ -374,7 +390,8 @@
     /* Laptop: tighten so headline, video and CTA fit in a ~900px-tall viewport */
     @media (min-width: 768px) {
       .hero { padding: var(--s4) 0 var(--s6); }
-      .hero-stack { max-width: 800px; }
+      .hero-stack { max-width: 780px; }
+      .h1-kicker { margin-bottom: 8px; font-size: 12px; }
       .proof-tag { margin-bottom: var(--s3); }
       .hero h1 { font-size: 34px; margin-bottom: 12px; }
       .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); }
@@ -471,80 +488,55 @@
       background: var(--surface);
     }
 
-    /* ── Testimonials ── */
-    .stories { display: grid; gap: var(--s5); }
+    /* ── Case studies: headline, one line, three stat chips ── */
+    .cases { display: grid; gap: var(--s4); }
 
-    .story {
-      display: grid;
-      gap: var(--s4);
+    @media (min-width: 760px) { .cases { grid-template-columns: 1fr 1fr; } }
+
+    .case {
       padding: var(--s4);
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--r-panel);
-      align-items: center;
     }
 
-    @media (min-width: 760px) {
-      .story { grid-template-columns: 1fr 1fr; gap: var(--s5); padding: var(--s5); }
-    }
+    @media (min-width: 760px) { .case { padding: var(--s5); } }
 
-    .story h3 {
+    .case h3 {
       font-family: var(--text);
       font-weight: 700;
       font-size: 20px;
       line-height: 28px;
       color: var(--ink);
-      margin-bottom: var(--s3);
     }
 
-    .story h3 em { font-style: normal; color: var(--sky); }
-
-    .story p { color: var(--ink-muted); }
-
-    .story-media {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-card);
-      overflow: hidden;
-      background: var(--ground);
+    .case-who {
+      margin-top: var(--s2);
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--ink-muted);
     }
 
-    .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* "Play with sound" tag, shown until the visitor unmutes */
-    .unmute {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
+    .chips {
+      list-style: none;
       display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 12px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font: inherit;
-    }
-
-    .unmute span {
-      display: inline-flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: var(--s2);
-      padding: 6px 10px;
-      border-radius: var(--r-tag);
-      border: 1px solid var(--hairline);
-      background: rgba(0, 0, 0, 0.8);
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 11px;
-      line-height: 16px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      margin-top: var(--s4);
     }
 
-    .unmute:hover span { border-color: var(--sky); }
-    .unmute:focus-visible { outline: 2px solid var(--sky); outline-offset: -4px; }
+    .chips li {
+      padding: 6px 10px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-tag);
+      background: var(--raised);
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 18px;
+      color: var(--ink-muted);
+    }
+
+    .chips strong { font-weight: 700; color: var(--sky); }
 
     .stories-cta { margin-top: var(--s5); }
 
@@ -699,12 +691,12 @@
             <span class="stars" aria-hidden="true">★★★★★</span>
             <strong>4.9/5</strong>
             <span class="sep" aria-hidden="true"></span>
-            <span>Trusted by 1,200+ doctors &amp; 9B+ views generated</span>
+            <span>The content system behind 1,200+ doctors and 9B+ organic views.</span>
           </p>
 
-          <h1 class="reveal d2"><span class="accent">3 million+</span> <span class="nowrap">real views.</span><br>Or your money back.</h1>
+          <h1 class="reveal d2"><span class="h1-kicker">Done-for-you organic content.</span> <span class="accent nowrap">1M+ real views</span> in 90&nbsp;days,<br class="br-wide"> or every dollar back.</h1>
 
-          <p class="lead reveal d3">Watch the short training video below.</p>
+          <p class="lead reveal d3">Fill your calendar with patients who already chose you.</p>
 
           <!-- VSL (Wistia, media 340vni851v) -->
           <div class="hero-video reveal d3">
@@ -716,7 +708,7 @@
           <div class="hero-cta reveal d4">
             <span class="cta-trace">
               <a href="#qualify" class="btn btn-primary btn-block" data-scroll-to="qualify">
-                See if you qualify
+                See if my practice qualifies
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
               </a>
               <svg class="trace" aria-hidden="true" focusable="false">
@@ -724,7 +716,7 @@
                 <rect class="trace-line" x="0" y="0" width="100%" height="100%" rx="8" ry="8" pathLength="100" />
               </svg>
             </span>
-            <p class="trust">Free 45-min viral audit call with our team</p>
+            <p class="trust">45-minute strategy call. Leave with your 90-day plan either way.</p>
           </div>
         </div>
       </div>
@@ -758,7 +750,7 @@
         <div class="section-head">
           <p class="eyebrow">Apply</p>
           <h2 id="qualify-title">See if you qualify</h2>
-          <p class="lead">Answer a few quick questions to book your free 45-minute viral audit call.</p>
+          <p class="lead">Complete the qualification below. Approved practices schedule directly with our team.</p>
         </div>
         <!-- ROASForm (form ID 924236-f7060d-0db987) -->
         <div class="form-panel">
@@ -770,50 +762,59 @@
       </div>
     </section>
 
-    <!-- Client stories -->
+    <!-- Case studies -->
     <section class="section" aria-labelledby="stories-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Client stories</p>
+          <p class="eyebrow">Case studies</p>
           <h2 id="stories-title">Real clients. Real results.</h2>
-          <p class="lead">Doctors and professionals who went viral with the Adamax Studios AI content system.</p>
         </div>
 
-        <div class="stories">
-          <article class="story">
-            <div>
-              <h3><em>36M+</em> organic views driving ideal clients</h3>
-              <p>Julie went from stalled growth at 6,000 followers to 22,000+ organically, generating over 36 million views and attracting exactly the clients she wanted, including highly aligned discovery calls from her target audience. She moved away from paid ads and collaborations that didn't convert, towards content that builds trust, relationships and real inbound demand tied directly to her mission.</p>
-            </div>
-            <div class="story-media">
-              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
-            </div>
+        <div class="cases">
+          <article class="case">
+            <h3>From underbooked to a second clinic.</h3>
+            <p class="case-who">Hassia, aesthetic doctor, 5 months</p>
+            <ul class="chips">
+              <li><strong>310M+</strong> views</li>
+              <li>Fees up <strong>47%</strong></li>
+              <li><strong>Second clinic</strong> opened</li>
+            </ul>
           </article>
 
-          <article class="story">
-            <div>
-              <h3>From 300 views to <em>2M+</em> in one day</h3>
-              <p>After being stuck at 200–300 views, Rohit published just two videos with Adamax and the first passed 2 million organic views, driving engagement, saves, shares and inbound conversations within days. Pairing his expertise with our AI-powered content system removed the production bottleneck and turned content into a scalable engine for real audience interaction.</p>
-            </div>
-            <div class="story-media">
-              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
-            </div>
+          <article class="case">
+            <h3>From 2,000 followers to a $2.1M product line.</h3>
+            <p class="case-who">Ryuza, integrative medicine, 8 months</p>
+            <ul class="chips">
+              <li><strong>650K</strong> followers</li>
+              <li><strong>375M</strong> views</li>
+              <li><strong>$2.1M</strong> in new revenue</li>
+            </ul>
           </article>
 
-          <article class="story">
-            <div>
-              <h3>From 800 views to <em>12M views a month</em></h3>
-              <p>Mahreen now runs a fast-growing coaching business and podcast brand, with partnerships including TikTok, Amazon, Lipton, Sony and Apture. She grew from 500 followers to 350K+ with Adamax, and now generates over 12 million organic views every month.</p>
-            </div>
-            <div class="story-media">
-              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
-            </div>
+          <article class="case">
+            <h3>60% of new patients come from social.</h3>
+            <p class="case-who">Dr. Diaz, 3 months</p>
+            <ul class="chips">
+              <li><strong>201K</strong> followers</li>
+              <li><strong>80M</strong> views</li>
+              <li><strong>Fully booked</strong></li>
+            </ul>
+          </article>
+
+          <article class="case">
+            <h3>Booked 3 months in advance.</h3>
+            <p class="case-who">Dr. Nathalie, endocrinologist, 12 months</p>
+            <ul class="chips">
+              <li><strong>2.3M</strong> followers</li>
+              <li>Fees up <strong>40%</strong></li>
+              <li><strong>$74K</strong> ebook week</li>
+            </ul>
           </article>
         </div>
 
         <div class="stories-cta">
           <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
-            See if you qualify
+            See if my practice qualifies
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
           </a>
         </div>
@@ -893,10 +894,10 @@
         </picture>
         <h2 id="end-title">Book your viral audit</h2>
         <a href="#qualify" class="btn btn-primary" data-scroll-to="qualify">
-          See if you qualify
+          See if my practice qualifies
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
         </a>
-        <p class="caption">Free 45-minute call. 3 million+ real views, or your money back.</p>
+        <p class="caption">45-minute strategy call. Leave with your 90-day plan either way.</p>
       </div>
     </section>
 
@@ -983,54 +984,6 @@
       }
       requestAnimationFrame(stepCarousel);
     }
-
-    /* ── Client story videos ── */
-    var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
-
-    function pauseOthers(current) {
-      videos.forEach(function (v) { if (v !== current) v.pause(); });
-    }
-
-    if ('IntersectionObserver' in window && !reduceMotion) {
-      // Muted autoplay while in view. Once a visitor unmutes a video it is no
-      // longer auto-resumed, so sound never starts without them asking.
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          var v = entry.target;
-          if (entry.isIntersecting) {
-            if (v.muted) v.play().catch(function () {});
-          } else {
-            v.pause();
-          }
-        });
-      }, { threshold: 0.3 });
-      videos.forEach(function (v) { observer.observe(v); });
-    }
-
-    var SPEAKER = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5"/></svg>';
-
-    videos.forEach(function (v) {
-      // The button intercepts the first click so the browser's native
-      // play/pause toggle doesn't cancel our restart. Once removed,
-      // the native controls work normally.
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'unmute';
-      btn.setAttribute('aria-label', 'Play with sound from the beginning');
-      btn.innerHTML = '<span>' + SPEAKER + 'Play with sound</span>';
-      v.parentElement.appendChild(btn);
-
-      btn.addEventListener('click', function () {
-        pauseOthers(v);
-        v.muted = false;
-        v.currentTime = 0;
-        v.play().catch(function () {});
-        btn.remove();
-      });
-
-      // Starting one with sound via the native controls stops the rest.
-      v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); });
-    });
   })();
   </script>
 
