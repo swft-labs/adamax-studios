@@ -26,7 +26,7 @@ Both calendar buttons read the booking from the URL params the ROASForm booking 
 
 ## Editing the proof cards
 
-Edit the `CASES` array in the script. The named doctors come first, then the other medical and health cases (doctor example, aesthetics, dentist, weight loss). Cases marked `more: true` are hidden behind a "Show N more client results" button under the grid. DOXA was removed on purpose.
+Edit the `CASES` array in the script. The named doctors come first, then the doctor example, aesthetics and dentist cases. Cases marked `more: true` are hidden behind a "Show N more client results" button under the grid. DOXA was removed on purpose.
 
 - `stat` / `label`: the headline number (e.g. `100M+` / `views`). `detail`: optional line underneath.
 - `links`: platform buttons. The first link is also where the video preview goes.
