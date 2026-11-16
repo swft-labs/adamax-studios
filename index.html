@@ -390,14 +390,14 @@
     /* Laptop: tighten so headline, video and CTA fit in a ~900px-tall viewport */
     @media (min-width: 768px) {
       .hero { padding: var(--s4) 0 var(--s6); }
-      .hero-stack { max-width: 780px; }
+      .hero-stack { max-width: 760px; }
       .h1-kicker { margin-bottom: 8px; font-size: 12px; }
       .proof-tag { margin-bottom: var(--s3); }
       .hero h1 { font-size: 34px; margin-bottom: 12px; }
       .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); }
       .hero-video { margin-bottom: var(--s3); }
       .hero .btn { padding: 14px 24px; }
-      .trust { margin-top: 12px; }
+      .trust { margin-top: 8px; }
     }
 
     @media (max-width: 480px) {
@@ -653,20 +653,25 @@
       padding: var(--s5) 0;
     }
 
+    /* Footer: everything centred, logo above the links */
     .site-footer .container {
       display: grid;
       gap: var(--s3);
+      justify-items: center;
+      text-align: center;
     }
 
     .footer-row {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: var(--s3);
+      gap: var(--s4);
     }
 
-    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); }
+    /* the lockup's clear space is symmetric, so no left-alignment offset when centred */
+    .site-footer .lockup { margin-left: 0; }
+
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2) var(--s4); }
 
     .footer-links a {
       color: var(--ink-muted);
@@ -767,7 +772,7 @@
                 <rect class="trace-line" x="0" y="0" width="100%" height="100%" rx="8" ry="8" pathLength="100" />
               </svg>
             </span>
-            <p class="trust">45-minute strategy call. Leave with your 90-day plan either way.</p>
+            <p class="trust">45-minute strategy call.<br>Leave with your 90-day plan either way.</p>
           </div>
         </div>
       </div>
@@ -953,7 +958,7 @@
           See if my practice qualifies
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
         </a>
-        <p class="caption">45-minute strategy call. Leave with your 90-day plan either way.</p>
+        <p class="caption">45-minute strategy call.<br>Leave with your 90-day plan either way.</p>
       </div>
     </section>
 
