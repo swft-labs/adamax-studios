@@ -1,5 +1,14 @@
 {
   "redirects": [
-    { "source": "/pre-call-info/", "destination": "/pre-call-info", "permanent": false }
+    {
+      "source": "/pre-call-info/",
+      "destination": "/pre-call-info",
+      "permanent": false
+    },
+    {
+      "source": "/follow-up-booking-call-page/",
+      "destination": "/follow-up-booking-call-page",
+      "permanent": false
+    }
   ]
 }
