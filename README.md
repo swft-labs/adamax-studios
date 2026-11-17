@@ -10,7 +10,7 @@ A single landing page, styled to the Adamax Studios Brand Kit v1.0:
   - `proof/`: the 50 proof-grid images,
   - `testimonials/`: the 3 client videos (720p) in the case-study cards.
 
-Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`) and `pre-call-info/` (`/pre-call-info`, the page people see after booking a call).
+Other pages on the same site live in their own folders, each with a README: `client-results/` (`/client-results`), `pre-call-info/` (`/pre-call-info`, the page people see after booking a call) and `follow-up-booking-call-page/` (`/follow-up-booking-call-page`, the GoHighLevel calendar for booking a follow-up call).
 
 Legal pages linked from the footer: `privacy/` (`/privacy`), `terms/` (`/terms`) and `results-disclaimer/` (`/results-disclaimer`). They share the landing page's fonts and logo via absolute `/assets/…` paths. **They are drafts written from what the site actually does (the ROAS form, the Meta Pixel it loads, Wistia, Vercel hosting, edited screenshots) and need legal review.** They don't yet name a legal entity, address, contact email or governing law.
 
