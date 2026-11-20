@@ -2,7 +2,7 @@
 
 A single landing page, styled to the Adamax Studios Brand Kit v1.0:
 
-- **`index.html`**: the page. VSL → "See if my practice qualifies" CTA → results carousel → ROAS qualify form → case studies → proof grid → end card.
+- **`index.html`**: the page. Hero with the ROAS qualification form → results carousel → case studies → FAQ → proof grid → end card.
 - **`assets/`**: everything the page loads, self-hosted (no GHL CDN or Google Fonts):
   - logo files resized for the web from the brand kit originals (table below),
   - `fonts/`: Krona One and Manrope (latin subset, woff2, SIL Open Font License), preloaded,
@@ -52,12 +52,12 @@ CSS and JS are inline; images load from `assets/` (relative paths).
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts playback to certain domains, it may not play locally.
+The qualification form is a ROASForm embed, so it needs a network connection to render locally.
 
 ## Brand rules applied
 
 - Built on pure black (`#000`). Surfaces `#030D1A`, hairlines `#172F52`. No drop shadows, glows or pills.
-- Azure `#006BE5` is the only button colour. Sky `#009BFC` is for eyebrows, rules and accents. Glow `#03CCFF` only as a thin lit edge (video frame).
+- Azure `#006BE5` is the only button colour. Sky `#009BFC` is for eyebrows, rules and accents. Glow `#03CCFF` only as a thin lit edge.
 - Krona One for uppercase headlines; Manrope for everything else. Left-aligned, except the end card.
 - Corners 4 / 8 / 16px; spacing 4 / 8 / 16 / 24 / 40 / 64. Angled accents use the mark's 60° cuts.
 - Logo PNGs have black built in, so they only sit on `#000`. Each PNG has ~10% black clear space per side, so the drawn logo is 80% of the file width. Sizes are set so the artwork stays above the brand minimums: 140px for the lockup, 320px for the metallic lockup.
@@ -66,7 +66,7 @@ The VSL is a Wistia embed (media `340vni851v`). If the Wistia account restricts 
 
 - **Carousel images:** the `<img class="carousel-item">` tags inside `#carouselTrack`. Each needs its `results/` WebP widths, `width`/`height` and `alt`.
 - **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
-- **VSL:** the Wistia player stays hidden behind a blurred thumbnail until Wistia's `api-ready` event (12s fallback). Wistia's own layout pass would otherwise count as layout shift.
 - **Client stories:** the three `.story` cards (text beside a video). Each has a headline, one line and three stat chips. Wrap the number in a chip in `<strong>` to colour it. Videos autoplay muted while in view and show a "Play with sound" button.
-- **Form:** the ROASForm embed inside `#qualify` (form ID `924236-f7060d-0db987`), inline at 600px with `fullScreen: true`: once a visitor answers the first question it takes over the screen, and its × returns them to the same spot on the page with their progress kept. Its colours and theme are set in the ROASForm dashboard.
+- **Form:** the ROASForm embed in the hero, inside `#qualify` (every "See if my practice qualifies" button scrolls there) (form ID `924236-f7060d-0db987`), inline at 600px with `fullScreen: true`: once a visitor answers the first question it takes over the screen, and its × returns them to the same spot on the page with their progress kept. Its colours and theme are set in the ROASForm dashboard.
+- **FAQ:** the six `<details>` items in the FAQ section, open by default; each question toggles its answer.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
