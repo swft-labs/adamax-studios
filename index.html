@@ -343,15 +343,6 @@
     /* ── Qualification form in the hero ── */
     .hero-form { margin-top: var(--s2); scroll-margin-top: var(--s3); }
 
-    .form-note {
-      max-width: 72ch;
-      margin: 0 auto var(--s3);
-      font-size: 14px;
-      line-height: 22px;
-      text-align: center;
-      color: var(--ink-muted);
-    }
-
 
     /* Laptop: tighten so the headline and the top of the form fit on screen */
     @media (min-width: 768px) {
@@ -360,7 +351,7 @@
       .h1-kicker { margin-bottom: 8px; font-size: 12px; }
       .proof-tag { margin-bottom: var(--s3); }
       .hero h1 { font-size: 34px; margin-bottom: 12px; }
-      .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); }
+      .hero .lead { font-size: 15px; line-height: 24px; margin-bottom: var(--s3); max-width: 72ch; }
     }
 
     @media (max-width: 480px) {
@@ -719,13 +710,12 @@
 
           <h1 class="reveal d2"><span class="h1-kicker">Done-for-you organic content.</span> <span class="accent nowrap">3M+ real views</span> in 30&nbsp;days,<br class="br-wide"> or every dollar back.</h1>
 
-          <p class="lead reveal d3">Fill your calendar with patients who already chose you.</p>
+          <p class="lead reveal d3">Complete the qualification below. Approved practices schedule directly with our team.</p>
 
         </div>
 
         <!-- Qualification form (id="qualify" is the target of every "See if my practice qualifies" button) -->
         <div class="hero-form" id="qualify">
-          <p class="form-note">Complete the qualification below. Approved practices schedule directly with our team.</p>
           <!-- ROASForm (form ID 924236-f7060d-0db987) -->
           <div class="form-panel">
             <div id="roasform-924236-f7060d-0db987" style="width: 100%; height: 600px"></div>
@@ -835,23 +825,23 @@
             <summary>What do you do?</summary>
             <p>We create and run organic short-form content for doctors and medical practices, done for you. It is the content system behind 1,200+ doctors and 9B+ organic views.</p>
           </details>
-          <details open>
-            <summary>Why social media?</summary>
-            <p>Patients choose doctors they already know and trust. Organic content lets them get to know you before they ever book, like word of mouth at scale. The result is a calendar of patients who already chose you.</p>
+          <details>
+            <summary>How do views get me more patients?</summary>
+            <p>Every view is someone watching you explain a problem they have. Patients book doctors they already know and trust, and watching you over and over is how that trust builds. Each video adds to it, so by the time viewers need care, they already feel they know you and come to you instead of searching for someone new. More views means more people who already trust you, and those people turn into more enquiries and booked patients.</p>
           </details>
-          <details open>
+          <details>
             <summary>How do I know this will work for me?</summary>
             <p>Complete the qualification at the top of this page. If your practice qualifies, you book a 45-minute strategy call where we look at your specialty, your goals and your current content. You leave with a 30-day plan either way, and if we don&rsquo;t think this will work for your practice, we&rsquo;ll tell you.</p>
           </details>
-          <details open>
+          <details>
             <summary>How does the guarantee work?</summary>
             <p>If you don&rsquo;t get 3M+ real views in 30 days, you get every dollar back. Conditions apply, and we walk you through them on your call.</p>
           </details>
-          <details open>
+          <details>
             <summary>What makes this different from the other options?</summary>
             <p>It is done for you and built for doctors. We work from what has already performed across 1,200+ doctors and 9B+ organic views, and tailor it to your specialty, so you aren&rsquo;t guessing at what to post or learning to edit.</p>
           </details>
-          <details open>
+          <details>
             <summary>What do I need to do next?</summary>
             <p>Complete the qualification at the top of this page. Approved practices schedule directly with our team. <a href="#qualify" data-scroll-to="qualify">Go to the qualification</a>.</p>
           </details>

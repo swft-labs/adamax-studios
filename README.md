@@ -68,5 +68,5 @@ The qualification form is a ROASForm embed, so it needs a network connection to 
 - **Proof grid images:** the `.proof-item` blocks inside `#proofGrid`, the same pattern with `proof/` widths.
 - **Client stories:** the three `.story` cards (text beside a video). Each has a headline, one line and three stat chips. Wrap the number in a chip in `<strong>` to colour it. Videos autoplay muted while in view and show a "Play with sound" button.
 - **Form:** the ROASForm embed in the hero, inside `#qualify` (every "See if my practice qualifies" button scrolls there) (form ID `924236-f7060d-0db987`), inline at 600px with `fullScreen: true`: once a visitor answers the first question it takes over the screen, and its × returns them to the same spot on the page with their progress kept. Its colours and theme are set in the ROASForm dashboard.
-- **FAQ:** the six `<details>` items in the FAQ section, open by default; each question toggles its answer.
+- **FAQ:** the six `<details>` items in the FAQ section. Only the first is open by default (`<details open>`); each question toggles its answer.
 - Every CTA uses `data-scroll-to="qualify"`. One delegated click handler smooth-scrolls to the form without adding a `#hash` to the URL.
