@@ -347,10 +347,14 @@ html, body { margin: 0; background: #000; }
   max-width: 60ch;
 }
 
-/* Video panel with a single lit top edge */
+/* Vertical (9:16) Wistia video with a single lit top edge. The player is
+   pinned inside a fixed-ratio box, so Wistia's set-up can't shift the page. */
 .adx-media {
   position: relative;
-  aspect-ratio: 16 / 9;
+  justify-self: center;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 9 / 16;
   border-radius: var(--r-md);
   border: 1px solid var(--hairline);
   background: #000;
@@ -368,43 +372,23 @@ html, body { margin: 0; background: #000; }
   opacity: .8;
   pointer-events: none;
 }
-.adx-media video { width: 100%; height: 100%; object-fit: cover; }
-
-/* "Play with sound" overlay: first click unmutes + restarts, then
-   removes itself so the native controls take over. */
-.adx-sound {
+.adx-media wistia-player { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+/* Wistia's blurred preview frame (--swatch, set per video) shows until the
+   player reports api-ready. The player stays invisible until then, because
+   its set-up pass resizes its video element on screen (CLS ~0.3 otherwise). */
+.adx-media::after {
+  content: '';
   position: absolute;
   inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: flex-end;
-  padding: 16px;
-  background: linear-gradient(to top, rgba(0, 0, 0, .55) 0%, transparent 50%);
+  z-index: 1;
+  background: #000 var(--swatch) center / contain no-repeat;
+  filter: blur(5px);
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
 }
-.adx-sound-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px 8px 8px;
-  border-radius: var(--r-md);
-  background: rgba(10, 23, 46, .88);
-  border: 1px solid var(--hairline);
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 600;
-  transition: border-color .2s var(--ease), background-color .2s var(--ease);
-}
-.adx-sound:hover .adx-sound-label,
-.adx-sound:focus-visible .adx-sound-label { border-color: var(--sky); background: var(--raised); }
-.adx-sound-icon {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--r-sm);
-  background: var(--azure);
-}
-.adx-sound-icon svg { width: 10px; height: 10px; fill: #fff; }
+.adx-media wistia-player { visibility: hidden; }
+.adx-media.is-ready wistia-player { visibility: visible; }
+.adx-media.is-ready::after { opacity: 0; }
 
 /* ── Carousel ── */
 .adx-carousel {
@@ -692,9 +676,8 @@ html, body { margin: 0; background: #000; }
               <h3><em>36M+</em> organic views, and the right clients</h3>
               <p>Julie's growth had stalled at 6,000 followers, and paid ads and collaborations weren't converting. With Adamax she moved to content that builds trust and inbound demand tied to her mission. She is now at 22,000+ followers and 36 million+ organic views, with discovery calls from exactly the audience she wanted.</p>
             </div>
-            <div class="adx-media">
-              <video src="/client-results/assets/video/696fb1780e12ab354fd7d11e.mp4" data-poster="/client-results/assets/poster/696fb1780e12ab354fd7d11e.webp"
-                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Julie's case study video"></video>
+            <div class="adx-media" style="--swatch: url('https://fast.wistia.com/embed/medias/megoi5w99b/swatch')">
+              <wistia-player media-id="megoi5w99b" aspect="0.5625" aria-label="Julie's case study video"></wistia-player>
             </div>
           </article>
 
@@ -708,9 +691,8 @@ html, body { margin: 0; background: #000; }
               <h3>From 300 views to <em>2M+</em> in one day</h3>
               <p>Rohit was stuck at 200 to 300 views a video. He published two videos with Adamax, and the first passed 2 million organic views, bringing saves, shares and inbound conversations within days. Adamax took on production, which turned his expertise into a content engine that scales.</p>
             </div>
-            <div class="adx-media">
-              <video src="/client-results/assets/video/696fb0e941fb815fe4ce2816.mp4" data-poster="/client-results/assets/poster/696fb0e941fb815fe4ce2816.webp"
-                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Rohit's case study video"></video>
+            <div class="adx-media" style="--swatch: url('https://fast.wistia.com/embed/medias/8wc3lrrvha/swatch')">
+              <wistia-player media-id="8wc3lrrvha" aspect="0.5625" aria-label="Rohit's case study video"></wistia-player>
             </div>
           </article>
 
@@ -724,9 +706,8 @@ html, body { margin: 0; background: #000; }
               <h3>From 800 views to <em>12M a month</em></h3>
               <p>Mahreen grew from 500 followers to 350K+ with Adamax and now averages more than 12 million organic views every month. She runs a fast-growing coaching business and podcast, with brand partnerships including TikTok, Amazon, Lipton, Sony and Apture.</p>
             </div>
-            <div class="adx-media">
-              <video src="/client-results/assets/video/696faf1e193b567ee57ccd79.mp4" data-poster="/client-results/assets/poster/696faf1e193b567ee57ccd79.webp"
-                     width="1920" height="1080" controls muted loop playsinline preload="none" aria-label="Mahreen's case study video"></video>
+            <div class="adx-media" style="--swatch: url('https://fast.wistia.com/embed/medias/hvuuhgtrkx/swatch')">
+              <wistia-player media-id="hvuuhgtrkx" aspect="0.5625" aria-label="Mahreen's case study video"></wistia-player>
             </div>
           </article>
         </div>
@@ -928,7 +909,6 @@ html, body { margin: 0; background: #000; }
   document.getElementById('adxYear').textContent = new Date().getFullYear();
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var saveData = !!(navigator.connection && navigator.connection.saveData);
 
   if (CTA_URL) {
     document.querySelectorAll('[data-cta]').forEach(function (a) {
@@ -1142,80 +1122,65 @@ html, body { margin: 0; background: #000; }
     }
   })();
 
-  /* ── Case-study videos ────────────────────────────────────── */
+  /* ── Case-study videos (Wistia) ───────────────────────────── */
   (function () {
-    var videos = Array.prototype.slice.call(document.querySelectorAll('.adx-media video'));
-    // Muted preview autoplay only on wider screens. On phones (mostly paid
-    // traffic on cellular data) the videos show their poster frame and load
-    // nothing until tapped.
-    var autoplay = !reduceMotion && !saveData && 'IntersectionObserver' in window &&
-                   window.matchMedia('(min-width: 900px)').matches;
+    var players = Array.prototype.slice.call(document.querySelectorAll('.adx-media wistia-player'));
+    if (!players.length) return;
 
-    function pauseOthers(except) {
-      videos.forEach(function (v) { if (v !== except) { v.pause(); v.muted = true; } });
+    // Wistia's scripts (~0.9 MB, ~1 s of CPU on a mid-range phone) start on the
+    // visitor's first scroll/tap, or 4 s after load, and only once a video is
+    // near the viewport, so they never compete with the first paint. Until
+    // then each box shows Wistia's swatch frame.
+    function addScript(src, isModule) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.async = true;
+      if (isModule) el.type = 'module';
+      document.head.appendChild(el);
+    }
+    function loadWistia() {
+      addScript('https://fast.wistia.com/player.js');
+      players.forEach(function (p) {
+        addScript('https://fast.wistia.com/embed/' + p.getAttribute('media-id') + '.js', true);
+      });
     }
 
-    videos.forEach(function (v) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'adx-sound';
-      btn.setAttribute('aria-label', 'Play ' + (v.getAttribute('aria-label') || 'video') + ' with sound');
-      btn.innerHTML =
-        '<span class="adx-sound-label">' +
-          '<span class="adx-sound-icon"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1v8l7-4z"/></svg></span>' +
-          (autoplay ? 'Play with sound' : 'Play video') +
-        '</span>';
-      v.parentElement.appendChild(btn);
-      // Native controls would show through under the overlay; restore them on play.
-      v.controls = false;
+    // Reveal each player once Wistia has finished setting it up (see CSS),
+    // with a fallback in case the event never arrives.
+    players.forEach(function (p) {
+      function ready() { p.parentElement.classList.add('is-ready'); }
+      p.addEventListener('api-ready', function () { requestAnimationFrame(function () { requestAnimationFrame(ready); }); }, { once: true });
+      p.addEventListener('load-start', function () { setTimeout(ready, 10000); }, { once: true });
+    });
 
-      btn.addEventListener('click', function () {
-        pauseOthers(v);
-        v.dataset.engaged = '1';
-        v.muted = false;
-        v.currentTime = 0;
-        v.play().catch(function () {});
-        btn.remove();
-        v.controls = true;
-        v.focus({ preventScroll: true });
-      });
-
-      // Using the native controls directly counts as engagement too.
-      v.addEventListener('play', function () {
-        if (!v.muted) { v.dataset.engaged = '1'; pauseOthers(v); }
-      });
-      v.addEventListener('volumechange', function () {
-        if (!v.muted) { v.dataset.engaged = '1'; if (btn.isConnected) { btn.remove(); v.controls = true; } pauseOthers(v); }
+    // Only one case study plays at a time.
+    players.forEach(function (p) {
+      p.addEventListener('play', function () {
+        players.forEach(function (o) { if (o !== p && typeof o.pause === 'function') o.pause(); });
       });
     });
 
-    // Posters are below the fold: attach them as the videos approach.
-    if ('IntersectionObserver' in window) {
-      var posterIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.poster = entry.target.getAttribute('data-poster');
-          posterIO.unobserve(entry.target);
-        });
-      }, { rootMargin: '800px 0px' });
-      videos.forEach(function (v) { posterIO.observe(v); });
-    } else {
-      videos.forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
-      return;
+    function watch() {
+      if (!('IntersectionObserver' in window)) { loadWistia(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); loadWistia(); }
+      }, { rootMargin: '300px 0px' });
+      players.forEach(function (p) { io.observe(p); });
     }
-
-    // Muted preview while in view; always pause when scrolled away.
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var v = entry.target;
-        if (entry.isIntersecting) {
-          if (autoplay && !v.dataset.engaged) v.play().catch(function () {});
-        } else if (!v.paused) {
-          v.pause();
-        }
-      });
-    }, { threshold: 0.35 });
-    videos.forEach(function (v) { io.observe(v); });
+    var started = false;
+    var triggers = ['scroll', 'touchstart', 'pointerdown', 'keydown'];
+    function start() {
+      if (started) return;
+      started = true;
+      triggers.forEach(function (t) { window.removeEventListener(t, start, { passive: true }); });
+      watch();
+    }
+    function afterLoad() {
+      triggers.forEach(function (t) { window.addEventListener(t, start, { passive: true, once: true }); });
+      setTimeout(start, 4000);
+    }
+    if (document.readyState === 'complete') afterLoad();
+    else window.addEventListener('load', afterLoad, { once: true });
   })();
 
   /* ── Scroll reveal ────────────────────────────────────────── */
