@@ -454,50 +454,21 @@
 
     .story h3 em { font-style: normal; color: var(--sky); }
 
+    /* Vertical (9:16) Wistia video. The player is pinned inside a fixed-ratio box so
+       Wistia's own layout pass while it initialises can't shift the page. */
     .story-media {
       position: relative;
-      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
       border: 1px solid var(--hairline);
       border-radius: var(--r-card);
       overflow: hidden;
       background: var(--ground);
     }
 
-    .story-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* "Play with sound" tag, shown until the visitor unmutes */
-    .unmute {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 12px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font: inherit;
-    }
-
-    .unmute span {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s2);
-      padding: 6px 10px;
-      border-radius: var(--r-tag);
-      border: 1px solid var(--hairline);
-      background: rgba(0, 0, 0, 0.8);
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 11px;
-      line-height: 16px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .unmute:hover span { border-color: var(--sky); }
-    .unmute:focus-visible { outline: 2px solid var(--sky); outline-offset: -4px; }
+    .story-media wistia-player { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 
     .stories-cta { margin-top: var(--s5); }
 
@@ -757,6 +728,8 @@
           <h2 id="stories-title">Real clients. Real results.</h2>
         </div>
 
+        <!-- Wistia player library (shared by the three client videos below) -->
+        <script src="https://fast.wistia.com/player.js" async></script>
         <div class="stories">
           <article class="story">
             <div>
@@ -769,7 +742,7 @@
               </ul>
             </div>
             <div class="story-media">
-              <video src="assets/testimonials/696fb1780e12ab354fd7d11e.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Julie's story"></video>
+              <script src="https://fast.wistia.com/embed/megoi5w99b.js" async type="module"></script><style>wistia-player[media-id='megoi5w99b']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/megoi5w99b/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style> <wistia-player media-id="megoi5w99b" aspect="0.5625" aria-label="Julie's story"></wistia-player>
             </div>
           </article>
 
@@ -784,7 +757,7 @@
               </ul>
             </div>
             <div class="story-media">
-              <video src="assets/testimonials/696fb0e941fb815fe4ce2816.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Rohit's story"></video>
+              <script src="https://fast.wistia.com/embed/8wc3lrrvha.js" async type="module"></script><style>wistia-player[media-id='8wc3lrrvha']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/8wc3lrrvha/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style> <wistia-player media-id="8wc3lrrvha" aspect="0.5625" aria-label="Rohit's story"></wistia-player>
             </div>
           </article>
 
@@ -799,7 +772,7 @@
               </ul>
             </div>
             <div class="story-media">
-              <video src="assets/testimonials/696faf1e193b567ee57ccd79.mp4" controls muted loop preload="none" playsinline class="autoplay-video" aria-label="Mahreen's story"></video>
+              <script src="https://fast.wistia.com/embed/hvuuhgtrkx.js" async type="module"></script><style>wistia-player[media-id='hvuuhgtrkx']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/hvuuhgtrkx/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style> <wistia-player media-id="hvuuhgtrkx" aspect="0.5625" aria-label="Mahreen's story"></wistia-player>
             </div>
           </article>
         </div>
@@ -1006,54 +979,6 @@
       }
       requestAnimationFrame(stepCarousel);
     }
-
-    /* ── Client videos ── */
-    var videos = Array.prototype.slice.call(document.querySelectorAll('.autoplay-video'));
-
-    function pauseOthers(current) {
-      videos.forEach(function (v) { if (v !== current) v.pause(); });
-    }
-
-    if ('IntersectionObserver' in window && !reduceMotion) {
-      // Muted autoplay while in view. Once a visitor unmutes a video it is no
-      // longer auto-resumed, so sound never starts without them asking.
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          var v = entry.target;
-          if (entry.isIntersecting) {
-            if (v.muted) v.play().catch(function () {});
-          } else {
-            v.pause();
-          }
-        });
-      }, { threshold: 0.3 });
-      videos.forEach(function (v) { observer.observe(v); });
-    }
-
-    var SPEAKER = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/><path d="M11.5 5.5a3.5 3.5 0 0 1 0 5"/></svg>';
-
-    videos.forEach(function (v) {
-      // The button intercepts the first click so the browser's native
-      // play/pause toggle doesn't cancel our restart. Once removed,
-      // the native controls work normally.
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'unmute';
-      btn.setAttribute('aria-label', 'Play with sound from the beginning');
-      btn.innerHTML = '<span>' + SPEAKER + 'Play with sound</span>';
-      v.parentElement.appendChild(btn);
-
-      btn.addEventListener('click', function () {
-        pauseOthers(v);
-        v.muted = false;
-        v.currentTime = 0;
-        v.play().catch(function () {});
-        btn.remove();
-      });
-
-      // Starting one with sound via the native controls stops the rest.
-      v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); });
-    });
   })();
   </script>
 
